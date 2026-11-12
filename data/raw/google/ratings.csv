@@ -1,0 +1,202 @@
+source,src_id,name,query,google_place_id,google_name,google_address,rating,user_rating_count,distance_m,status
+seoul_heritage,194,동대문생선구이골목,동대문생선구이골목,ChIJEW-SvCSjfDURN9zK8MKuC9g,Dongdaemun Grilled Fish Alley,"Jong-ro 40ga-gil, Jongno District, Seoul, South Korea",4,495,6,ok
+seoul_heritage,210,신당동 떡볶이 골목,신당동 떡볶이 골목,ChIJ0_9cDRlFezUR0ACptb_70Cs,신당동 떡볶이타운,"10-18 Dasan-ro 33-gil, Jung District, Seoul, South Korea",3.8,525,42,ok
+seoul_heritage,2579,을지로 노가리 골목,을지로 노가리 골목,ChIJA17wJIajfDURORb_dfN8bkU,Euljiro Nogari Alley,"15 Eulji-ro 13-gil, Euljiro 3(sam)-ga, Jung District, Seoul, South Korea",3.9,447,40,ok
+seoul_heritage,209,장충동 족발골목,장충동 족발골목,ChIJoe-qd1GjfDUR9k4tgmUvWSA,Jangchung-dong Jokbal Alley,"South Korea, Seoul, Jung District, 장충동 62-96",4.1,7,27,ok
+seoul_heritage,208,피맛골,피맛골,ChIJxW-oZ-eifDURrH29Zan3WRg,Pimatgol Alley,"32 Donhwamun-ro 5-gil, Jongno District, Seoul, South Korea",3.7,189,5,ok
+seoul_heritage,476,가락시장,가락시장,ChIJq5SjCJKlfDURGqkGbzT21Y8,Garak Market,"932 Yangjae-daero, Songpa District, Seoul, South Korea",4,7875,220,far
+seoul_heritage,2742,구로시장,구로시장,ChIJvSPE6BmefDURdTE8LCTHgUM,구로시장,"731-1 Guro-dong, Guro District, Seoul, South Korea",3.8,817,190,far
+seoul_heritage,330,국기원,국기원,ChIJL1OJRP2jfDUR7uLWZ2ooQlI,Kukkiwon (World Taekwondo Headquarters),"South Korea, Seoul, Gangnam District, Teheran-ro 7-gil, 32",4.1,531,40,ok
+seoul_heritage,3066,나폴레옹 과자점,나폴레옹 과자점,ChIJf-oLYNG8fDURslvQf3k7cQc,Napoleon Bakery,"7 Seongbuk-ro, Seongbuk District, Seoul, South Korea",4.1,1585,20,ok
+seoul_heritage,260,낙원떡집,낙원떡집,ChIJ2ScEIt2ifDURWG4aegPMO30,Nakwon Tteokjip,"438 Samil-daero, Jongno District, Seoul, South Korea",3.7,123,57,ok
+seoul_heritage,471,남대문시장,남대문시장,ChIJfYjlFvWifDURYSDsoxYbN80,Namdaemun Market,"21 Namdaemunsijang 4-gil, Jung District, Seoul, South Korea",4.2,28518,105,far
+seoul_heritage,2525,노량진 학원가,노량진 학원가,ChIJeT5UVA-ffDURXGk0DJ7GQdA,미태리 노량진학원가점,"8 Noryangjin-ro 14ga-gil, Dongjak District, Seoul, South Korea",4.5,6,116,far
+seoul_heritage,2709,독일빵집,독일빵집,ChIJGQZxWfKYfDUR_lhyuSu5UXQ,German Bakery,"22 Yeonhui-ro 11-gil, Seodaemun-gu, Seoul, South Korea",3.9,25,4,ok
+seoul_heritage,2561,동부고려제과,동부고려제과,ChIJWa9ZP0W6fDURgw0jPgHG9GY,Dongbu Goryeo Bakery,"563 Mangu-dong, Jungnang-gu, Seoul, South Korea",4,63,101,far
+seoul_heritage,2694,만리시장,만리시장,ChIJ60DXN3CifDURzBRAzhGQoy8,Malli Market,"260-1 Seogye-dong, Yongsan District, Seoul, South Korea",3.6,130,16,ok
+seoul_heritage,3411,무계원,무계원,ChIJQyTwXrSjfDURR_78n41hBlI,Mugyewon,"4-1 Changuimun-ro 11-gil, Jongno District, Seoul, South Korea",4.5,21,10,ok
+seoul_heritage,3325,비원떡집,비원떡집,ChIJBXdJgNuifDURcxTs-uST1wg,Biwon tteokjip,"33-1 Bukchon-ro, Jongno District, Seoul, South Korea",4,36,0,ok
+seoul_heritage,3326,사보이 호텔,사보이 호텔,ChIJzaBR-PCifDURuu5hlVTK1aw,Savoy Hotel Seoul,"10 Myeongdong 8na-gil, Jung District, Seoul, South Korea",4,618,15,ok
+seoul_heritage,134,삼청각,삼청각,ChIJg4GZhDG9fDURTTtku8l0ldE,삼청각,"3 Daesagwan-ro, Seongbuk District, Seoul, South Korea",4.2,1828,22,ok
+seoul_heritage,701,서울풍물시장,서울풍물시장,ChIJ3W8SI0yjfDUR70wqfxdELx8,Seoul Folk Flea Market,"21 Cheonho-daero 4-gil, Sinseol-dong, Dongdaemun District, Seoul, South Korea",3.9,4896,4,ok
+seoul_heritage,2293,석파랑(손재형 옛 가옥),석파랑(손재형 옛 가옥),ChIJMS7bcKuifDURym1rgUnFSLw,Seokparang,"309 Jahamun-ro, Jongno District, Seoul, South Korea",4,415,9,ok
+seoul_heritage,3069,숙명여자고등학교 도서관,숙명여자고등학교 도서관,ChIJhb2gAaemfDURDR-8Vn7cXnw,숙명여자고등학교,"2807 Nambusunhwan-ro, Gangnam District, Seoul, South Korea",,,107,far
+seoul_heritage,524,양재동 화훼유통상가,양재동 화훼유통상가,ChIJydKGb1infDUREW6lw5ee9g0,양재동꽃시장,"27 Gangnam-daero, Seocho District, Seoul, South Korea",4.4,1411,103,far
+seoul_heritage,3332,융태행,융태행,ChIJBfczevOifDURgn_RcORkgi4,Yungtaehaeng,"26-9 Namdaemun-ro 1-gil, Bukchang-dong, Jung District, Seoul, South Korea",4.9,22,5,ok
+seoul_heritage,281,이상의 집,이상의 집,ChIJtfW6BL6ifDUR459rO4phG_g,Lee Sang's House,"18 Jahamun-ro 7-gil, Jongno District, Seoul, South Korea",4.1,104,0,ok
+seoul_heritage,367,이화여자대학교 진선미관,이화여자대학교 진선미관,ChIJZ3nBJayZfDURxLfPbj7PS2Q,진선미관,"52 Ewhayeodae-gil, Seodaemun-gu, Seoul, South Korea",4.5,57,100,ok
+seoul_heritage,331,태릉선수촌,태릉선수촌,ChIJ-wMMwpS5fDURK0Okolidzds,태릉선수촌실내빙상장,"Gongneung-dong, Nowon-gu, Seoul, South Korea",4.5,18,79,ok
+seoul_heritage,2537,통인시장,통인시장,ChIJYxd6fL6ifDURy7wm894BUcQ,Tongin Traditional Market,"18 Jahamun-ro 15-gil, Jongno District, Seoul, South Korea",3.8,7717,173,far
+seoul_heritage,259,학림다방,학림다방,ChIJzZCu7SujfDURGD9aedZkmYM,Hakrim Dabang,"119 Daehak-ro, Jongno District, Seoul, South Korea",4.4,1113,4,ok
+seoul_heritage,183,홍익문고,홍익문고,ChIJRWJqzJWYfDURGciU25Ey5Tg,Hongik Books,"2 Yonsei-ro, Seodaemun-gu, Seoul, South Korea",4.2,497,5,ok
+seoul_heritage,154,고려삼계탕,고려삼계탕,ChIJOVx5nYuifDURAtKWJ9ZktE4,Goryeo Samgyetang City Hall Branch,"1 Seosomun-ro 11-gil, Jung District, Seoul, South Korea",4.2,2549,0,ok
+seoul_heritage,3410,김용기 과자점,김용기 과자점,ChIJCZybYuycfDURg-Ocbf1EsfE,김용기과자점,"65 Songjeong-ro, Gangseo-gu, 서울 South Korea",4.1,31,2,ok
+seoul_heritage,2527,대문점,대문점,ChIJtaoj2eKefDURBOE8pLCVsDc,Daemunjeom,"15-4 Yeongdeungpo-dong 3(sam)-ga, Yeongdeungpo District, Seoul, South Korea",3.9,486,34,ok
+seoul_heritage,241,동흥관,동흥관,ChIJhzxeRrhhezURJ2xwfdQLrgE,Donghunggwan,"20 Siheung-daero 63-gil, Geumcheon District, Seoul, South Korea",3.9,1443,1,ok
+seoul_heritage,240,라 칸티나,라 칸티나,ChIJ00QI8u2ifDURYcN3Tscka70,La Cantina,"50 Euljiro 1(il)-ga, Jung District, Seoul, South Korea",4.2,817,4,ok
+seoul_heritage,2249,마포옥,마포옥,ChIJDwy2KrCYfDURK4ghAucLbSY,마포옥 한우양지설렁탕,"312 Tojeong-ro, Mapo-gu, Seoul, South Korea",4.2,1565,2,ok
+seoul_heritage,163,마포진짜원조최대포,마포진짜원조최대포,ChIJ74nv3KCYfDURB_kxW_AcS4Y,Mapo Jinjja Wonjo Choidaepo,"105 Baekbeom-ro, Mapo-gu, Seoul, South Korea",3.7,1381,864,far
+seoul_heritage,3605,명동교자 본점,명동교자 본점,ChIJW7FBDfCifDURHTpisLbVUH0,Myeongdong Kyoja,"129 Toegye-ro, Jung District, Seoul, South Korea",4.2,15065,176,far
+seoul_heritage,170,무교동 북어국집,무교동 북어국집,ChIJPVESye2ifDURbOaGAstuwyM,Mugyo-dong Bugeo-guk,"38 Eulji-ro 1-gil, Jung District, Seoul, South Korea",4.5,4000,0,ok
+seoul_heritage,161,문화옥,문화옥,ChIJOW4six-jfDURSacxaeFWkNY,설렁탕.족탕.꼬리곰탕의 문화옥,"118-3 Jugyo-dong, Jung District, Seoul, South Korea",4,593,6,ok
+seoul_heritage,2531,미네르바,미네르바,ChIJJyYFApSYfDURl0DH8hBKITY,Minerva,"South Korea, Seoul, Seodaemun-gu, Myeongmul-gil, 18 2 층",4.4,86,28,ok
+seoul_heritage,799,미진,미진,ChIJUdO28-uifDURutXAwIaJQjw,Mijin,"19 Jong-ro, Jongno District, Seoul, South Korea",4.1,3590,16,ok
+seoul_heritage,3394,복성각 마포본점,복성각 마포본점,ChIJW1exFhaZfDURStICxGO7sLo,복성각 마포본점,"South Korea, Seoul, Mapo-gu, Dohwa-dong, 173번지 삼창프라자 지하 복성각 1층",4.1,850,7,ok
+seoul_heritage,2244,부민옥,부민옥,ChIJc57w1u2ifDURKGRslFfOMkY,Buminok,"24-12 Dadong-gil, Jung District, Seoul, South Korea",4.1,1530,39,ok
+seoul_heritage,138,부여집,부여집,ChIJx2FHeO2efDURPY_rWjCVbPA,Buyeojib,"24 Seonyudong 1-ro, Yeongdeungpo District, Seoul, South Korea",3.8,345,14,ok
+seoul_heritage,2247,산골막국수,산골막국수,ChIJD3Bj1x-jfDURhbFHXoWboa8,San-gol Myeonok Chuncheon Mak-Guksu,"175-3 Eulji-ro, 을지로동 Jung District, Seoul, South Korea",3.6,151,5,ok
+seoul_heritage,165,삼거리먼지막순대국,삼거리먼지막순대국,ChIJCaPmiwaffDURphVOVYB5NS8,삼거리먼지막순대국,"11 Siheung-daero 185-gil, Yeongdeungpo District, Seoul, South Korea",4.3,1063,0,ok
+seoul_heritage,2563,서북면옥,서북면옥,ChIJYddj0SelfDUR8WXTCKiMARc,Seo-book Noodle,"199-1 Jayang-ro, Gwangjin District, Seoul, South Korea",4.1,2058,23,ok
+seoul_heritage,2252,서울서둘째로잘하는집,서울서둘째로잘하는집,ChIJPWSy286ifDURodcZS2J09tk,Seoulseo Duljjaero Jalhaneun Jip,"122-1 Samcheong-ro, Jongno District, Seoul, South Korea",4.4,926,5,ok
+seoul_heritage,3328,선천집,선천집,ChIJraly7sKifDURb_LmYSxoz4k,Seoncheon,"5 Insadong 14-gil, Jongno District, Seoul, South Korea",4,152,5,ok
+seoul_heritage,2585,성북동 국시집,성북동 국시집,ChIJrzZJxNO8fDURuaKzuToAfqk,Gugsijib,"9 Changgyeonggung-ro 43-gil, 성북동 Seongbuk District, Seoul, South Korea",3.8,383,29,ok
+seoul_heritage,3409,소문난개미집,소문난개미집,ChIJ-VKs286dfDURSsWovqg_Xic,소문난개미,"South Korea, Seoul, Yangcheon District, Jungang-ro 46-gil, 5 1 층",4,63,13,ok
+seoul_heritage,2710,쌍다리 식당,쌍다리 식당,ChIJSzZelSm9fDURfO8IciUqOC0,Ssangdari Main Branch,"4 Seongbuk-ro 23-gil, Seongbuk District, Seoul, South Korea",4,1410,10,ok
+seoul_heritage,243,안동장,안동장,ChIJwxMtAOSifDURT6Ej5JN04-o,Andongjang,"124 Eulji-ro, Jung District, Seoul, South Korea",3.9,2033,4,ok
+seoul_heritage,169,역전회관,역전회관,ChIJxZim3K-YfDUR3jf_ThTKP18,YukJeon Hoegwan,"47 Tojeong-ro 37-gil, Mapo-gu, Seoul, South Korea",3.9,2172,7,ok
+seoul_heritage,164,열차집,열차집,ChIJEcIYG82jfDUR0qgkdV0LfBw,Yeolchajib,"47 Jong-ro 7-gil, Jongno District, Seoul, South Korea",4,15,6,ok
+seoul_heritage,3106,옛날집 낙원아구찜,옛날집 낙원아구찜,ChIJkxAEFN2ifDURb4jQMaVhP8c,Nagwon Agujjim,"436 Samil-daero, Jongno District, Seoul, South Korea",4,367,4,ok
+seoul_heritage,166,오장동함흥냉면,오장동함흥냉면,ChIJb63Nih6jfDURs1emCe-s2EY,Ojangdong Hamheung Naengmyeon,"108 Mareunnae-ro, Jung District, Seoul, South Korea",3.6,2857,7,ok
+seoul_heritage,3331,오장동흥남집,오장동흥남집,ChIJhX857h6jfDURTXULgLjlZr8,Ojang-dong Heungnamjip Main Store,"114 Mareunnae-ro, Jung District, Seoul, South Korea",4,3303,5,ok
+seoul_heritage,127,용금옥,용금옥,ChIJbczJ0-2ifDURyzVx2SvP6Xg,Yong Geum Ok,"24-2 Dadong-gil, Jung District, Seoul, South Korea",4.1,487,12,ok
+seoul_heritage,149,우래옥,우래옥,ChIJ95h3lR-jfDURkB9hKZltPXM,Woo Lae Oak,"62-29 Changgyeonggung-ro, Jung District, Seoul, South Korea",4.2,6579,2,ok
+seoul_heritage,3128,원대구탕,원대구탕,ChIJB5-kbBaifDURUzcrCAvBNh0,Won Daegu-tang,"8 Hangang-daero 62ga-gil, Yongsan District, Seoul, South Korea",3.9,2782,8,ok
+seoul_heritage,2262,원조 할머니 기름 떡볶이,원조 할머니 기름 떡볶이,ChIJJTwRsTCjfDURzrYEZbYVLZs,원조정할머니기름떡볶이,"18 Jahamun-ro 15-gil, 청운효자동 Jongno District, Seoul, South Korea",3.9,89,21,ok
+seoul_heritage,2263,유림면,유림면,ChIJR5RpMPOifDURSM0OmHA_h_0,Yurimmyeon,"139-1 Seosomun-ro, Jung District, Seoul, South Korea",3.9,1451,1,ok
+seoul_heritage,2261,유진식당,유진식당,ChIJq4zOYt2ifDURsGNjd3OqwvU,Yujin Restaurant,"40 Jong-ro 17-gil, Jongno District, Seoul, South Korea",4,1322,3,ok
+seoul_heritage,133,은호식당,은호식당,ChIJPx3xFfWifDURdbWervjwicc,Eunho Sikdang,"50-42 Namchang-dong, Jung District, Seoul, South Korea",3.8,441,6,ok
+seoul_heritage,124,이문설농탕,이문설농탕,ChIJN0aOM-iifDUR98SZc1MQre0,Yimoon Seolleongtang,"38-13 Ujeongguk-ro, Jongno District, Seoul, South Korea",4,2655,9,ok
+seoul_heritage,3333,잼배옥,잼배옥,ChIJFeLbbYuifDURucXOnVpo0wU,잼배옥,"68-9 Sejong-daero 9-gil, Jung District, Seoul, South Korea",4,327,21,ok
+seoul_heritage,3335,중림장,중림장,ChIJpX9FYmKifDURDilxmst3mFM,Jungnimjang Seolleongtang,"South Korea, Seoul, Jung District, 중림동 468",4.1,1475,5,ok
+seoul_heritage,262,진아춘,진아춘,ChIJ3xg-uiujfDURBrjFSlS7k-U,Jin-Achun,"18 Daemyeong 1-gil, Jongno District, Seoul, South Korea",3.9,293,12,ok
+seoul_heritage,155,진주회관,진주회관,ChIJKcw_Q4uifDUR8xJygSjZwpc,Jinju Hoegwan,"26 Sejong-daero 11-gil, Jung District, Seoul, South Korea",4.2,3577,4,ok
+seoul_heritage,2692,창성옥,창성옥,ChIJiyOgWw-ifDURElxt_CzxKcg,Changseong-Og,"25-16 Yongmun-dong, Yongsan District, Seoul, South Korea",4.1,1241,5,ok
+seoul_heritage,2246,청일집,청일집,ChIJrVJmB4aXfDURP2DcsvVpc30,Cheong-Iljib,"South Korea, Seoul, Eunpyeong District, Tongil-ro, 850, Yeonseo Market, A동 1층 24호",4,3,6,ok
+seoul_heritage,135,청진옥,청진옥,ChIJyfkL8-uifDURGjR9tuiIbSo,Cheongjinok,"32 Jong-ro 3-gil, Jongno District, Seoul, South Korea",3.9,3798,77,ok
+seoul_heritage,2250,초가집,초가집,ChIJKbTeYYO-fDURkE0jjz2mC4s,Chogajib,"116-28 Samyang-ro 173-gil, Gangbuk-gu, Seoul, South Korea",3.9,91,9,ok
+seoul_heritage,167,태조감자국,태조감자국,ChIJu4j2Ace8fDURb_43bT8q7_k,Taejo Gamjaguk Sungshin Women's Univ.,"43 Bomun-ro 34-gil, Seongbuk District, Seoul, South Korea",4.2,999,2,ok
+seoul_heritage,3337,평래옥,평래옥,ChIJddwdaOSifDURUeKnfI1iPtE,Pyeongnaeok,"21-1 Mareunnae-ro, Jung District, Seoul, South Korea",3.8,2011,4,ok
+seoul_heritage,3667,한국의 집,한국의 집,ChIJ1ytmM5SifDURnsR4OoEvDFQ,Korea House,"10 Toegye-ro 36-gil, Jung District, Seoul, South Korea",4.4,1967,8,ok
+seoul_heritage,148,한일관,한일관,ChIJkUSoe4-jfDURujr_bknv6iE,Hanilkwan Apgujeong,"14 Apgujeong-ro, Gangnam District, Seoul, South Korea",4,1721,7,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/7th-door,7th Door,7th Door,ChIJJ1xm8n-lfDUR5AOAQSJ0oeM,7th Door,"South Korea, Seoul, Gangnam District, Hakdong-ro 97-gil, 41 4층",4.6,128,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/bicena,Bicena,Bicena,ChIJIQaZkQqlfDUR5qNX-DM-Blw,Bicena,"South Korea, Seoul, Songpa District, Sincheon-dong, Olympic-ro, 300 롯데월드 타워 81층",4.4,527,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/collage,Collage,Collage,ChIJEUtuhoCnfDURX--PABdLcnU,Collage,"South Korea, Seoul, Gangnam District, Nonhyeon-ro 136-gil, 11 2층",3.6,7,0,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/eatanic-garden,Eatanic Garden,Eatanic Garden,ChIJKWHZw3alfDUR5A5F61Oqj5I,"Eatanic Garden, Josun Palace","조선 팰리스(센터필드 웨스트 타워 231, 테헤란로 강남구 서울특별시 South Korea",4.6,107,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/escondido,Escondido,Escondido,ChIJBYx0XAGjfDUR3NMPYf2_qjY,Escondido,"61-7 Hannam-daero 20-gil, Yongsan District, Seoul, South Korea",4.8,32,3,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/exquisine,Exquisine,Exquisine,ChIJVVjCIW6kfDUR7cOSCmAmdUE,Exquisine,"6 Samseong-ro 140-gil, Cheongdam-dong, Gangnam District, Seoul, South Korea",4.5,177,13,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/gaggen,GAGGEN by Choi Junho,GAGGEN by Choi Junho,ChIJKzILV7ulfDUR4-cgf86P2s4,가겐 by 최준호,"South Korea, Seoul, Gangnam District, Apgujeong-ro 80-gil, 19-1 2층",5,11,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/gigas,Gigas,Gigas,ChIJ971zYXGjfDURWeiU2g-VPvI,Gigas,"South Korea, Seoul, Jung District, Toegye-ro 6ga-gil, 30 3층",4.5,40,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/giwakang,GiwaKang,GiwaKang,ChIJvw75L8mjfDURSr7jm2tfq4U,GiwaKang 기와강,"South Korea, Seoul, Gangnam District, Nonhyeon-ro 152-gil, 9 4층",4.5,14,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/goryori-ken,Goryori Ken,Goryori Ken,ChIJzfoBFYajfDUR-x_J11iVJdU,Goryori Ken,"15-3 Eonju-ro 152-gil, Gangnam District, Seoul, South Korea",4.4,34,3,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/hakusi,Hakusi,Hakusi,ChIJ4xjGiACjfDURRscCvhwkQtw,Hakusi,"6 Dokseodang-ro 29-gil, Yongsan District, Seoul, South Korea",4.2,35,2296,far
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/restaurant-jueun,JUEUN,JUEUN,ChIJPbq7MnyjfDUROwBrnGcV-C8,Restaurant Jueun,"South Korea, Seoul, Jongno District, Gyeonghuigung-gil, 36 8 층",4.8,96,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/kang-minchul-restaurant,KANG MINCHUL Restaurant,KANG MINCHUL Restaurant,ChIJX-lvM5WlfDURSDv31GaVe4g,강민철 레스토랑,"18 5F Dosan-daero 63-gil, Gangnam District, Seoul, South Korea",4.1,38,8,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/l-amant-secret,L'Amant Secret,L'Amant Secret,ChIJVZ4zFyOjfDURrY5_G1k5F7A,L’Amant Secret,"67 Toegye-ro, Jung District, Seoul, South Korea",4.7,247,2,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/l-amitie,L'Amitié,L'Amitié,ChIJH2jZ86GlfDURAVZBp3imf64,L'Amitié Cheongdam,"South Korea, Seoul, Gangnam District, Dosan-daero 67-gil, 30 2층",4.5,236,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/legume,Légume,Légume,ChIJG4cH3j6jfDURUapdZ0hDtX0,LEGUME,"652 Gangnam-daero, Gangnam District, Seoul, South Korea",4.8,87,20,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/muni,Muni,Muni,ChIJ_TH_xA2lfDURO7DMMZXDl9U,Muni,"26 Dosan-daero 70-gil, 청담동 Gangnam District, Seoul, South Korea",4.5,99,113,far
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/muoki,Muoki,Muoki,ChIJx08AyXWkfDURs2BBkP20hJo,Muoki,"12-12 Hakdong-ro 55-gil, Gangnam District, Seoul, South Korea",4.7,345,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/onjium,Onjium,Onjium,ChIJk5DRDD2jfDURUA4aAk0Frx0,Onjium,"South Korea, Seoul, Jongno District, Hyoja-ro, 49 4층",4.7,168,9,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/san,SAN,SAN,ChIJr__jo2OjfDURT4N0VNw62MM,Restaurant SAN,"South Korea, Seoul, Gangnam District, Eonju-ro 168-gil, 6 B1F",4.7,42,3,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/solbam,Solbam,Solbam,ChIJL2hHUjujfDURbxzijlzZtxs,Solbam,"South Korea, Seoul, Gangnam District, Nonhyeon-dong, Hakdong-ro, 231 백영센터 2층",4.8,93,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/soseoul-hannam,Soseoul Hannam,Soseoul Hannam,ChIJ8R_CLEWjfDUR3HHfL-sNAiA,Soseoul Hannam,"South Korea, Seoul, Hannam-dong, Hannam-daero 20-gil, 21 18 1층 KR 서울특별시 용산구 B동 지하",4.5,259,7,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/soul-dining,Soul,Soul,ChIJWQe-N-6jfDUR8a_Qr2Xrhfk,Soul Dining,"35 Sinheung-ro 26-gil, Yongsan District, Seoul, South Korea",4.6,181,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/sushi-kanesaka-1244365,Sushi Kanesaka,Sushi Kanesaka,ChIJm9HFAgClfDURqp0_Hrb6jpQ,Sushi Kanesaka,"1F, Grand InterContinental Seoul Parnas, 521 Teheran-ro, Gangnam District, Seoul, South Korea",5,1,19,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/sushi-matsumoto-1195338,Sushi Matsumoto,Sushi Matsumoto,ChIJ5WOsGoyjfDUR9wNJyWemF5A,Sushi Matsumoto,"South Korea, Seoul, Gangnam District, Dosan-daero 75-gil, 24 1층",4.4,34,46,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/tutoiement,Tutoiement,Tutoiement,ChIJkTTxM1GlfDURaFBGMDEIHQc,Tutoiement,"South Korea, Seoul, Seongdong-gu, Gwangnaru-ro 11-gil, 20 101호",4.5,6,5,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/vinho,VINHO,VINHO,ChIJqWOZj6KjfDURWWKxJdKW6-I,Vinho,"South Korea, Seoul, KR 서울특별시 강남구 학동로43길 38 논현웰스톤 지상 162호 VINHO",4.8,98,3,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/yun,YUN,YUN,ChIJT4iUTU6ZfDURTYMMNDveRLo,Yun Seoul,"805 Seolleung-ro, Gangnam District, Seoul, South Korea",4.6,69,7,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/yu-yuan,Yu Yuan,Yu Yuan,ChIJ3dVqNJOifDURoB_zAowK8I0,유 유안 Yu Yuan,"97 Saemunan-ro, Jongno District, Seoul, South Korea",4.3,472,45,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/zero-complex,Zero Complex,Zero Complex,ChIJ3xNCtMWjfDURi88O7OCijdM,Zero Complex,"11-8 Seobinggo-ro 59-gil, Yongsan District, Seoul, South Korea",4.4,285,5,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/y-east,y'east,y'east,ChIJB2BRX3OjfDURrLzEVUCryxk,Y'east,"South Korea, Seoul, Gangnam District, Sinsa-dong, Eonju-ro 170-gil, 26-6 3층",4.9,79,3,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/evett,Evett,Evett,ChIJTaVjWi6hfDURVegqLOB9oSs,EVETT,"10-5 Dosan-daero 45-gil, Gangnam District, Seoul, South Korea",4.6,314,4,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/jungsik511965,Jungsik,Jungsik,ChIJLwsYxYijfDURiJD-QZw6MYU,Jungsik Seoul,"11 Seolleung-ro 158-gil, Gangnam District, Seoul, South Korea",4.4,1651,10,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/kwonsooksoo,Kwonsooksoo,Kwonsooksoo,ChIJZ1-yoYijfDURvkRg_wdaQao,KwonSookSoo,"37 Apgujeong-ro 80-gil, Gangnam District, Seoul, South Korea",4.5,521,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/la-yeon,La Yeon,La Yeon,ChIJf8Lq1wSjfDURbuyVUM14Svc,La Yeon,"South Korea, Seoul, Jung District, 장충동 Dongho-ro, 249, THE SHILLA Seoul, 23층",4.5,812,9,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/mitou,Mitou,Mitou,ChIJGZ6vIe2jfDURWOUsVCO94cA,Mitou,"South Korea, Seoul, Gangnam District, 청담동 17-24 1층",4.8,87,15,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/mosu,Mosu,Mosu,ChIJJeNdcbOjfDURCzyDecCVK7o,MOSU Seoul,"4 Hoenamu-ro 41-gil, Yongsan District, Seoul, South Korea",4.4,315,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/restaurant-allen,Restaurant Allen,Restaurant Allen,ChIJQ-Y88belfDURrUsKUS6HMVY,Restaurant Allen,"South Korea, Seoul, KR 서울특별시 강남구 테헤란로 231 EAST 2층 E205호",4.5,108,0,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/soigne,Soigné,Soigné,ChIJIU2RrnahfDURNvCJDhODupM,Soigné,"South Korea, Seoul, Gangnam District, Sinsa-dong, SINSA SQUARE, 2F",4.5,472,0,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/sosuheon,소수헌,Sosuheon,ChIJ6fwnPgCjfDURRK3JXHKApos,Sosuheon,"283 Malli-dong 2(i)-ga, Jung District, Seoul, South Korea",5,11,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/alla-prima,alla prima,alla prima,ChIJsdM8l_KjfDURobnSNkInVo8,Alla Prima,"13 Hakdong-ro 17-gil, Gangnam District, Seoul, South Korea",4.6,457,5,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/mingles,Mingles,Mingles,ChIJjXuM24mjfDURSwmouRnxNlM,Mingles,"South Korea, Seoul, Gangnam District, Dosan-daero 67-gil, 19 힐탑빌딩 2층",4.5,886,10,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/3rd-samgyetang,3rd Generation Samgyetang Master,3rd Generation Samgyetang Master,ChIJq7z77WyhfDURJm6zbi7bFkw,Samdae Samgyejangin,"56-3 Banpo-daero 28-gil, Seocho District, Seoul, South Korea",4.4,1076,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/alt-a,ALT.a,ALT.a,ChIJAweR_RyjfDURWomb0mTkRI0,ALT.a,"109 Bogwang-ro, Yongsan District, Seoul, South Korea",4.7,422,4,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/anam,ANAM,ANAM,ChIJBedYETCjfDURWaJ6phZ-yy4,Anam,"10 Bukchon-ro 5-gil, Jongno District, Seoul, South Korea",4.3,363,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/andeok,Andeok,Andeok,ChIJ-yZQ4JijfDURDGQwBKgy9nk,Andeok,"18 Jahamun-ro 17-gil, Jongno District, Seoul, South Korea",4.2,114,3,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/base-is-nice,Base is nice,Base is nice,ChIJm4-szsKZfDURb1v4KUtJCP4,BASE IS NICE,"20 Dohwa 2-gil, Mapo-gu, Seoul, South Korea",4.7,60,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/daesungjip,대성집,Daesungjip,ChIJd6YDRZdrMhURXjRQpMLq23U,Daesungjip,"5 Sajik-ro, Jongno District, Seoul, South Korea",4.3,2117,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/damtaek,Damtaek,Damtaek,ChIJi-ZS7o2ZfDURcffutblKC4o,Damtaek,"South Korea, Seoul, Mapo-gu, Donggyo-ro 12an-gil, 51 1층",4.5,463,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/gaeseong-mandu-koong,Gaeseong Mandu Koong,Gaeseong Mandu Koong,ChIJBXBbv8KifDURu3CVFSwMyjg,KOONG | Gaeseong Traditional Dumpling House,"11-3 Insadong 10-gil, Jongno District, Seoul, South Korea",4.1,1576,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/gebang-sikdang,Gebangsikdang,Gebangsikdang,ChIJ9Uxbo4qjfDURYaXnzVaYiMY,Gebangsikdang,"17 Seolleung-ro 131-gil, Gangnam District, Seoul, South Korea",4.3,665,3,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/geumdwaeji-sikdang,Geumdwaeji Sikdang,Geumdwaeji Sikdang,ChIJFRmIDRGjfDUR2nv7h8qMx2Y,Geumdwaeji Sikdang,"149 Dasan-ro, Jung District, Seoul, South Korea",4.3,3075,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/ggupdang,Ggupdang,Ggupdang,ChIJe3UoNQKjfDURa_IWZVyc2w4,Kkubdang Sinsa,"615 Gangnam-daero, Seocho District, Seoul, South Korea",4.4,835,15,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/gomtang-lab,Gomtang Lab,Gomtang Lab,ChIJCTeTIgCjfDURl5OD7lpTNlc,Gomtang LAB,"10층, 현대백화점, 517 Teheran-ro, Gangnam District, Seoul, South Korea",4.6,47,3,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/gosari-express,Gosari Express,Gosari Express,ChIJCZxRQwCjfDURvNOXDx629wE,Gosari Express,"12-10 Toegye-ro 85-gil, Jung District, Seoul, South Korea",4.7,90,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/horapa,HORAPA,HORAPA,ChIJhQtB_rSjfDURKQupt63WLDY,Horapa,"37-1 Jahamun-ro, Jongno District, Seoul, South Korea",4.5,46,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/halmaejip,Halmaejip,Halmaejip,ChIJSz0DNZSifDURbyoY-rvEl1o,Halmaejip,"1-5 Sajik-ro 12-gil, Jongno District, Seoul, South Korea",4.1,617,20,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/hapjeongok,Hapjeongok,Hapjeongok,ChIJiY0MFiuZfDURSB_bKFPZf0k,Hapjeong-dong,"Hapjeong-dong, Mapo-gu, Seoul, South Korea",,,145,far
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/hwa-hae-dang,화해당,Hwa Hae Dang,ChIJDZMdLCWffDURLJe61me3ZMU,Hwa Hae Dang Michelin,"15 Gukhoe-daero 62-gil, Yeongdeungpo District, Seoul, South Korea",4.2,537,31,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/hwanggeum-kongbat,Hwanggeum Kongbat,Hwanggeum Kongbat,ChIJJ-gxpXeifDUR-UWa6w9-IBw,Hwanggeum Kongbat,"9 Mapo-daero 16-gil, Mapo-gu, Seoul, South Korea",4.3,1098,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/hwangsaengga-kalguksu,Hwangsaengga Kalguksu,Hwangsaengga Kalguksu,ChIJ13yZpsaifDURUpD__4MZcT4,Hwangsaengga Kalguksu,"78 Bukchon-ro 5-gil, Jongno District, Seoul, South Korea",4.2,3029,8,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/jaha-son-mandu,Jaha Son Mandu,Jaha Son Mandu,ChIJC1L27LGifDURk9mMQgbLfg0,Jaha Son Mandu,"12 Baekseokdong-gil, Jongno District, Seoul, South Korea",3.8,2275,3,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/jeongmyeon,Jeongmyeon,Jeongmyeon,ChIJNzgZOqalfDURp8oGe93cVsI,Jeongmyeon,"88 Neungdong-ro 13-gil, Gwangjin District, Seoul, South Korea",4.6,157,4,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/jungin-myeonok,정인면옥,Jungin Myeonok,ChIJ3YVgTCWffDURFxXN4L28kyU,Jungin Myeonok,"10 Gukhoe-daero 76-gil, Yeongdeungpo District, Seoul, South Korea",4,2780,5,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/kyewol-gomtang,Kyewol,Kyewol,ChIJ3z3vJ3ulfDUR893XkU1Inyk,Kyewol Gomtang,"8 Seongdeokjeong 3-gil, Seongsu-dong 1(il)-ga, Seongdong-gu, Seoul, South Korea",4,98,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/kyodaiya,Kyodaiya,Kyodaiya,ChIJn5sM9u6efDURMountCMxj_Y,Kyodaiya,"South Korea, Seoul, Mapo-gu, Seongji-gil, 39 1층",4.3,1153,11,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/limbyungjoo-sandong-kalguksu,Limbyungjoo Sandong Kalguksu,Limbyungjoo Sandong Kalguksu,ChIJ90PW2EuhfDURVGnAxYEqiYc,Lim Byungjoo Sandong Kalguksu,"65 Gangnam-daero 37-gil, Seocho District, Seoul, South Korea",4.1,3306,14,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/mandujip,Mandujip,Mandujip,ChIJ-zTnnoejfDURU00l4M32Uhc,Mandoojip,"338 Apgujeong-ro, Gangnam District, Seoul, South Korea",4.1,834,4,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/mapo-ok,Mapo Ok,Mapo Ok,ChIJDwy2KrCYfDURK4ghAucLbSY,마포옥 한우양지설렁탕,"312 Tojeong-ro, Mapo-gu, Seoul, South Korea",4.2,1565,5,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/mattdol,Mattdol,Mattdol,ChIJF3dws7WlfDURu4yGTlxgOHU,Mattdol,"63 Seongdeokjeong-gil, Seongdong-gu, Seoul, South Korea",4.9,31,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/mijin,Mijin,Mijin,ChIJUdO28-uifDURutXAwIaJQjw,Mijin,"19 Jong-ro, Jongno District, Seoul, South Korea",4.1,3590,23,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/mipildam,Mipildam,Mipildam,ChIJFxPP-oOZfDURqlOrwJdGEqI,Mipildam,"South Korea, Seoul, Mapo-gu, Seongji 3-gil, 22 1층",4.4,52,0,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/myeon-seoul,Myeon Seoul,Myeon Seoul,ChIJOY1bNEqjfDUR8pHYAdJ029M,Myeonseoul,"805 Seolleung-ro, Gangnam District, Seoul, South Korea",4.3,228,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/neungdong-minari,Neungdong Minari,Neungdong Minari,ChIJ-R1qgxmifDUR4igPyu23xmo,Neungdong Minari Sinyongsan,"28 Hangang-daero 40-gil, Yongsan District, Seoul, South Korea",4.4,478,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/nishimuramen,Nishimuramen,Nishimuramen,ChIJpXffNqGZfDUR74ZT2Gzgu2M,Nishimuramen,"South Korea, Seoul, Mapo-gu, Donggyo-ro, 265 4층",4.3,93,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/oilje,Oilje,Oilje,ChIJ_QFVYGSjfDURpdna_-3xNGI,Oilje,"180-1 Hangangno 1(il)-ga, Yongsan District, Seoul, South Korea",4.5,57,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/okdol-heyonok,Okdolhyunok,Okdolhyunok,ChIJ1YvHj8ClfDURGdKbF4psJ1o,Okdolhyunok,"아이파크 D존, 55 Beobwon-ro, Songpa District, Seoul, South Korea",4.3,342,2,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/okdongsik,Okdongsik,Okdongsik,ChIJyZixE7-8fDURJGg4PFNXcQk,Okdongsik Seogyo,"44-10 Yanghwa-ro 7-gil, Mapo-gu, Seoul, South Korea",4.3,1338,5,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/oreno-ramen,Oreno Ramen,Oreno Ramen,ChIJqYTmWtGYfDURryq7AaODZoc,Oreno Ramen Main Store,"16 Dongmak-ro 8-gil, Mapo-gu, Seoul, South Korea",4.6,2183,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/pildong-myeonok,Pildong Myeonok,Pildong Myeonok,ChIJzctx3J2jfDUR8aZ4DVRySoE,Pildong Myeonok,"26 Seoae-ro, Jung District, Seoul, South Korea",4.2,1182,10,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/sarukame,Sarukame,Sarukame,ChIJTQ3uYuiYfDURYKfjeAlpp-I,Sarukame,"15 Yeonnam-ro, Mapo-gu, Seoul, South Korea",4.4,572,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/seokyonanmyunbang,Seokyonanmyunbang,Seokyonanmyunbang,ChIJnVSAKwCZfDURFv7lBeMn9P8,Seogyo Nanmyeonbang,"16 Donggyo-ro 12-gil, Mapo-gu, Seoul, South Korea",4.8,248,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/seoryung,서령,Seoryung,ChIJe35o4oGHezURfiKkyNhIb3g,Seoryung,"South Korea, Seoul, Jung District, Sowol-ro, 10, Danam Tower, 1층",4.5,547,7,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/sobakeeri-suzu,Sobakeeri Suzu,Sobakeeri Suzu,ChIJVcWVYQCjfDURackHV-G6EO0,Sobakeeri Suzu,"337-51 Sindang-dong, Jung District, Seoul, South Korea",5,2,0,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/subaru,Subaru,Subaru,ChIJCQU272qhfDUR6PCzxxD7AfY,Subaru,"South Korea, Seoul, Seocho District, Bangbaejungang-ro 21-gil, 7 1층",4.1,161,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/woo-lae-oak,우래옥,Woo Lae Oak,ChIJ95h3lR-jfDURkB9hKZltPXM,Woo Lae Oak,"62-29 Changgyeonggung-ro, Jung District, Seoul, South Korea",4.2,6579,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/yangyang-memil-makguksu,Yangyang Memil Makguksu,Yangyang Memil Makguksu,ChIJzbFCkqShfDURlJnels3lvdQ,Yangyang Memil Makguksu,"10 Donggwang-ro 15-gil, Seocho District, Seoul, South Korea",4.1,602,4,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/yonggeumok,Yonggeumok,Yonggeumok,ChIJIf38cb6ifDURf7nV1pl5O1U,Yonggeumok,"41-2 Jahamun-ro, Jongno District, Seoul, South Korea",4,273,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/youhan,Youhan,Youhan,ChIJESHUysWjfDURuaDOEmdnsuI,유한,"10-5 Daesagwan-ro 5-gil, Yongsan District, Seoul, South Korea",4.3,28,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/yurimmyeon,유림면,Yurimmyeon,ChIJR5RpMPOifDURSM0OmHA_h_0,Yurimmyeon,"139-1 Seosomun-ro, Jung District, Seoul, South Korea",3.9,1451,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/al-aise,A L'AISE,A L'AISE,ChIJu0PN47-jfDURDd0JJBV9Rj0,A L'aise,"89 Dokseodang-ro, Yongsan District, Seoul, South Korea",4.4,41,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/aelgerizm,Aelgerizm,Aelgerizm,ChIJkz9YGJijfDUR8yFRzwIn-6g,알고리즘 aelgerizm,"652-3 Sinsa-dong, Gangnam District, Seoul, South Korea",4.6,12,0,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/bawi,Bawi,Bawi,ChIJGd6fZsGjfDURjaLz4iSKZvs,레스토랑 바위 / restaurant bawi,"South Korea, Seoul, Yongsan District, Itaewon-ro 54-gil, 16-9 3층",5,4,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/bistrot-de-yountville,Bistrot de Yountville,Bistrot de Yountville,ChIJWd4hFXikfDURPpkzGW59RdQ,Bistrot de Yountville,"South Korea, Seoul, Gangnam District, 청담동 Seolleung-ro 158-gil, 13-7 이안빌딩 1층",4.4,412,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/bium,Bium,Bium,ChIJNUC-Pz2lfDURMGV1S250AKg,Bium,"South Korea, Seoul, Gangnam District, Hakdong-ro 97-gil, 41 리유빌딩 1층",4.8,21,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/bongmilga,Bongmilga,Bongmilga,ChIJKZIUL3WkfDURxCDCpyU7-G8,Bongmilga,"South Korea, Seoul, Gangnam District, Seolleung-ro, 664 건설빌딩 109호 109",4.5,838,7,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/boreumsae,Boreumsae,Boreumsae,ChIJwU1jpBSkfDURtZH2lQU4uuE,Boreumsae,"36 Teheran-ro 81-gil, Gangnam District, Seoul, South Korea",4.4,820,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/borgo-hannam,Borgo Hannam,Borgo Hannam,ChIJEycpD7mjfDURx4dvuWyLSBg,Borgo Hannam,"3rd Floor, 684-62 한남동 Yongsan District, Seoul, South Korea",4.3,132,16,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/born-and-bred,Born and Bred,Born and Bred,ChIJ03uyyKqkfDURBP72STLlOHU,Born and Bred,"1 Majang-ro 42-gil, Seongdong-gu, Seoul, South Korea",4.4,846,31,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/budnamujip,Budnamujip,Budnamujip,ChIJF0EyD0-hfDURAh73ZLPC6-w,Budnamujip,"434 Hyoryeong-ro, Seocho District, Seoul, South Korea",4.1,1367,8,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/original-numbers,Cantique,Cantique,ChIJOYhJNwClfDURpvnZIIPjZes,Original Numbers,"South Korea, Seoul, Gangnam District, 청담동 88-2",4.5,8,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/chaconne,Chaconne,Chaconne,ChIJwevSQgCjfDUR9rAlL8RLzbc,Chaconne,"639 Yeoksam-dong, Gangnam District, Seoul, South Korea",4.5,10,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/chez-nous,Chez Nous Private Kitchen,Chez Nous Private Kitchen,ChIJxV46qdCjfDURO8r93s3E_7g,Chez Nous Private Kitchen,"South Korea, Seoul, Yongsan District, Itaewon-dong, 421-1 3층",5,16,6,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/chez-simon,Chez Simon,Chez Simon,ChIJPe4H9cWifDUR763SM6dZJsw,Chez Simon,"South Korea, Seoul, Yongsan District, Hoenamu-ro, 66 가야랑빌딩 3층",4.7,130,9,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/continental,Continental,Continental,ChIJ6xPyuhqjfDURdwrynnNFQIE,Continental,"South Korea, Seoul, Jung District, 장충동 Dongho-ro, 249 23층",4.5,187,34,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/doori,Doori,Doori,ChIJO928IwCjfDURIiQ3QzgMeSo,Doori,"27 Wonhyo-ro 63-gil, Yongsan District, Seoul, South Korea",5,3,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/doughroom,Doughroom,Doughroom,ChIJl7SKCaGhfDURaTXGENQVQ2w,Doughroom by Soigné,"South Korea, Seoul, Seocho District, Donggwang-ro, 99 2층",4.2,455,7,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/elpic,ELPIC,ELPIC,ChIJUbDlEV6lfDURWTHYOyweWpQ,Elpic,"South Korea, Seoul, Gangnam District, 청담동 11-12",4.3,38,9,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/egg-flour,Egg & Flour,Egg & Flour,ChIJoeybIEajfDURxsAVU7lM9V0,Egg & Flour,"1-549 yongsan-dong 2(i)-ga, Yongsan District, Seoul, South Korea",4,173,14,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/fuje,Fuje,Fuje,ChIJqTgxIkGnfDURqFKbw1B1VFA,fuje 후제,"South Korea, Seoul, Gangnam District, Nonhyeon-ro 24-gil, 21 2층",5,11,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/gom-ba-wie,Gom Ba Wie,Gom Ba Wie,ChIJi7TvdWmkfDURzu_8K9y8RRQ,Gom Ba Wie,"10 Yeongdong-daero 115-gil, Gangnam District, Seoul, South Korea",4.1,1248,7,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/goobok-mandu,Goobok Mandu,Goobok Mandu,ChIJyWM5KmqifDUR7ftzNHpjrz0,Gubok Mandu,"7 Duteopbawi-ro, Yongsan District, Seoul, South Korea",4.1,2219,45,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/grandir,Grandir,Grandir,ChIJQdPID8ijfDURS-wvu5N1b64,그랑디르 Grandir,"South Korea, Seoul, 3F Apgujeong-ro 54-gil, 4 KR 서울특별시 강남구",4.9,17,0,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/gucci-osteria-da-massimo-bottura-1203402,Gucci Osteria da Massimo Bottura,Gucci Osteria da Massimo Bottura,ChIJY4dVG6OjfDURQN5e3dfOM5E,Gucci Osteria Seoul da Massimo Bottura,"5F, 462 Apgujeong-ro, Gangnam District, Seoul, South Korea",4.5,66,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/gwanghwamun-gukbap,Gwanghwamun Gukbap,Gwanghwamun Gukbap,ChIJ8YClzZKifDURP7QLq67jXGk,Gwanghwamun Gukbap/광화문국밥,"53 Sejong-daero 21-gil, Jung District, Seoul, South Korea",4.2,1858,12,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/hane,HANE,HANE,ChIJ05Zoz1-jfDURNjPePpknw5k,Sushi Hane,"14 Eonju-ro 172-gil, Apgujeong-dong, Gangnam District, Seoul, South Korea",4.3,58,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/hadongkwan,하동관,Hadongkwan,ChIJvZjTMWC9fDURxnT8dx21N3U,Hadongkwan,"12 Myeongdong 9-gil, Jung District, Seoul, South Korea",3.6,2185,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/haenam-cheonilgwan,Haenam Cheonilgwan,Haenam Cheonilgwan,ChIJP81GSPehfDURvDoB3v66uNM,Haenam Chunilgwan,"36-1 Banpo-daero 39-gil, Seocho District, Seoul, South Korea",4.4,42,1,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/haobin,Haobin,Haobin,ChIJN4BClAKjfDUR_ear9V64CTc,Haobin,"287 Dongho-ro, Jung District, Seoul, South Korea",4.1,46,25,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/il-vecchio,Il Vecchio,Il Vecchio,ChIJTfzULhKZfDURPuTC4NJq5pY,일베키오,"South Korea, Seoul, Mapo-gu, World Cup buk-ro, 332-12 안언하우스 1층",3.5,73,10,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/imok-smoke-dining,Imok Smoke Dining,Imok Smoke Dining,ChIJT0oJO4SjfDURBdwv91l1yz4,Imok Smoke Dining,"South Korea, Seoul, Gangnam District, Apgujeong-ro 2-gil, 6 지하 1층",4.8,43,14,ok
+michelin,https://guide.michelin.com/en/seoul-capital-area/kr-seoul/restaurant/imun-seolnongtang,Imun Seolnongtang,Imun Seolnongtang,ChIJN0aOM-iifDUR98SZc1MQre0,Yimoon Seolleongtang,"38-13 Ujeongguk-ro, Jongno District, Seoul, South Korea",4,2655,8,ok

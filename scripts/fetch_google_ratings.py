@@ -67,7 +67,7 @@ def search(key: str, query: str, lat: float, lng: float) -> dict | None:
 
 def save(results: list[dict]) -> None:
     with OUT_PATH.open("w", encoding="utf-8", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=COLUMNS)
+        w = csv.DictWriter(f, fieldnames=COLUMNS, lineterminator="\n")
         w.writeheader()
         w.writerows(results)
 

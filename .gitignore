@@ -1,6 +1,3 @@
-# 원본 데이터 (재실행으로 재생성 가능)
-data/raw/
-
 # Python
 __pycache__/
 *.pyc
