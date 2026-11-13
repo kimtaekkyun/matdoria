@@ -224,8 +224,9 @@
 
 ## D-037 · 2026-11-13 · 확정 (모바일 리스트 패널 전환 애니메이션)
 **좁은 화면의 리스트 패널은 swipe, grabber drag, mouse wheel로 확장/축소되고 위치를 부드럽게 전환한다.**
-- 리스트 맨 위에서 wheel-up하거나 grabber를 swipe/drag up하면 전체 화면으로 확장한다. 확장 상태에서 grabber wheel-down 또는 drag down으로 분할 화면으로 돌아온다.
-- 전체 화면 확장/분할 복귀는 240ms transition으로 표시한다.
+- grabber를 touch/mouse drag하는 동안 패널 top과 지도 높이가 포인터를 실시간으로 따라간다. 손을 놓으면 가장 가까운 peek/split/expanded 단계로 부드럽게 snap한다.
+- 리스트 맨 위에서 wheel-up하거나 grabber를 swipe/drag up하면 전체 화면으로 확장한다. 확장 상태에서 grabber wheel-down 또는 drag down으로 지도 영역을 다시 드러낸다.
+- 단계 간 snap은 240ms transition으로 표시한다.
 - `prefers-reduced-motion` 설정을 존중해 동작을 최소화한다.
 
 ## D-038 · 2026-11-13 · 확정 (지도 크게 보기 peek 상태)

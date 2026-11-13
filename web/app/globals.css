@@ -614,6 +614,16 @@ select {
     height: 100%;
   }
 
+  .app.panel-dragging .sidebar {
+    top: var(--panel-top);
+    transition: none;
+  }
+
+  .app.panel-dragging .map-wrap {
+    height: var(--panel-top);
+    transition: none;
+  }
+
   .sidebar.panel-peek .sidebar-head,
   .sidebar.panel-peek .sidebar-content {
     display: none;
@@ -651,7 +661,7 @@ select {
   }
 
   .mobile-map-peek {
-    display: flex;
+    display: none;
     flex: 0 0 44px;
     align-items: center;
     justify-content: space-between;

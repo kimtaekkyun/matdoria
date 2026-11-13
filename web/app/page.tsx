@@ -26,6 +26,7 @@ const SORT_OPTIONS = [
 ] as const;
 type SortKey = (typeof SORT_OPTIONS)[number]["key"];
 type PanelMode = "peek" | "split" | "expanded";
+type PanelDrag = { startY: number; startTop: number; lastTop: number; moved: boolean };
 
 function ListRating({ label, rating, count }: { label: "K Star" | "G Star"; rating: number | null; count: number | null }) {
   const fill = rating === null ? 0 : Math.max(0, Math.min(100, (rating / 5) * 100));
@@ -46,7 +47,9 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortKey>("name");
   const [panelMode, setPanelMode] = useState<PanelMode>("split");
-  const pointerStartY = useRef<number | null>(null);
+  const [isPanelDragging, setIsPanelDragging] = useState(false);
+  const appRef = useRef<HTMLDivElement>(null);
+  const panelDrag = useRef<PanelDrag | null>(null);
   const suppressToggleClickUntil = useRef(0);
 
   const visible = useMemo(() => {
@@ -89,9 +92,52 @@ export default function Home() {
     ) as Record<SourceFilter, number>;
   }, []);
 
+  const panelTopForMode = (mode: PanelMode) => {
+    const viewportHeight = window.innerHeight;
+    if (mode === "expanded") return 0;
+    if (mode === "peek") return Math.max(0, viewportHeight - 74);
+    return Math.max(260, viewportHeight * 0.48);
+  };
+  const nearestPanelMode = (top: number): PanelMode => {
+    const stops: Array<{ mode: PanelMode; top: number }> = [
+      { mode: "expanded", top: panelTopForMode("expanded") },
+      { mode: "split", top: panelTopForMode("split") },
+      { mode: "peek", top: panelTopForMode("peek") },
+    ];
+    return stops.reduce((best, candidate) =>
+      Math.abs(candidate.top - top) < Math.abs(best.top - top) ? candidate : best,
+    ).mode;
+  };
   const onPanelPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
-    pointerStartY.current = event.clientY;
+    const sidebar = appRef.current?.querySelector(".sidebar");
+    if (!sidebar || !window.matchMedia("(max-width: 800px)").matches) return;
+    const startTop = sidebar.getBoundingClientRect().top;
+    panelDrag.current = { startY: event.clientY, startTop, lastTop: startTop, moved: false };
+    appRef.current?.style.setProperty("--panel-top", `${startTop}px`);
+    setIsPanelDragging(true);
     event.currentTarget.setPointerCapture(event.pointerId);
+  };
+  const onPanelPointerMove = (event: PointerEvent<HTMLButtonElement>) => {
+    const drag = panelDrag.current;
+    if (!drag || !appRef.current) return;
+    const nextTop = Math.max(0, Math.min(window.innerHeight - 74, drag.startTop + event.clientY - drag.startY));
+    drag.lastTop = nextTop;
+    drag.moved ||= Math.abs(event.clientY - drag.startY) > 8;
+    appRef.current.style.setProperty("--panel-top", `${nextTop}px`);
+  };
+  const finishPanelDrag = (event?: PointerEvent<HTMLButtonElement>) => {
+    const drag = panelDrag.current;
+    if (!drag) return;
+    const top = event
+      ? Math.max(0, Math.min(window.innerHeight - 74, drag.startTop + event.clientY - drag.startY))
+      : drag.lastTop;
+    const moved = drag.moved || (event ? Math.abs(event.clientY - drag.startY) > 8 : false);
+    if (moved) {
+      setPanelMode(nearestPanelMode(top));
+      suppressToggleClickUntil.current = Date.now() + 500;
+    }
+    panelDrag.current = null;
+    setIsPanelDragging(false);
   };
   const movePanel = (direction: "up" | "down") => {
     setPanelMode((mode) => {
@@ -103,15 +149,7 @@ export default function Home() {
     setSelectedId(id);
     if (id && panelMode === "peek") setPanelMode("expanded");
   };
-  const onPanelPointerUp = (event: PointerEvent<HTMLButtonElement>) => {
-    if (pointerStartY.current === null) return;
-    const deltaY = event.clientY - pointerStartY.current;
-    pointerStartY.current = null;
-    if (Math.abs(deltaY) > 24) {
-      movePanel(deltaY < 0 ? "up" : "down");
-      suppressToggleClickUntil.current = Date.now() + 500;
-    }
-  };
+  const onPanelPointerUp = (event: PointerEvent<HTMLButtonElement>) => finishPanelDrag(event);
   const onPanelToggleClick = () => {
     if (Date.now() < suppressToggleClickUntil.current) return;
     setPanelMode((mode) => mode === "peek" ? "split" : mode === "split" ? "expanded" : "split");
@@ -136,7 +174,7 @@ export default function Home() {
   };
 
   return (
-    <div className={`app panel-${panelMode}`}>
+    <div ref={appRef} className={`app panel-${panelMode}${isPanelDragging ? " panel-dragging" : ""}`}>
       <aside className={`sidebar${selected ? " has-selection" : ""}${panelMode === "peek" ? " panel-peek" : ""}`} onWheel={onPanelWheel}>
         <button
           type="button"
@@ -144,8 +182,9 @@ export default function Home() {
           aria-label={panelMode === "expanded" ? "분할 화면으로 접기" : panelMode === "split" ? "리스트 전체 화면으로 펼치기" : "리스트 보기"}
           aria-expanded={panelMode === "expanded"}
           onPointerDown={onPanelPointerDown}
+          onPointerMove={onPanelPointerMove}
           onPointerUp={onPanelPointerUp}
-          onPointerCancel={() => { pointerStartY.current = null; }}
+          onPointerCancel={() => finishPanelDrag()}
           onClick={onPanelToggleClick}
         >
           <span />
