@@ -151,3 +151,50 @@
 - 미쉐린 데이터는 커뮤니티 데이터셋(ngshiheng/michelin-my-maps)이다. 공식 API가 아니며, 데이터셋 자체의 갱신 시점은 확인할 수 없다. `source_snapshot`(2026-11-09)은 우리가 내려받은 날짜이지 데이터 기준일이 아니다. 데이터 기준일은 업스트림 커밋 `15ef8a5`(2026-11-03)이다. 폐업, 등급 변경, 이전이 반영되지 않았을 수 있다.
 - 따라서 미쉐린 항목은 "참고용 정량 신호"로 표시하고, 배포 전 공식 가이드(guide.michelin.com)에서 주요 항목을 샘플 확인한다. 화면에 "데이터 기준일"을 노출하는 것을 검토한다.
 - 현재 미쉐린 high 174곳 중 SIIO(사카비토, 3.4m)는 확인이 필요하다.
+
+## D-027 · 2026-11-12 · 확정 (외부 지표 소스 재조사)
+**맛집 선별용 외부 정량 지표를 다시 조사하되, 공식 또는 허가된 수집 경로와 재사용 조건이 확인된 데이터만 점수 파이프라인 후보로 삼는다.**
+- 블루리본 등 기존에 제외하거나 보류했던 편집 가이드도 공개 데이터·라이선스·공식 API 가능성을 재검토한다. 이는 곧바로 수집·재배포를 허용하는 결정은 아니다.
+- 데이터베이스/점수 구조와 2026-11-12 기준 소스별 조사 결과는 `docs/scoring-strategy.md`에 기록한다.
+- Google Places의 평점 필드 존재는 확인했으나, Google Places 콘텐츠의 저장·파생 점수 제한과 지도 표시 조건 때문에 현행 Kakao 지도 기반 정적 점수 파이프라인에는 사용하지 않는다. 정책/라이선스가 달라지면 재검토한다.
+- 이번 결정은 특정 소스의 도입, 최종 점수 가중치, 단일 Top 100 점수를 확정하지 않는다.
+
+## D-028 · 2026-11-12 · 확정 (출처 탭과 Matdoria's Pick)
+**각 외부 목록은 별도 탭/필터로 보여주고, `Matdoria's Pick`은 출처 데이터를 바탕으로 별도 큐레이션한다.**
+- 탭 후보: 미쉐린, 서울미래유산, 착한가격업소, 모범음식점, 서울미식 100선, 백년가게, Matdoria's Pick.
+- 데이터 수집이나 장소 매칭이 확인되지 않은 소스는 탭을 준비 상태로 노출하고, 빈 데이터를 정상적인 0건으로 표시한다. 원본 이름만으로 Kakao 장소를 자동 연결하지 않는다.
+- Matdoria's Pick은 외부 원본 목록 자체와 구분하고, 선정 점수·근거를 별도로 관리한다. 가중치와 조건은 후속 결정이다.
+- Kakao 별점은 공식 로컬 API에 없고 비공식 내부 API의 수집·재사용 허가가 확인되지 않아 표시하지 않는다.
+- Google Places에는 평점/평가 수 필드가 있으나, 표준 정책상 Kakao 지도에 Google Places 콘텐츠를 결합해 표시하거나 그 값으로 파생 점수를 만드는 것은 사용하지 않는다. Google 지도로 이전하거나 별도 허가를 받지 않는 한 표시하지 않는다.
+
+## D-029 · 2026-11-12 · 확정 (평점 API 실험; D-030에서 로컬 범위만 갱신)
+**Kakao 내부 리뷰 API와 Google Places API를 1건씩 기술 검증했지만, 아직 웹앱에는 평점을 연결하지 않는다.**
+- Kakao 웹앱의 undocumented 리뷰 엔드포인트가 7th Door에 `average_score=4.2`, `review_count=17`을 반환함을 확인했다. 공식 Local API가 아니며 사용 허가, 안정성, 자동 호출 조건은 확인하지 않았다.
+- Google Places API(New) 1건은 7th Door에 평점 4.6, 평가 수 128을 반환했다. Places 정책 및 Kakao 지도와의 결합 조건은 해소되지 않았다.
+- 개인용이라는 이유만으로 서비스 약관/플랫폼 정책이 면제된다고 가정하지 않는다. 이 조사 결과는 자동 대량 수집, 캐싱, Matdoria's Pick 점수 산출, 배포를 승인하지 않는다.
+- 요청/결과와 재현 정보는 `docs/rating-api-experiment.md`에 기록한다. 제품 사용은 정책·이용 조건 확인 후 별도 결정한다.
+
+## D-030 · 2026-11-12 · 대체됨 (D-031; 로컬 범위만)
+**Kakao와 Google 평점은 로컬 개발 환경에서만 상세 카드에 실시간 표시한다.**
+- Kakao 리뷰 내부 API와 Google Places Details API를 on-demand 호출하며, 응답에는 `Cache-Control: no-store`를 설정한다. 리뷰 본문은 사용하지 않는다.
+- Google Place ID만 기존 검증된 매칭 자료에서 가져와 정적 JSON에 둔다. Google 평점·평가 수 값은 JSON/export에 저장하지 않는다.
+- 개발 모드가 아닌 환경에서 두 API route는 404를 반환한다. Matdoria's Pick 점수에는 평점을 사용하지 않는다.
+- 사용자가 개인적으로 요청한 실험 범위다. 이를 공개 서비스에서 사용할 권리나 약관 적합성을 의미하지 않으며, 개인 사용도 약관 적용 예외라고 단정하지 않는다. 배포 전에는 현재 정책과 권한을 다시 확인한다.
+
+## D-031 · 2026-11-12 · 대체됨 (D-032; 실시간 endpoint에서 static snapshot으로 전환)
+**Kakao 내부 평점 및 Google Places 평점을 상세 패널에 표시하고, 공개 배포에서도 API route를 활성화한다.**
+- 표기: `K Star 4.0 ★★★★★ (123)`, `G Star 4.0 ★★★★★ (123)`. 별 다섯 개는 항상 표시하고, 별점에 비례해 채움 색상을 적용한다.
+- Kakao/Google Maps 외부 상세 페이지로 각각 이동하는 버튼을 제공한다.
+- 조회는 장소 상세를 열 때 on-demand로 하고, rating/count 응답은 정적 JSON에 넣지 않으며 `Cache-Control: no-store`를 사용한다. Google Place ID만 허용된 목록에서 사용한다.
+- 평점 API는 현재 `places.json`에 존재하는 Place ID만 허용하며, 같은 provider/place 단위로 짧은 인스턴스 내 요청 간격 제한을 둔다. Google API 키는 server-side `GOOGLE_PLACES_API_KEY`로만 설정하고 `NEXT_PUBLIC_` 환경변수로 노출하지 않는다.
+- 공개 route를 켜면 제3자가 요청할 수 있고 Google API 비용/쿼터가 발생할 수 있다. Vercel 배포 전 Google Cloud에서 Places API 제한, 사용량 알림과 quota를 설정한다. 메모리 rate limit은 serverless 환경에서 전역 보장이 아니다.
+- 사용자의 요청에 따라 배포 동작을 활성화한 것이며, Google/Kakao 정책상 사용 허가를 확인했다는 의미는 아니다. 약관 적합성 검토와 공개 운영 위험은 별도다. 평점은 Matdoria's Pick 점수에 넣지 않는다.
+- 내부 API 조사 따라하기: `docs/kakao-rating-api-walkthrough.html`.
+
+## D-032 · 2026-11-13 · 확정 (평점 스냅샷, 리스트 정렬, 마커 상세 말풍선)
+**Kakao/Google 평점을 수동 수집 스냅샷으로 `places.json`에 포함하고, 웹앱에서는 외부 평점 API를 호출하지 않는다.**
+- Kakao 내부 API 배치 결과는 243곳 중 별점 236곳, 평점 없는 7곳. Google snapshot은 222개 매칭 장소에 포함. Google 21곳은 far/ID 충돌 등으로 자동 매핑하지 않는다.
+- `PlaceDetail` 및 리스트뷰에서 K Star/G Star와 count를 표시한다. 평점/리뷰 수 정렬 옵션을 제공하고 결측은 항상 목록 뒤에 둔다.
+- Google/Kakao 실시간 평점 API routes는 삭제했다. Vercel 웹앱 실행에는 `GOOGLE_PLACES_API_KEY`가 필요하지 않는다. 새 snapshot 수집 시에만 로컬 수집 스크립트에서 Google key가 필요하다.
+- 지도 마커를 선택하면 해당 pin을 강조하고, marker 위치에 상세 말풍선(CustomOverlay)을 띄운다. 목록에서 선택해도 동일하게 동작한다.
+- 평점 스냅샷은 수집 시점에 고정되므로 최신값이 아니며, 업데이트가 필요할 때 명시적으로 batch 재수집 후 export한다. Google 콘텐츠의 저장 조건과 Kakao 내부 API 재사용 정책 위험은 남아 있으며, 이는 이 구현으로 해결되지 않는다.

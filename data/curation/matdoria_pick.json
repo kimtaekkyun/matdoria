@@ -1,0 +1,16 @@
+{
+  "profileVersion": "draft-1",
+  "minimumScore": null,
+  "sourceWeights": {
+    "michelin": 0,
+    "seoul_heritage": 0,
+    "good_price": 0,
+    "model_restaurant": 0,
+    "seoul_gourmet_100": 0,
+    "hundred_store": 0
+  },
+  "michelinAwardScores": {},
+  "heritageGroupScores": {},
+  "includePlaceIds": [],
+  "excludePlaceIds": []
+}

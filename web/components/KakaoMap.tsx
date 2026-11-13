@@ -1,11 +1,13 @@
 "use client";
 
+import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import type { Place } from "../lib/types";
+import PlaceDetail from "./PlaceDetail";
 
 declare global {
   interface Window {
-    kakao: any; // 카카오 지도 SDK 전역 객체 (타입 정의 없음)
+    kakao: any; // Kakao Maps SDK does not expose bundled TypeScript definitions.
   }
 }
 
@@ -34,23 +36,37 @@ function loadKakaoSdk(appKey: string): Promise<void> {
   });
 }
 
+function markerImage(kakao: any, selected: boolean) {
+  const width = selected ? 38 : 30;
+  const height = selected ? 48 : 40;
+  const fill = selected ? "#e24b35" : "#3367d6";
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 38 48"><path d="M19 2C9.6 2 2 9.5 2 18.8 2 31 19 46 19 46s17-15 17-27.2C36 9.5 28.4 2 19 2Z" fill="${fill}" stroke="white" stroke-width="3"/><circle cx="19" cy="19" r="6" fill="white"/></svg>`;
+  const image = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  return new kakao.maps.MarkerImage(
+    image,
+    new kakao.maps.Size(width, height),
+    { offset: new kakao.maps.Point(width / 2, height) },
+  );
+}
+
 type Props = {
   places: Place[];
   selectedId: string | null;
-  onSelect: (id: string) => void;
+  onSelect: (id: string | null) => void;
   appKey: string;
 };
 
 export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
-  // 지도 객체가 만들어졌는지 상태로 둔다. ref만 쓰면 마커 effect가 지도 생성 뒤에 다시 실행되지 않는다.
+  const overlayRef = useRef<any>(null);
   const [mapReady, setMapReady] = useState(false);
+  const [overlayHost, setOverlayHost] = useState<HTMLDivElement | null>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
+  const selectedPlace = selectedId ? places.find((place) => place.id === selectedId) ?? null : null;
 
-  // 지도 초기화 (한 번)
   useEffect(() => {
     let cancelled = false;
     loadKakaoSdk(appKey)
@@ -64,46 +80,89 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
         setMapReady(true);
       })
       .catch((err: Error) => {
-        if (containerRef.current) {
-          containerRef.current.textContent = err.message;
-        }
+        if (containerRef.current) containerRef.current.textContent = err.message;
       });
     return () => {
       cancelled = true;
     };
   }, [appKey]);
 
-  // 마커 갱신 (필터가 바뀔 때)
   useEffect(() => {
     const map = mapRef.current;
     if (!mapReady || !map || !window.kakao?.maps) return;
     const { kakao } = window;
 
-    markersRef.current.forEach((m) => m.setMap(null));
+    markersRef.current.forEach((marker) => marker.setMap(null));
     markersRef.current = new Map();
 
     const bounds = new kakao.maps.LatLngBounds();
     for (const place of places) {
       const position = new kakao.maps.LatLng(place.lat, place.lng);
-      const marker = new kakao.maps.Marker({ position, title: place.name });
+      const marker = new kakao.maps.Marker({
+        position,
+        title: place.name,
+        image: markerImage(kakao, place.id === selectedId),
+        zIndex: place.id === selectedId ? 10 : 1,
+      });
       marker.setMap(map);
       kakao.maps.event.addListener(marker, "click", () => onSelectRef.current(place.id));
       markersRef.current.set(place.id, marker);
       bounds.extend(position);
     }
-    if (places.length > 0) {
-      map.setBounds(bounds);
-    }
+    if (places.length > 0) map.setBounds(bounds);
   }, [places, mapReady]);
 
-  // 선택 변경 시 지도 이동
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !selectedId || !window.kakao?.maps) return;
-    const place = places.find((p) => p.id === selectedId);
-    if (!place) return;
-    map.panTo(new window.kakao.maps.LatLng(place.lat, place.lng));
-  }, [selectedId, places]);
+    if (!mapReady || !map || !window.kakao?.maps) return;
+    const { kakao } = window;
+    markersRef.current.forEach((marker, id) => {
+      const selected = id === selectedId;
+      marker.setImage(markerImage(kakao, selected));
+      marker.setZIndex(selected ? 10 : 1);
+    });
+    if (selectedPlace) {
+      map.panTo(new kakao.maps.LatLng(selectedPlace.lat, selectedPlace.lng));
+    }
+  }, [selectedId, selectedPlace, mapReady]);
 
-  return <div ref={containerRef} className="map" />;
+  useEffect(() => {
+    const map = mapRef.current;
+    if (overlayRef.current) {
+      overlayRef.current.setMap(null);
+      overlayRef.current = null;
+    }
+    setOverlayHost(null);
+    if (!mapReady || !map || !selectedPlace || !window.kakao?.maps) return;
+
+    const kakao = window.kakao;
+    const host = document.createElement("div");
+    host.className = "map-bubble-host";
+    const overlay = new kakao.maps.CustomOverlay({
+      position: new kakao.maps.LatLng(selectedPlace.lat, selectedPlace.lng),
+      content: host,
+      xAnchor: 0.5,
+      yAnchor: 1.0,
+      zIndex: 20,
+      clickable: true,
+    });
+    overlay.setMap(map);
+    overlayRef.current = overlay;
+    setOverlayHost(host);
+
+    return () => {
+      overlay.setMap(null);
+      if (overlayRef.current === overlay) overlayRef.current = null;
+    };
+  }, [mapReady, selectedPlace]);
+
+  return (
+    <>
+      <div ref={containerRef} className="map" />
+      {overlayHost && selectedPlace && createPortal(
+        <PlaceDetail place={selectedPlace} onClose={() => onSelect(null)} />,
+        overlayHost,
+      )}
+    </>
+  );
 }

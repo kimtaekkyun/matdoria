@@ -1,22 +1,26 @@
 """매칭된 전체 장소에 대해 Google Places(New) 평점과 리뷰 수를 조회한다.
 
 사용법:
-    python scripts/fetch_google_ratings.py
+    python scripts/fetch_google_ratings.py             # 신규 source row만 조회
+    python scripts/fetch_google_ratings.py --refresh   # 기존 253행 전체를 다시 조회 (과금 가능)
 
 - 입력: data/processed/places_matched.csv (confidence high 전체)
 - 키: .env.local 의 GOOGLE_PLACES_API_KEY (출력하지 않음)
-- 출력: data/raw/google/ratings.csv (git 미추적). 한 번 조회한 항목은 캐시에서 재사용한다.
-- 약관: 평점과 리뷰 수 같은 Google 콘텐츠는 캐시 기간에 제한이 있다. 웹앱 배포본에 넣기 전에
-  공식 약관을 확인하고, 필요하면 주기적으로 다시 조회한다.
+- 출력: data/raw/google/ratings.csv. 기존 source/src_id 결과는 재사용하며, 누락된 high 매칭만 조회한다.
+- Google Place ID는 영구 보관 가능한 식별자지만 rating/count 응답 콘텐츠는 장기 저장하지 말 것.
+  이 CSV는 과거 조사 결과이며 웹앱 JSON에는 평점값을 export하지 않는다. 추가 수집 전에 정책/권한을 확인한다.
 """
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import math
 import urllib.error
 import urllib.request
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,7 +31,7 @@ OUT_PATH = OUT_DIR / "ratings.csv"
 ENDPOINT = "https://places.googleapis.com/v1/places:searchText"
 FIELD_MASK = "places.id,places.displayName,places.formattedAddress,places.location,places.rating,places.userRatingCount"
 COLUMNS = ["source", "src_id", "name", "query", "google_place_id", "google_name", "google_address",
-           "rating", "user_rating_count", "distance_m", "status"]
+           "rating", "user_rating_count", "distance_m", "status", "collected_at"]
 
 
 def load_key() -> str:
@@ -72,7 +76,18 @@ def save(results: list[dict]) -> None:
         w.writerows(results)
 
 
+def checkpoint(results: list[dict], cached: dict[tuple[str, str], dict], rows: list[dict]) -> None:
+    merged = dict(cached)
+    merged.update({(r["source"], r["src_id"]): r for r in results})
+    ordered_keys = [(r["source"], r["src_id"]) for r in rows]
+    save([merged[k] for k in ordered_keys if k in merged])
+
+
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--refresh", action="store_true", help="re-query cached source rows (Google API requests may be billed)")
+    args = parser.parse_args()
+
     key = load_key()
     with MATCHED_PATH.open(encoding="utf-8", newline="") as f:
         rows = [r for r in csv.DictReader(f) if r["match_confidence"] == "high"]
@@ -87,7 +102,7 @@ def main() -> None:
     results = []
     for i, r in enumerate(rows, 1):
         k = (r["source"], r["src_id"])
-        if k in cached:
+        if k in cached and not args.refresh:
             results.append(cached[k])
             continue
         query = r.get("michelin_name") or r["name"]
@@ -96,11 +111,12 @@ def main() -> None:
             hit = search(key, query, lat, lng)
         except urllib.error.HTTPError as e:
             # 중간 결과를 저장해 두고 중단한다. 다시 실행하면 저장된 항목은 건너뛴다.
-            save(results)
-            raise SystemExit(f"HTTP {e.code} at {i}/{len(rows)} (중간 결과 {len(results)}곳 저장): "
+            checkpoint(results, cached, rows)
+            raise SystemExit(f"HTTP {e.code} at {i}/{len(rows)} (기존 및 중간 결과 보존): "
                              f"{e.read().decode('utf-8', 'replace')[:200]}")
         row = {c: "" for c in COLUMNS}
-        row.update({"source": r["source"], "src_id": r["src_id"], "name": r["name"], "query": query})
+        row.update({"source": r["source"], "src_id": r["src_id"], "name": r["name"], "query": query,
+                    "collected_at": datetime.now(timezone.utc).isoformat(timespec="seconds")})
         if hit is None:
             row["status"] = "no_result"
         else:
@@ -117,6 +133,8 @@ def main() -> None:
             })
         results.append(row)
         print(f"{i}/{len(rows)} {row['status']:<10} {r['name'][:28]}")
+        checkpoint(results, cached, rows)
+        time.sleep(0.1)
 
     save(results)
     ok = [x for x in results if x["status"] == "ok"]

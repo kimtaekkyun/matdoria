@@ -56,7 +56,9 @@ body {
   display: flex;
   gap: 6px;
   margin-top: 10px;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
 }
 
 .chip {
@@ -66,18 +68,44 @@ body {
   background: #fff;
   font-size: 13px;
   cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
 
-.chip[aria-pressed="true"] {
+.chip[aria-selected="true"] {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
 }
 
+.chip-count {
+  display: inline-block;
+  min-width: 16px;
+  margin-left: 5px;
+  opacity: 0.75;
+}
+
+.list-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
 .count {
   font-size: 12px;
   color: var(--muted);
-  margin-top: 8px;
+}
+
+.sort-select {
+  max-width: 150px;
+  padding: 5px 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--fg);
+  font-size: 12px;
 }
 
 .list {
@@ -113,6 +141,28 @@ body {
   color: var(--muted);
 }
 
+.list-item-ratings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 5px;
+  color: #715000;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.list-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.list-rating-stars {
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
 .map-wrap {
   position: relative;
   min-width: 0;
@@ -140,6 +190,30 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
+.map-bubble-host {
+  position: relative;
+}
+
+.map-bubble-host .detail {
+  position: relative;
+  inset: auto;
+  width: min(340px, calc(100vw - 24px));
+  max-height: min(64vh, 620px);
+  margin-bottom: 10px;
+}
+
+.map-bubble-host .detail::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 9px);
+  bottom: -10px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 10px solid #fff;
+}
+
 .detail h2 {
   margin: 0 0 6px;
   font-size: 18px;
@@ -149,6 +223,47 @@ body {
   font-size: 13px;
   color: var(--muted);
   margin: 4px 0;
+}
+
+.rating-panel {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.rating-row {
+  display: grid;
+  grid-template-columns: 58px 36px 78px minmax(0, 1fr);
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rating-prefix {
+  white-space: nowrap;
+}
+
+.rating-number {
+  text-align: right;
+}
+
+.rating-count {
+  min-width: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.rating-stars {
+  display: inline-block;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  font-size: 16px;
 }
 
 .badges {
@@ -175,6 +290,24 @@ body {
   color: #0b5cad;
 }
 
+.badge.good_price {
+  background: #e8f5e9;
+  color: #216e39;
+}
+
+.badge.model_restaurant,
+.badge.seoul_gourmet_100,
+.badge.hundred_store {
+  background: #f1edff;
+  color: #5a42a6;
+}
+
+.badge.matdoria-pick {
+  background: #fff1cc;
+  color: #815a00;
+  font-weight: 600;
+}
+
 .source-block {
   border-top: 1px solid var(--line);
   padding-top: 10px;
@@ -184,6 +317,13 @@ body {
 
 .source-block a {
   color: var(--accent);
+}
+
+.pick-reasons {
+  border: 1px solid #f1d88c;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fffaf0;
 }
 
 .actions {
@@ -207,6 +347,12 @@ body {
 .btn.primary {
   background: #fee500;
   border-color: #fee500;
+  font-weight: 600;
+}
+
+.btn.google {
+  background: #fff;
+  border-color: #d8dce3;
   font-weight: 600;
 }
 
@@ -249,6 +395,11 @@ body {
 
   .map-wrap {
     order: 1;
+  }
+
+  .map-bubble-host .detail {
+    width: min(320px, calc(100vw - 24px));
+    max-height: min(42vh, 360px);
   }
 
   .detail {

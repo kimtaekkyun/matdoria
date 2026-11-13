@@ -1,5 +1,8 @@
 # Python
 __pycache__/
+
+# Downloaded source snapshots and API caches
+/data/raw/
 *.pyc
 .venv/
 .ipynb_checkpoints/

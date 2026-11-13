@@ -18,7 +18,44 @@ export type HeritageSource = {
   originalName: string;
 };
 
-export type PlaceSource = MichelinSource | HeritageSource;
+export type GoodPriceSource = {
+  source: "good_price";
+  label: string;
+  category: string;
+  menuName: string;
+  menuPrice: number | null;
+  url: string;
+  originalName: string;
+};
+
+export type PublicSelectionSource = {
+  source: "model_restaurant" | "seoul_gourmet_100" | "hundred_store";
+  label: string;
+  category?: string;
+  year?: number | null;
+  url?: string;
+  originalName: string;
+};
+
+export type PlaceSource = MichelinSource | HeritageSource | GoodPriceSource | PublicSelectionSource;
+
+export type RatingSnapshot = {
+  rating: number | null;
+  count: number | null;
+  collectedAt: string | null;
+};
+
+export type PlaceRatings = {
+  kakao: RatingSnapshot | null;
+  google: RatingSnapshot | null;
+};
+
+export type MatdoriaPick = {
+  selected: boolean;
+  score?: number;
+  reasons: string[];
+  profileVersion?: string;
+};
 
 export type Place = {
   id: string; // 카카오 장소 ID
@@ -28,5 +65,8 @@ export type Place = {
   lat: number;
   lng: number;
   kakaoUrl: string;
+  googlePlaceId?: string;
+  ratings?: PlaceRatings;
   sources: PlaceSource[];
+  matdoriaPick?: MatdoriaPick;
 };
