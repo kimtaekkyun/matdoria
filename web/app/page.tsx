@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import type { PointerEvent } from "react";
 import dynamic from "next/dynamic";
 import placesData from "../public/data/places.json";
 import type { Place } from "../lib/types";
@@ -19,9 +20,9 @@ const KAKAO_MAP_KEY = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY ?? "";
 const SORT_OPTIONS = [
   { key: "name", label: "이름순" },
   { key: "kakao_rating", label: "K Star 높은 순" },
-  { key: "kakao_count", label: "K review 많은 순" },
+  { key: "kakao_count", label: "K 리뷰 많은 순" },
   { key: "google_rating", label: "G Star 높은 순" },
-  { key: "google_count", label: "G review 많은 순" },
+  { key: "google_count", label: "G 평가 많은 순" },
 ] as const;
 type SortKey = (typeof SORT_OPTIONS)[number]["key"];
 
@@ -43,6 +44,9 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortKey>("name");
+  const [listExpanded, setListExpanded] = useState(false);
+  const pointerStartY = useRef<number | null>(null);
+  const suppressToggleClickUntil = useRef(0);
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -84,9 +88,39 @@ export default function Home() {
     ) as Record<SourceFilter, number>;
   }, []);
 
+  const onPanelPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
+    pointerStartY.current = event.clientY;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+  const onPanelPointerUp = (event: PointerEvent<HTMLButtonElement>) => {
+    if (pointerStartY.current === null) return;
+    const deltaY = event.clientY - pointerStartY.current;
+    pointerStartY.current = null;
+    if (Math.abs(deltaY) > 24) {
+      setListExpanded(deltaY < 0);
+      suppressToggleClickUntil.current = Date.now() + 500;
+    }
+  };
+  const onPanelToggleClick = () => {
+    if (Date.now() < suppressToggleClickUntil.current) return;
+    setListExpanded((expanded) => !expanded);
+  };
+
   return (
-    <div className="app">
-      <aside className="sidebar">
+    <div className={`app${listExpanded ? " list-expanded" : ""}`}>
+      <aside className={`sidebar${selected ? " has-selection" : ""}`}>
+        <button
+          type="button"
+          className="mobile-panel-toggle"
+          aria-label={listExpanded ? "리스트 패널 접기" : "리스트 전체 화면으로 펼치기"}
+          aria-expanded={listExpanded}
+          onPointerDown={onPanelPointerDown}
+          onPointerUp={onPanelPointerUp}
+          onPointerCancel={() => { pointerStartY.current = null; }}
+          onClick={onPanelToggleClick}
+        >
+          <span />
+        </button>
         <div className="sidebar-head">
           <h1>matdoria · 서울</h1>
           <input
