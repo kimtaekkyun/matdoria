@@ -26,15 +26,15 @@ const SORT_OPTIONS = [
 ] as const;
 type SortKey = (typeof SORT_OPTIONS)[number]["key"];
 
-function ListRating({ label, rating, count }: { label: "K Star" | "G Star"; rating: number; count: number | null }) {
-  const fill = Math.max(0, Math.min(100, (rating / 5) * 100));
+function ListRating({ label, rating, count }: { label: "K Star" | "G Star"; rating: number | null; count: number | null }) {
+  const fill = rating === null ? 0 : Math.max(0, Math.min(100, (rating / 5) * 100));
   const style = { backgroundImage: `linear-gradient(90deg, #e5a100 ${fill}%, #d5d7dc ${fill}%)` };
   return (
     <span className="list-rating">
       <span className="list-rating-label">{label}</span>
-      <span className="list-rating-score">{rating.toFixed(1)}</span>
-      <span className="rating-stars list-rating-stars" style={style} aria-label={`${fill.toFixed(0)}% 별점`}>★★★★★</span>
-      <span className="list-rating-count">({count?.toLocaleString("ko-KR") ?? "-"})</span>
+      <span className="list-rating-score">{rating === null ? "" : rating.toFixed(1)}</span>
+      <span className="rating-stars list-rating-stars" style={style} aria-label={rating === null ? "평점 없음" : `${fill.toFixed(0)}% 별점`}>★★★★★</span>
+      <span className="list-rating-count">{rating === null || count === null ? "" : `(${count.toLocaleString("ko-KR")})`}</span>
     </span>
   );
 }
@@ -183,17 +183,10 @@ export default function Home() {
                     {" · "}
                     {p.address}
                   </div>
-                  {((p.ratings?.kakao?.rating !== null && p.ratings?.kakao?.rating !== undefined) ||
-                    (p.ratings?.google?.rating !== null && p.ratings?.google?.rating !== undefined)) && (
-                    <div className="list-item-ratings">
-                      {p.ratings?.kakao?.rating !== null && p.ratings?.kakao?.rating !== undefined && (
-                        <ListRating label="K Star" rating={p.ratings.kakao.rating} count={p.ratings.kakao.count} />
-                      )}
-                      {p.ratings?.google?.rating !== null && p.ratings?.google?.rating !== undefined && (
-                        <ListRating label="G Star" rating={p.ratings.google.rating} count={p.ratings.google.count} />
-                      )}
-                    </div>
-                  )}
+                  <div className="list-item-ratings">
+                    <ListRating label="K Star" rating={p.ratings?.kakao?.rating ?? null} count={p.ratings?.kakao?.count ?? null} />
+                    <ListRating label="G Star" rating={p.ratings?.google?.rating ?? null} count={p.ratings?.google?.count ?? null} />
+                  </div>
                 </li>
               ))}
             </ul>

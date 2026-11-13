@@ -266,10 +266,10 @@ select {
 
 .list-rating {
   display: grid;
-  grid-template-columns: 54px 32px 72px 58px;
+  grid-template-columns: 50px 30px 72px 58px;
   align-items: center;
-  gap: 4px;
-  width: 236px;
+  gap: 2px;
+  width: 216px;
   max-width: 100%;
   white-space: nowrap;
 }
@@ -278,9 +278,13 @@ select {
   font-weight: 650;
 }
 
-.list-rating-score,
-.list-rating-count {
+.list-rating-score {
   text-align: right;
+}
+
+.list-rating-count {
+  text-align: left;
+  white-space: nowrap;
 }
 
 .list-rating-stars {
@@ -288,6 +292,7 @@ select {
   text-align: left;
   font-size: 13px;
   letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .map-wrap {
@@ -399,9 +404,10 @@ select {
 
 .rating-row {
   display: grid;
-  grid-template-columns: 58px 36px 78px minmax(0, 1fr);
+  grid-template-columns: 56px 30px 76px 58px;
   align-items: center;
-  gap: 4px;
+  justify-content: end;
+  gap: 2px;
   min-height: 24px;
   font-size: 13px;
   font-variant-numeric: tabular-nums;
@@ -417,7 +423,7 @@ select {
 
 .rating-count {
   min-width: 0;
-  text-align: right;
+  text-align: left;
   white-space: nowrap;
 }
 
@@ -426,8 +432,12 @@ select {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 1px;
-  font-size: 16px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.rating-stars:not(.list-rating-stars) {
+  font-size: 14px;
 }
 
 .badges {
@@ -666,20 +676,54 @@ select {
   }
 
   .list-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 198px;
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: 8px;
     padding: 11px 13px 10px 15px;
   }
 
   .list-item-name {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
     font-size: 14px;
   }
 
   .list-item-sub {
-    line-height: 1.45;
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+    overflow: hidden;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .list-item-ratings {
-    gap: 7px;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: auto;
+    gap: 2px;
+    margin-top: 0;
     font-size: 11px;
+  }
+
+  .list-rating {
+    grid-template-columns: 42px 28px 68px 50px;
+    gap: 2px;
+    width: 194px;
+  }
+
+  .list-rating-stars {
+    width: 68px;
+    font-size: 13px;
+  }
+
+  .list-rating-count {
+    font-size: 10px;
   }
 
   .sidebar-content.has-selection .list,
@@ -735,6 +779,42 @@ select {
 }
 
 @media (max-width: 380px) {
+  .list-item {
+    display: block;
+  }
+
+  .list-item-name,
+  .list-item-sub {
+    display: block;
+  }
+
+  .list-item-sub {
+    overflow: visible;
+  }
+
+  .list-item-ratings {
+    width: 100%;
+    margin-top: 6px;
+    align-items: flex-end;
+    gap: 3px;
+    font-size: 11px;
+  }
+
+  .list-rating {
+    grid-template-columns: 50px 30px 72px 58px;
+    gap: 2px;
+    width: 216px;
+  }
+
+  .list-rating-stars {
+    width: 72px;
+    font-size: 13px;
+  }
+
+  .list-rating-count {
+    font-size: 11px;
+  }
+
   .list-toolbar {
     gap: 5px;
   }
