@@ -61,11 +61,29 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
   const mapRef = useRef<any>(null);
   const overlayRef = useRef<any>(null);
   const [mapReady, setMapReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [overlayHost, setOverlayHost] = useState<HTMLDivElement | null>(null);
   const markersRef = useRef<Map<string, any>>(new Map());
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
   const selectedPlace = selectedId ? places.find((place) => place.id === selectedId) ?? null : null;
+
+  useEffect(() => {
+    if (!selectedPlace) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onSelect(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [selectedPlace, onSelect]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 800px)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -133,7 +151,7 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
       overlayRef.current = null;
     }
     setOverlayHost(null);
-    if (!mapReady || !map || !selectedPlace || !window.kakao?.maps) return;
+    if (!mapReady || !map || !selectedPlace || isMobile || !window.kakao?.maps) return;
 
     const kakao = window.kakao;
     const host = document.createElement("div");
@@ -154,12 +172,12 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
       overlay.setMap(null);
       if (overlayRef.current === overlay) overlayRef.current = null;
     };
-  }, [mapReady, selectedPlace]);
+  }, [mapReady, selectedPlace, isMobile]);
 
   return (
     <>
       <div ref={containerRef} className="map" />
-      {overlayHost && selectedPlace && createPortal(
+      {!isMobile && overlayHost && selectedPlace && createPortal(
         <PlaceDetail place={selectedPlace} onClose={() => onSelect(null)} />,
         overlayHost,
       )}

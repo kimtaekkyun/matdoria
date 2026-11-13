@@ -196,5 +196,16 @@
 - Kakao 내부 API 배치 결과는 243곳 중 별점 236곳, 평점 없는 7곳. Google snapshot은 222개 매칭 장소에 포함. Google 21곳은 far/ID 충돌 등으로 자동 매핑하지 않는다.
 - `PlaceDetail` 및 리스트뷰에서 K Star/G Star와 count를 표시한다. 평점/리뷰 수 정렬 옵션을 제공하고 결측은 항상 목록 뒤에 둔다.
 - Google/Kakao 실시간 평점 API routes는 삭제했다. Vercel 웹앱 실행에는 `GOOGLE_PLACES_API_KEY`가 필요하지 않는다. 새 snapshot 수집 시에만 로컬 수집 스크립트에서 Google key가 필요하다.
-- 지도 마커를 선택하면 해당 pin을 강조하고, marker 위치에 상세 말풍선(CustomOverlay)을 띄운다. 목록에서 선택해도 동일하게 동작한다.
+- PC에서는 지도 마커를 선택하면 해당 pin을 강조하고 marker 위치에 상세 말풍선(CustomOverlay)을 띄운다. 모바일에는 상세가 화면을 덮는 bottom sheet로 표시된다.
 - 평점 스냅샷은 수집 시점에 고정되므로 최신값이 아니며, 업데이트가 필요할 때 명시적으로 batch 재수집 후 export한다. Google 콘텐츠의 저장 조건과 Kakao 내부 API 재사용 정책 위험은 남아 있으며, 이는 이 구현으로 해결되지 않는다.
+
+## D-033 · 2026-11-13 · 대체됨 (D-034; 모바일 상세 표시 방식)
+**PC 상세는 선택 pin 옆 말풍선으로, 모바일 상세는 하단 sheet로 보여준다.**
+- 모바일의 지도 말풍선은 화면 폭과 높이가 작아 읽기 어려우므로 사용하지 않는다. 대신 선택 시 배경 dim 처리된 scrollable bottom sheet를 열고, 닫기 버튼/바깥 클릭으로 dismiss한다.
+- PC는 pin을 highlight하고 해당 좌표에 CustomOverlay 상세를 붙인다. 리스트 선택도 같은 동작을 한다.
+
+## D-034 · 2026-11-13 · 확정 (모바일 리스트 영역에 상세 표시)
+**모바일에서 장소를 선택하면 dim/backdrop overlay 대신 아래쪽 리스트 영역을 상세 패널로 바꾼다.**
+- 지도는 상단에 계속 보이고 선택 pin을 강조/포커스한다. 하단의 목록 자리에 상세 내용을 꽉 채워 스크롤 가능하게 표시한다.
+- 닫기 `×`를 누르면 같은 영역에 목록을 복원한다. 말풍선의 작은 높이, 배경 dim, swipe/drag affordance는 사용하지 않는다.
+- PC는 D-032대로 pin 옆 상세 말풍선을 유지한다.

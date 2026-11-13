@@ -85,13 +85,21 @@ function SourceBlock({ source }: { source: PlaceSource }) {
   );
 }
 
-export default function PlaceDetail({ place, onClose }: { place: Place; onClose: () => void }) {
+export default function PlaceDetail({
+  place,
+  onClose,
+  presentation = "bubble",
+}: {
+  place: Place;
+  onClose: () => void;
+  presentation?: "bubble" | "inline";
+}) {
   const googleMapUrl = place.googlePlaceId
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} ${place.address}`)}&query_place_id=${encodeURIComponent(place.googlePlaceId)}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} ${place.address}`)}`;
 
   return (
-    <div className="detail" role="dialog" aria-label={`${place.name} 상세`}>
+    <div className={`detail ${presentation === "inline" ? "detail-inline" : ""}`} role="dialog" aria-label={`${place.name} 상세`}>
       <button className="close" onClick={onClose} aria-label="닫기">
         ×
       </button>

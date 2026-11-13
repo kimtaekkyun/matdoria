@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import placesData from "../public/data/places.json";
 import type { Place } from "../lib/types";
 import { SOURCE_FILTERS, SOURCE_STATUS, matchesFilter, type SourceFilter } from "../lib/sources";
+import PlaceDetail from "../components/PlaceDetail";
 
 // 지도는 브라우저에서만 동작하므로 SSR을 끈다.
 const KakaoMap = dynamic(() => import("../components/KakaoMap"), {
@@ -29,9 +30,10 @@ function ListRating({ label, rating, count }: { label: "K Star" | "G Star"; rati
   const style = { backgroundImage: `linear-gradient(90deg, #e5a100 ${fill}%, #d5d7dc ${fill}%)` };
   return (
     <span className="list-rating">
-      <span>{label} {rating.toFixed(1)}</span>
+      <span className="list-rating-label">{label}</span>
+      <span className="list-rating-score">{rating.toFixed(1)}</span>
       <span className="rating-stars list-rating-stars" style={style} aria-label={`${fill.toFixed(0)}% 별점`}>★★★★★</span>
-      <span>({count?.toLocaleString("ko-KR") ?? "-"})</span>
+      <span className="list-rating-count">({count?.toLocaleString("ko-KR") ?? "-"})</span>
     </span>
   );
 }
@@ -68,6 +70,8 @@ export default function Home() {
       return a.name.localeCompare(b.name, "ko");
     });
   }, [filter, query, sortBy]);
+
+  const selected = selectedId ? visible.find((place) => place.id === selectedId) ?? null : null;
 
   const sourceCounts = useMemo(() => {
     return Object.fromEntries(
@@ -113,47 +117,54 @@ export default function Home() {
           </div>
         </div>
 
-        {visible.length === 0 ? (
-          <div className="empty">
-            {query.trim()
-              ? "검색 조건에 맞는 식당이 없습니다."
-              : sourceCounts[filter] === 0
-                ? SOURCE_STATUS[filter]
-                : "조건에 맞는 식당이 없습니다."}
-          </div>
-        ) : (
-          <ul className="list">
-            {visible.map((p) => (
-              <li
-                key={p.id}
-                className="list-item"
-                aria-selected={p.id === selectedId}
-                onClick={() => setSelectedId(p.id)}
-              >
-                <div className="list-item-name">{p.name}</div>
-                <div className="list-item-sub">
-                  {[
-                    ...p.sources.map((source) => SOURCE_FILTERS.find((f) => f.key === source.source)?.label),
-                    ...(p.matdoriaPick?.selected ? ["Matdoria's Pick"] : []),
-                  ].filter(Boolean).join(" · ")}
-                  {" · "}
-                  {p.address}
-                </div>
-                {((p.ratings?.kakao?.rating !== null && p.ratings?.kakao?.rating !== undefined) ||
-                  (p.ratings?.google?.rating !== null && p.ratings?.google?.rating !== undefined)) && (
-                  <div className="list-item-ratings">
-                    {p.ratings?.kakao?.rating !== null && p.ratings?.kakao?.rating !== undefined && (
-                      <ListRating label="K Star" rating={p.ratings.kakao.rating} count={p.ratings.kakao.count} />
-                    )}
-                    {p.ratings?.google?.rating !== null && p.ratings?.google?.rating !== undefined && (
-                      <ListRating label="G Star" rating={p.ratings.google.rating} count={p.ratings.google.count} />
-                    )}
+        <div className={`sidebar-content${selected ? " has-selection" : ""}`}>
+          {selected && (
+            <div className="mobile-detail-pane">
+              <PlaceDetail place={selected} onClose={() => setSelectedId(null)} presentation="inline" />
+            </div>
+          )}
+          {visible.length === 0 ? (
+            <div className="empty">
+              {query.trim()
+                ? "검색 조건에 맞는 식당이 없습니다."
+                : sourceCounts[filter] === 0
+                  ? SOURCE_STATUS[filter]
+                  : "조건에 맞는 식당이 없습니다."}
+            </div>
+          ) : (
+            <ul className="list">
+              {visible.map((p) => (
+                <li
+                  key={p.id}
+                  className="list-item"
+                  aria-selected={p.id === selectedId}
+                  onClick={() => setSelectedId(p.id)}
+                >
+                  <div className="list-item-name">{p.name}</div>
+                  <div className="list-item-sub">
+                    {[
+                      ...p.sources.map((source) => SOURCE_FILTERS.find((f) => f.key === source.source)?.label),
+                      ...(p.matdoriaPick?.selected ? ["Matdoria's Pick"] : []),
+                    ].filter(Boolean).join(" · ")}
+                    {" · "}
+                    {p.address}
                   </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
+                  {((p.ratings?.kakao?.rating !== null && p.ratings?.kakao?.rating !== undefined) ||
+                    (p.ratings?.google?.rating !== null && p.ratings?.google?.rating !== undefined)) && (
+                    <div className="list-item-ratings">
+                      {p.ratings?.kakao?.rating !== null && p.ratings?.kakao?.rating !== undefined && (
+                        <ListRating label="K Star" rating={p.ratings.kakao.rating} count={p.ratings.kakao.count} />
+                      )}
+                      {p.ratings?.google?.rating !== null && p.ratings?.google?.rating !== undefined && (
+                        <ListRating label="G Star" rating={p.ratings.google.rating} count={p.ratings.google.count} />
+                      )}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
         <div className="notice">
           장소 정보는 카카오 로컬 기준입니다. 출처별 데이터는 공식 수집 경로와 식당 매칭이 확인된 뒤 차례로 추가합니다. Matdoria's Pick은 별도 큐레이션 기준으로 구성합니다.
