@@ -107,6 +107,22 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
 
   useEffect(() => {
     const map = mapRef.current;
+    const container = containerRef.current;
+    if (!mapReady || !map || !container || typeof ResizeObserver === "undefined") return;
+    let frame = 0;
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => map.relayout());
+    });
+    observer.observe(container);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [mapReady]);
+
+  useEffect(() => {
+    const map = mapRef.current;
     if (!mapReady || !map || !window.kakao?.maps) return;
     const { kakao } = window;
 

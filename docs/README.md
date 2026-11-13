@@ -19,7 +19,7 @@
 - 미쉐린 데이터: 커뮤니티 크롤러(ngshiheng/michelin-my-maps)가 만든 CSV를 raw URL로 내려받아 사용. 업스트림 커밋 `15ef8a5` (2026-11-03 기준), 우리 다운로드 2026-11-09. 자세한 내용은 data-sources.md 참조.
 - 데이터 점수 전략과 외부 소스 실현 가능성 조사: [scoring-strategy.md](scoring-strategy.md). 착한가격업소 CSV를 확보했으나 현재 장소와의 확정 매칭은 없음. 모범음식점 원본 다운로드와 추가 목록 검증은 후속 작업.
 - 웹 UI에 출처별 탭과 `Matdoria's Pick` 탭을 추가했습니다. 아직 데이터/매칭이 없는 탭은 건수 0과 준비 상태 안내를 보여줍니다. Pick 조건 설정은 `data/curation/matdoria_pick.json`에서 시작하며 현재 미선정입니다.
-- K Star/G Star 평점 스냅샷을 `places.json`에 포함해 런타임 API 호출 없이 상세와 리스트에 표시합니다. 모바일 리스트 패널은 swipe-up으로 지도 전체를 덮고, 장소 선택 시 패널 전체를 상세 화면으로 바꿉니다. K/G Star는 리스트 우측에 폭을 맞춰 정렬합니다.
+- K Star/G Star 평점 스냅샷을 `places.json`에 포함해 런타임 API 호출 없이 상세와 리스트에 표시합니다. 모바일 리스트 패널은 `peek`/`split`/`expanded` 3단계로 swipe·wheel·손잡이 조작 전환하고, 장소 선택 시 패널 상세로 바꿉니다. K/G Star는 리스트 우측 열에 정렬합니다.
 - Google 수집 파일은 high 매칭 253건까지 보충 완료 (238건 100m 이내, 15건 far); 통합 장소에 자동 연결한 Google snapshot 222개. Kakao snapshot은 243개 중 236개 평점 확보, 7개는 평점 없음. export 결과는 `web/public/data/places.json`에서 확인합니다. D-032 참고.
 - 현재 앱 runtime에는 Google/Kakao rating API 호출이 없으므로 Vercel에는 `GOOGLE_PLACES_API_KEY`를 등록할 필요가 없습니다. 새 snapshot을 로컬에서 수집할 때만 Google API 키가 필요합니다.
 - 다음 단계: 외부 데이터의 실제 파일/커버리지 검증 및 Vercel 배포 (Root Directory `web`, 환경변수, 카카오 도메인 등록).

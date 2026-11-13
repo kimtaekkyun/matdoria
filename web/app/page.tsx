@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import type { PointerEvent } from "react";
+import type { PointerEvent, WheelEvent } from "react";
 import dynamic from "next/dynamic";
 import placesData from "../public/data/places.json";
 import type { Place } from "../lib/types";
@@ -25,6 +25,7 @@ const SORT_OPTIONS = [
   { key: "google_count", label: "G 평가 많은 순" },
 ] as const;
 type SortKey = (typeof SORT_OPTIONS)[number]["key"];
+type PanelMode = "peek" | "split" | "expanded";
 
 function ListRating({ label, rating, count }: { label: "K Star" | "G Star"; rating: number | null; count: number | null }) {
   const fill = rating === null ? 0 : Math.max(0, Math.min(100, (rating / 5) * 100));
@@ -44,7 +45,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortKey>("name");
-  const [listExpanded, setListExpanded] = useState(false);
+  const [panelMode, setPanelMode] = useState<PanelMode>("split");
   const pointerStartY = useRef<number | null>(null);
   const suppressToggleClickUntil = useRef(0);
 
@@ -92,28 +93,56 @@ export default function Home() {
     pointerStartY.current = event.clientY;
     event.currentTarget.setPointerCapture(event.pointerId);
   };
+  const movePanel = (direction: "up" | "down") => {
+    setPanelMode((mode) => {
+      if (direction === "up") return mode === "peek" ? "split" : "expanded";
+      return mode === "expanded" ? "split" : "peek";
+    });
+  };
+  const selectPlace = (id: string | null) => {
+    setSelectedId(id);
+    if (id && panelMode === "peek") setPanelMode("expanded");
+  };
   const onPanelPointerUp = (event: PointerEvent<HTMLButtonElement>) => {
     if (pointerStartY.current === null) return;
     const deltaY = event.clientY - pointerStartY.current;
     pointerStartY.current = null;
     if (Math.abs(deltaY) > 24) {
-      setListExpanded(deltaY < 0);
+      movePanel(deltaY < 0 ? "up" : "down");
       suppressToggleClickUntil.current = Date.now() + 500;
     }
   };
   const onPanelToggleClick = () => {
     if (Date.now() < suppressToggleClickUntil.current) return;
-    setListExpanded((expanded) => !expanded);
+    setPanelMode((mode) => mode === "peek" ? "split" : mode === "split" ? "expanded" : "split");
+  };
+  const onPanelWheel = (event: WheelEvent<HTMLElement>) => {
+    if (!window.matchMedia("(max-width: 800px)").matches || Math.abs(event.deltaY) < 12) return;
+    const target = event.target as HTMLElement;
+    const onHandle = target.closest(".mobile-panel-toggle");
+    if (onHandle) {
+      movePanel(event.deltaY < 0 ? "up" : "down");
+      return;
+    }
+    if (target.closest("input, select, button, a")) return;
+
+    const detail = target.closest(".detail-inline") as HTMLElement | null;
+    if (detail) {
+      if (panelMode === "split" && event.deltaY < 0 && detail.scrollTop <= 0) setPanelMode("expanded");
+      return;
+    }
+    const list = target.closest(".list") as HTMLElement | null;
+    if (list && panelMode === "split" && event.deltaY < 0 && list.scrollTop <= 0) setPanelMode("expanded");
   };
 
   return (
-    <div className={`app${listExpanded ? " list-expanded" : ""}`}>
-      <aside className={`sidebar${selected ? " has-selection" : ""}`}>
+    <div className={`app panel-${panelMode}`}>
+      <aside className={`sidebar${selected ? " has-selection" : ""}${panelMode === "peek" ? " panel-peek" : ""}`} onWheel={onPanelWheel}>
         <button
           type="button"
           className="mobile-panel-toggle"
-          aria-label={listExpanded ? "리스트 패널 접기" : "리스트 전체 화면으로 펼치기"}
-          aria-expanded={listExpanded}
+          aria-label={panelMode === "expanded" ? "분할 화면으로 접기" : panelMode === "split" ? "리스트 전체 화면으로 펼치기" : "리스트 보기"}
+          aria-expanded={panelMode === "expanded"}
           onPointerDown={onPanelPointerDown}
           onPointerUp={onPanelPointerUp}
           onPointerCancel={() => { pointerStartY.current = null; }}
@@ -121,6 +150,11 @@ export default function Home() {
         >
           <span />
         </button>
+        {panelMode === "peek" && !selected && (
+          <button type="button" className="mobile-map-peek" onClick={() => setPanelMode("split")}>
+            <span>{visible.length}곳 · 목록 보기</span><span aria-hidden="true">↑</span>
+          </button>
+        )}
         <div className="sidebar-head">
           <h1>matdoria · 서울</h1>
           <input
@@ -154,7 +188,7 @@ export default function Home() {
         <div className={`sidebar-content${selected ? " has-selection" : ""}`}>
           {selected && (
             <div className="mobile-detail-pane">
-              <PlaceDetail place={selected} onClose={() => setSelectedId(null)} presentation="inline" />
+              <PlaceDetail place={selected} onClose={() => selectPlace(null)} presentation="inline" />
             </div>
           )}
           {visible.length === 0 ? (
@@ -172,7 +206,7 @@ export default function Home() {
                   key={p.id}
                   className="list-item"
                   aria-selected={p.id === selectedId}
-                  onClick={() => setSelectedId(p.id)}
+                  onClick={() => selectPlace(p.id)}
                 >
                   <div className="list-item-name">{p.name}</div>
                   <div className="list-item-sub">
@@ -202,7 +236,7 @@ export default function Home() {
         <KakaoMap
           places={visible}
           selectedId={selectedId}
-          onSelect={setSelectedId}
+          onSelect={selectPlace}
           appKey={KAKAO_MAP_KEY}
         />
         {!KAKAO_MAP_KEY && (
