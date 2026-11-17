@@ -78,6 +78,7 @@ GU_EN_TO_KO = {
     "Jungnang-gu": "중랑구",
 }
 GU_KO = set(GU_EN_TO_KO.values())
+FOOD_ALLEY_CATEGORY = "여행 > 관광,명소 > 테마거리 > 먹자골목"
 
 
 def _address_numbers(addr: str) -> set[str]:
@@ -168,6 +169,16 @@ def name_sim(a: str, b: str) -> float:
     return ratio
 
 
+def is_food_category(category: str) -> bool:
+    """Kakao's restaurant category includes food shops, cafes, and bakeries."""
+    return category.split(" > ", 1)[0] == "음식점"
+
+
+def is_name_eligible_category(category: str) -> bool:
+    """Allow food venues and the explicitly documented Kakao food-alley category."""
+    return is_food_category(category) or category == FOOD_ALLEY_CATEGORY
+
+
 def load_aliases() -> dict[str, str]:
     if not ALIASES.exists():
         return {}
@@ -176,18 +187,20 @@ def load_aliases() -> dict[str, str]:
 
 
 def to_cand(doc: dict, lat: float, lng: float, name: str, name_only: bool = False) -> dict:
+    category = doc.get("category_name", "")
     return {
         "kakao_id": doc["id"],
         "kakao_name": doc["place_name"],
         "kakao_address": doc.get("road_address_name") or doc.get("address_name", ""),
-        "kakao_category": doc.get("category_name", ""),
+        "kakao_category": category,
         "kakao_url": doc["place_url"],
         "kakao_lat": doc["y"],
         "kakao_lng": doc["x"],
         "distance_m": round(haversine_m(lat, lng, float(doc["y"]), float(doc["x"])), 1),
         "sim": round(name_sim(name, doc["place_name"]), 3),
         "name_only": name_only,
-        "is_food": "음식점" in (doc.get("category_name") or ""),
+        "is_food": is_food_category(category),
+        "is_name_eligible": is_name_eligible_category(category),
     }
 
 
@@ -311,20 +324,26 @@ def en_address_matches(src_en: str, juso_en: str) -> bool:
 
 def decide(cands: list[dict], src_address: str = "", src_en: str = "") -> tuple[str, dict | None, str]:
     """(verdict, 선택 후보, 규칙 이름). verdict는 accept 또는 drop."""
-    # 1. 이름이 충분히 비슷한 음식점: 150m 이내 유사도 0.50 이상, 또는 30m 이내 유사도 0.40 이상
+    # 1. 이름이 충분히 비슷한 음식점 또는 먹자골목: 150m 이내 유사도 0.50 이상, 또는 30m 이내 유사도 0.40 이상
     #    (유사도 0.4대는 "식사"→"전아사" 같은 오탐이 확인되어 거리 조건을 더 엄격히 둔다)
-    near = [c for c in cands if (c["distance_m"] <= NEAR_M and c["sim"] >= SIM_NEAR_STRICT)
-            or (c["distance_m"] <= NEAREST_FOOD_M and c["sim"] >= SIM_NEAR)]
+    near = [
+        c for c in cands
+        if c["is_name_eligible"] and (
+            (c["distance_m"] <= NEAR_M and c["sim"] >= SIM_NEAR_STRICT)
+            or (c["distance_m"] <= NEAREST_FOOD_M and c["sim"] >= SIM_NEAR)
+        )
+    ]
     if near:
         best = max(near, key=lambda c: (c["sim"], -c["distance_m"]))
         return "accept", best, "name_near"
     # 2. 300m 이내 이름이 거의 같은 것
-    far = [c for c in cands if c["distance_m"] <= FAR_M and c["sim"] >= SIM_FAR]
+    far = [c for c in cands if c["is_name_eligible"] and c["distance_m"] <= FAR_M and c["sim"] >= SIM_FAR]
     if far:
         best = max(far, key=lambda c: (c["sim"], -c["distance_m"]))
         return "accept", best, "name_far"
     # 3. 서울 내 이름 일치 (좌표가 부정확할 수 있으므로 거리 상한은 1km)
-    named = [c for c in cands if c["name_only"] and c["sim"] >= SIM_NAME_ONLY and c["distance_m"] <= NAME_ONLY_M]
+    named = [c for c in cands if c["is_name_eligible"] and c["name_only"]
+             and c["sim"] >= SIM_NAME_ONLY and c["distance_m"] <= NAME_ONLY_M]
     if named:
         best = max(named, key=lambda c: (c["sim"], -c["distance_m"]))
         return "accept", best, "name_only"
@@ -394,7 +413,7 @@ def main() -> None:
         verdict, best, rule = decide(cands, s["src_address"], src_en)
         row = {**s, "match_rule": rule, "match_confidence": CONFIDENCE.get(rule, "")}
         if best:
-            row.update({f"match_{k}": v for k, v in best.items() if k not in ("is_food",)})
+            row.update({f"match_{k}": v for k, v in best.items() if k not in ("is_food", "is_name_eligible")})
             matched.append(row)
         else:
             row["candidate_count"] = len(cands)

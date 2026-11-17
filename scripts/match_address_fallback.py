@@ -27,6 +27,17 @@ PROCESSED = m.PROCESSED
 ROAD_TABLE = ROOT / "data" / "aliases" / "michelin_roads.csv"
 
 
+def eligible_address_candidates(cands: list[dict]) -> list[dict]:
+    """Keep only restaurant candidates passing the address-search distance/name guard."""
+    return [
+        candidate for candidate in cands
+        if candidate["is_food"] and (
+            candidate["distance_m"] <= 30
+            or (candidate["distance_m"] <= 300 and candidate["sim"] >= 0.5)
+        )
+    ]
+
+
 def juso_search(juso_key: str, keyword: str) -> list[dict]:
     params = {"confmKey": juso_key, "currentPage": 1, "countPerPage": 5, "keyword": keyword, "resultType": "json"}
     url = m.JUSO_API + "?" + urllib.parse.urlencode(params)
@@ -96,7 +107,7 @@ def main() -> None:
             failed.append((name, f"카카오에 '{road}' 주소 장소 없음"))
             continue
         # 주소가 같아도 식당이 아닌 입주 업체(사무실 등)일 수 있으므로 좌표와 이름으로 한 번 더 거른다
-        ok = [c for c in cands if c["distance_m"] <= 30 or (c["distance_m"] <= 300 and c["sim"] >= 0.5)]
+        ok = eligible_address_candidates(cands)
         if not ok:
             far = min(cands, key=lambda c: c["distance_m"])
             failed.append((name, f"주소는 같지만 좌표·이름이 맞지 않음 ({far['kakao_name']}, {far['distance_m']}m)"))
@@ -119,7 +130,7 @@ def main() -> None:
             "match_rule": "address_search", "match_confidence": "high",
         })
         for k, v in best.items():
-            if k != "is_food":
+            if k not in ("is_food", "is_name_eligible"):
                 row[f"match_{k}"] = v
         matched_rows.append(row)
         print(f"  채택  {name:<24} -> {best['kakao_name']} ({best['distance_m']}m) [{road}]")

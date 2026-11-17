@@ -234,3 +234,14 @@
 - 기본 `split`은 지도와 리스트를 나눠 보여준다. 아래로 swipe하면 `peek` 상태가 되어 리스트를 74px 하단 바로 줄이고 지도를 크게 보여준다.
 - `peek`에서 위로 swipe하면 `split`, 다시 위로 swipe하면 전체 화면 `expanded` 리스트가 된다. `expanded`에서 아래로 swipe하면 `split`, 한 번 더 내리면 `peek`이다.
 - peek 상태에서 지도의 식당 pin을 선택하면 상세를 볼 수 있도록 패널을 전체 화면으로 연다. 상단의 `목록 보기` 버튼은 peek에서 split으로 확장한다.
+
+## D-039 · 2026-11-16 · 확정 (임시 Matdoria's Pick 및 평점 snapshot 공개 선택)
+**임시 Matdoria's Pick은 미쉐린과 서울미래유산 양쪽에 모두 등재된 Kakao 장소의 교집합으로 정하고, Kakao/Google 평점 snapshot은 공개 웹 JSON에 포함한다.**
+- Pick은 점수 프로필이 아니라 두 출처의 공통 등재 사실을 보여주는 임시 규칙이다. `data/curation/matdoria_pick.json`의 `selectionMode`와 `requiredSources`로 설정하며, 결과에는 score를 넣지 않는다. 이후 점수 프로필로 전환할 수 있다.
+- Kakao/Google snapshot을 공개 표시하기로 한 사용자 결정은 약관 적합성, 데이터 저장·재사용 권한 또는 공개 표시 조건을 검증했다는 뜻이 아니다. Kakao 내부 API의 허가/안정성과 Google 콘텐츠 저장·공개 조건은 미해결 위험으로 남긴다. 평점은 Matdoria's Pick에 사용하지 않는다.
+
+## D-040 · 2026-11-16 · 확정 (이름 기반 Kakao 매칭의 카테고리 검증)
+**이름 기반 매칭은 Kakao 카테고리가 음식점이거나 명시적으로 허용한 먹자골목일 때만 high-confidence로 인정한다.**
+- 검색 결과에는 이름이 비슷한 시장·호텔·시설 등 비음식점도 섞일 수 있으므로, 이름 유사도만으로는 음식점 장소를 확인한 것으로 보지 않는다.
+- 주소 검증은 음식점 카테고리에 한해 적용한다. 먹자골목 등 음식 관련 비식당 범위는 별도 명시된 Kakao 카테고리일 때만 이름 매칭을 허용한다.
+- 기존 high-confidence 중 새 기준에 맞지 않는 이름 매칭 16건은 medium으로 낮춰 웹 export에서 제외했다. 수동으로 실제 음식점을 확인한 뒤에만 다시 high로 승격한다.

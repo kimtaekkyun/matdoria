@@ -1,5 +1,11 @@
 {
-  "profileVersion": "draft-1",
+  "profileVersion": "temporary-source-intersection-1",
+  "selectionMode": "source_intersection",
+  "requiredSources": [
+    "michelin",
+    "seoul_heritage"
+  ],
+  "selectionReason": "미쉐린 가이드와 서울미래유산 두 출처 공통 등재",
   "minimumScore": null,
   "sourceWeights": {
     "michelin": 0,

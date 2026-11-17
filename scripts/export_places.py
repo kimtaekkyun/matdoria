@@ -77,6 +77,22 @@ def source_entry(row: dict) -> dict:
 
 
 def pick_entry(place: dict, config: dict) -> dict:
+    mode = config.get("selectionMode", "score_profile")
+    place_id = str(place["id"])
+    excluded = place_id in {str(value) for value in config.get("excludePlaceIds", [])}
+
+    if mode == "source_intersection":
+        required_sources = set(config.get("requiredSources", []))
+        place_sources = {source["source"] for source in place["sources"]}
+        selected = not excluded and required_sources.issubset(place_sources)
+        return {
+            "selected": selected,
+            "reasons": [config["selectionReason"]] if selected else [],
+            "profileVersion": config.get("profileVersion", "temporary"),
+        }
+    if mode != "score_profile":
+        raise ValueError(f"지원하지 않는 Matdoria's Pick selectionMode: {mode}")
+
     source_weights = config.get("sourceWeights", {})
     award_scores = config.get("michelinAwardScores", {})
     heritage_scores = config.get("heritageGroupScores", {})
@@ -99,9 +115,7 @@ def pick_entry(place: dict, config: dict) -> dict:
             reasons.append(f"{source['label']}: {label} (+{points:g})")
 
     score = sum(best_by_source.values())
-    place_id = str(place["id"])
     included = place_id in {str(value) for value in config.get("includePlaceIds", [])}
-    excluded = place_id in {str(value) for value in config.get("excludePlaceIds", [])}
     minimum = config.get("minimumScore")
     selected = not excluded and (included or (minimum is not None and score >= float(minimum)))
     if included and not excluded and not reasons:

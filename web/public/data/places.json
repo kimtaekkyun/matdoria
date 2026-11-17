@@ -34,9 +34,8 @@
     "googlePlaceId": "ChIJq7z77WyhfDURJm6zbi7bFkw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -74,9 +73,8 @@
     "googlePlaceId": "ChIJZ6wvtROlfDURtlX0fHf89Ak",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -114,44 +112,8 @@
     "googlePlaceId": "ChIJKzILV7ulfDUR4-cgf86P2s4",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "27314504",
-    "name": "가락시장",
-    "address": "서울 송파구 양재대로 932",
-    "category": "가정,생활 > 시장",
-    "lat": 37.4938884413034,
-    "lng": 127.110927336635,
-    "kakaoUrl": "http://place.map.kakao.com/27314504",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2013,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=476",
-        "originalName": "가락시장",
-        "sourceRecordId": "476"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 4.0,
-        "count": 158,
-        "collectedAt": "2026-11-13T14:45:52+00:00"
-      },
-      "google": null
-    },
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -189,9 +151,8 @@
     "googlePlaceId": "ChIJX-lvM5WlfDURSDv31GaVe4g",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -229,9 +190,8 @@
     "googlePlaceId": "ChIJBXBbv8KifDURu3CVFSwMyjg",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -264,9 +224,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -304,9 +263,8 @@
     "googlePlaceId": "ChIJ9Uxbo4qjfDURYaXnzVaYiMY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -344,9 +302,8 @@
     "googlePlaceId": "ChIJ3z3vJ3ulfDUR893XkU1Inyk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -384,9 +341,8 @@
     "googlePlaceId": "ChIJLzuI6f2ZfDUR-rWOQ-rDAcI",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -424,9 +380,8 @@
     "googlePlaceId": "ChIJOVx5nYuifDURAtKWJ9ZktE4",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -464,9 +419,8 @@
     "googlePlaceId": "ChIJzfoBFYajfDUR-x_J11iVJdU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -504,9 +458,8 @@
     "googlePlaceId": "ChIJCZxRQwCjfDURvNOXDx629wE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -544,9 +497,8 @@
     "googlePlaceId": "ChIJVVjCIW6kfDUR7cOSCmAmdUE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -584,9 +536,8 @@
     "googlePlaceId": "ChIJ6yW8BpijfDUR56FsNsQFTAk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -624,9 +575,8 @@
     "googlePlaceId": "ChIJi7TvdWmkfDURzu_8K9y8RRQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -664,9 +614,8 @@
     "googlePlaceId": "ChIJ8YClzZKifDURP7QLq67jXGk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -704,9 +653,8 @@
     "googlePlaceId": "ChIJn5sM9u6efDURMountCMxj_Y",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -744,44 +692,8 @@
     "googlePlaceId": "ChIJ_xv9z02jfDURvn071d2Iu58",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "278173084",
-    "name": "구로시장",
-    "address": "서울 구로구 구로동로22길 17-4",
-    "category": "가정,생활 > 시장",
-    "lat": 37.4896296933168,
-    "lng": 126.885620029839,
-    "kakaoUrl": "http://place.map.kakao.com/278173084",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2016,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=2742",
-        "originalName": "구로시장",
-        "sourceRecordId": "2742"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 4.0,
-        "count": 26,
-        "collectedAt": "2026-11-13T14:46:01+00:00"
-      },
-      "google": null
-    },
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -819,9 +731,8 @@
     "googlePlaceId": "ChIJyWM5KmqifDUR7ftzNHpjrz0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -859,49 +770,8 @@
     "googlePlaceId": "ChIJY4dVG6OjfDURQN5e3dfOM5E",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "9248712",
-    "name": "국기원",
-    "address": "서울 강남구 테헤란로7길 32",
-    "category": "사회,공공기관 > 단체,협회",
-    "lat": 37.50199523828162,
-    "lng": 127.03028620611877,
-    "kakaoUrl": "http://place.map.kakao.com/9248712",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2013,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=330",
-        "originalName": "국기원",
-        "sourceRecordId": "330"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 3.3,
-        "count": 17,
-        "collectedAt": "2026-11-13T14:46:02+00:00"
-      },
-      "google": {
-        "rating": 4.1,
-        "count": 531,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJL1OJRP2jfDUR7uLWZ2ooQlI",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -939,9 +809,8 @@
     "googlePlaceId": "ChIJrzZJxNO8fDURuaKzuToAfqk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -979,9 +848,8 @@
     "googlePlaceId": "ChIJkz9YGJijfDUR8yFRzwIn-6g",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1019,9 +887,8 @@
     "googlePlaceId": "ChIJZ1-yoYijfDURvkRg_wdaQao",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1059,9 +926,8 @@
     "googlePlaceId": "ChIJFRmIDRGjfDUR2nv7h8qMx2Y",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1099,9 +965,8 @@
     "googlePlaceId": "ChIJvw75L8mjfDURSr7jm2tfq4U",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1139,9 +1004,8 @@
     "googlePlaceId": "ChIJCZybYuycfDURg-Ocbf1EsfE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1179,9 +1043,8 @@
     "googlePlaceId": "ChIJNzgZOqalfDURp8oGe93cVsI",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1219,9 +1082,8 @@
     "googlePlaceId": "ChIJQdPID8ijfDURS-wvu5N1b64",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1259,9 +1121,8 @@
     "googlePlaceId": "ChIJUdO28-uifDURutXAwIaJQjw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1299,9 +1160,8 @@
     "googlePlaceId": "ChIJf-oLYNG8fDURslvQf3k7cQc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1339,44 +1199,8 @@
     "googlePlaceId": "ChIJ2ScEIt2ifDURWG4aegPMO30",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "7934963",
-    "name": "남대문시장",
-    "address": "서울 중구 남대문시장4길 21",
-    "category": "가정,생활 > 시장",
-    "lat": 37.55918176072071,
-    "lng": 126.9776267740439,
-    "kakaoUrl": "http://place.map.kakao.com/7934963",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2013,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=471",
-        "originalName": "남대문시장",
-        "sourceRecordId": "471"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 4.3,
-        "count": 329,
-        "collectedAt": "2026-11-13T14:46:09+00:00"
-      },
-      "google": null
-    },
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1414,9 +1238,8 @@
     "googlePlaceId": "ChIJqzfQfO6ifDURU8xTjuLm4Bk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1454,9 +1277,8 @@
     "googlePlaceId": "ChIJ-R1qgxmifDUR4igPyu23xmo",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1494,9 +1316,8 @@
     "googlePlaceId": "ChIJpXffNqGZfDUR74ZT2Gzgu2M",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1534,9 +1355,8 @@
     "googlePlaceId": "ChIJi-ZS7o2ZfDURcffutblKC4o",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1574,9 +1394,8 @@
     "googlePlaceId": "ChIJtaoj2eKefDURBOE8pLCVsDc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1614,9 +1433,8 @@
     "googlePlaceId": "ChIJd6YDRZdrMhURXjRQpMLq23U",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1659,9 +1477,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1699,9 +1516,8 @@
     "googlePlaceId": "ChIJKWHZw3alfDUR5A5F61Oqj5I",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1734,9 +1550,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1774,9 +1589,8 @@
     "googlePlaceId": "ChIJYdgV_PGifDURunjvQVtAzaU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1814,9 +1628,8 @@
     "googlePlaceId": "ChIJl7SKCaGhfDURaTXGENQVQ2w",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1854,9 +1667,8 @@
     "googlePlaceId": "ChIJGQZxWfKYfDUR_lhyuSu5UXQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1889,9 +1701,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1929,9 +1740,8 @@
     "googlePlaceId": "ChIJEW-SvCSjfDURN9zK8MKuC9g",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -1964,9 +1774,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2004,9 +1813,8 @@
     "googlePlaceId": "ChIJhzxeRrhhezURJ2xwfdQLrgE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2044,9 +1852,8 @@
     "googlePlaceId": "ChIJO928IwCjfDURIiQ3QzgMeSo",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2084,9 +1891,8 @@
     "googlePlaceId": "ChIJF3dws7WlfDURu4yGTlxgOHU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2124,9 +1930,8 @@
     "googlePlaceId": "ChIJkTTxM1GlfDURaFBGMDEIHQc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2164,9 +1969,8 @@
     "googlePlaceId": "ChIJH2jZ86GlfDURAVZBp3imf64",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2204,9 +2008,8 @@
     "googlePlaceId": "ChIJUS08LqFbezURDh9pmOoXnpU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2244,9 +2047,8 @@
     "googlePlaceId": "ChIJ00QI8u2ifDURYcN3Tscka70",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2289,9 +2091,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2329,9 +2130,8 @@
     "googlePlaceId": "ChIJGZ6vIe2jfDURWOUsVCO94cA",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2369,9 +2169,8 @@
     "googlePlaceId": "ChIJr__jo2OjfDURT4N0VNw62MM",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2409,9 +2208,8 @@
     "googlePlaceId": "ChIJR1GiswGlfDURukx-bP-iXiw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2449,9 +2247,8 @@
     "googlePlaceId": "ChIJa1q-n3qkfDURTpuIGCW7_bA",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2489,9 +2286,8 @@
     "googlePlaceId": "ChIJS9nKAOujfDURJv1LbZxRs-k",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2529,9 +2325,8 @@
     "googlePlaceId": "ChIJQ6j87vujfDURqb5ZHxPeueM",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2569,9 +2364,8 @@
     "googlePlaceId": "ChIJE2Y_kdCjfDURiGU-fYokLMM",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2618,10 +2412,11 @@
     },
     "googlePlaceId": "ChIJDwy2KrCYfDURK4ghAucLbSY",
     "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "selected": true,
+      "reasons": [
+        "미쉐린 가이드와 서울미래유산 두 출처 공통 등재"
+      ],
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2654,49 +2449,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "18524631",
-    "name": "만리시장",
-    "address": "서울 용산구 효창원로 270",
-    "category": "가정,생활 > 시장",
-    "lat": 37.55121342278342,
-    "lng": 126.96351044713096,
-    "kakaoUrl": "http://place.map.kakao.com/18524631",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2016,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=2694",
-        "originalName": "만리시장",
-        "sourceRecordId": "2694"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 3.7,
-        "count": 7,
-        "collectedAt": "2026-11-13T14:46:26+00:00"
-      },
-      "google": {
-        "rating": 3.6,
-        "count": 130,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJ60DXN3CifDURzBRAzhGQoy8",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2729,9 +2483,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2769,49 +2522,8 @@
     "googlePlaceId": "ChIJJeNdcbOjfDURCzyDecCVK7o",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "24357072",
-    "name": "무계원",
-    "address": "서울 종로구 창의문로5가길 2",
-    "category": "문화,예술 > 문화시설 > 문화원",
-    "lat": 37.591909528303,
-    "lng": 126.963372829163,
-    "kakaoUrl": "http://place.map.kakao.com/24357072",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2021,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=3411",
-        "originalName": "무계원",
-        "sourceRecordId": "3411"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 4.5,
-        "count": 13,
-        "collectedAt": "2026-11-13T14:46:28+00:00"
-      },
-      "google": {
-        "rating": 4.5,
-        "count": 21,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJQyTwXrSjfDURR_78n41hBlI",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2849,9 +2561,8 @@
     "googlePlaceId": "ChIJPVESye2ifDURbOaGAstuwyM",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2889,9 +2600,8 @@
     "googlePlaceId": "ChIJR4-z3dmjfDUR81tFY1FOgGU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2924,9 +2634,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -2964,9 +2673,8 @@
     "googlePlaceId": "ChIJx08AyXWkfDURs2BBkP20hJo",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3004,9 +2712,8 @@
     "googlePlaceId": "ChIJYxLPGQCjfDURXB0wJktN-Hk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3044,9 +2751,8 @@
     "googlePlaceId": "ChIJOW4six-jfDURSacxaeFWkNY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3084,9 +2790,8 @@
     "googlePlaceId": "ChIJv6qOwb6ifDURsuSiTUj3rP0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3124,9 +2829,8 @@
     "googlePlaceId": "ChIJJyYFApSYfDURl0DH8hBKITY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3164,9 +2868,8 @@
     "googlePlaceId": "ChIJL7y3vumjfDURCmnvoBAjfVw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3199,9 +2902,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3239,9 +2941,8 @@
     "googlePlaceId": "ChIJFxPP-oOZfDURqlOrwJdGEqI",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3279,9 +2980,8 @@
     "googlePlaceId": "ChIJjXuM24mjfDURSwmouRnxNlM",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3319,9 +3019,8 @@
     "googlePlaceId": "ChIJ971zYXGjfDURWeiU2g-VPvI",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3359,9 +3058,8 @@
     "googlePlaceId": "ChIJGd6fZsGjfDURjaLz4iSKZvs",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3399,9 +3097,8 @@
     "googlePlaceId": "ChIJh_Hy_YOlfDURPBVzNYFT0qk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3439,9 +3136,8 @@
     "googlePlaceId": "ChIJF0EyD0-hfDURAh73ZLPC6-w",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3479,9 +3175,8 @@
     "googlePlaceId": "ChIJm4-szsKZfDURb1v4KUtJCP4",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3519,9 +3214,8 @@
     "googlePlaceId": "ChIJEycpD7mjfDURx4dvuWyLSBg",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3559,9 +3253,8 @@
     "googlePlaceId": "ChIJwU1jpBSkfDURtZH2lQU4uuE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3599,9 +3292,8 @@
     "googlePlaceId": "ChIJ9wItqJ-hfDURZiZrNxz5ffg",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3639,9 +3331,8 @@
     "googlePlaceId": "ChIJW1exFhaZfDURStICxGO7sLo",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3679,9 +3370,8 @@
     "googlePlaceId": "ChIJ03uyyKqkfDURBP72STLlOHU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3719,9 +3409,8 @@
     "googlePlaceId": "ChIJKZIUL3WkfDURxCDCpyU7-G8",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3759,9 +3448,8 @@
     "googlePlaceId": "ChIJc57w1u2ifDURKGRslFfOMkY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3799,9 +3487,8 @@
     "googlePlaceId": "ChIJx2FHeO2efDURPY_rWjCVbPA",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3839,9 +3526,8 @@
     "googlePlaceId": "ChIJBXdJgNuifDURcxTs-uST1wg",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3879,9 +3565,8 @@
     "googlePlaceId": "ChIJqWOZj6KjfDURWWKxJdKW6-I",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3919,49 +3604,8 @@
     "googlePlaceId": "ChIJTQ3uYuiYfDURYKfjeAlpp-I",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "11049685",
-    "name": "사보이호텔",
-    "address": "서울 중구 명동8나길 10",
-    "category": "여행 > 숙박 > 호텔",
-    "lat": 37.561720028656,
-    "lng": 126.984186092731,
-    "kakaoUrl": "http://place.map.kakao.com/11049685",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2020,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=3326",
-        "originalName": "사보이 호텔",
-        "sourceRecordId": "3326"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 4.5,
-        "count": 6,
-        "collectedAt": "2026-11-13T14:46:43+00:00"
-      },
-      "google": {
-        "rating": 4.0,
-        "count": 618,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJzaBR-PCifDURuu5hlVTK1aw",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -3999,9 +3643,8 @@
     "googlePlaceId": "ChIJWbXUVBKjfDURcZ1ufEGa43I",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4039,9 +3682,8 @@
     "googlePlaceId": "ChIJD3Bj1x-jfDURhbFHXoWboa8",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4079,9 +3721,8 @@
     "googlePlaceId": "ChIJT0yLpi-lfDURlC034_SeSQo",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4119,9 +3760,8 @@
     "googlePlaceId": "ChIJEUtuhoCnfDURX--PABdLcnU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4159,9 +3799,8 @@
     "googlePlaceId": "ChIJCaPmiwaffDURphVOVYB5NS8",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4199,49 +3838,8 @@
     "googlePlaceId": "ChIJ_f318Y6jfDURJT8z3uE0U9I",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "9103357",
-    "name": "삼청각",
-    "address": "서울 성북구 대사관로 3",
-    "category": "문화,예술 > 문화시설",
-    "lat": 37.59735073472928,
-    "lng": 126.98418081977508,
-    "kakaoUrl": "http://place.map.kakao.com/9103357",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2013,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=134",
-        "originalName": "삼청각",
-        "sourceRecordId": "134"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 3.3,
-        "count": 31,
-        "collectedAt": "2026-11-13T14:46:47+00:00"
-      },
-      "google": {
-        "rating": 4.2,
-        "count": 1828,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJg4GZhDG9fDURTTtku8l0ldE",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4279,9 +3877,8 @@
     "googlePlaceId": "ChIJwevSQgCjfDUR9rAlL8RLzbc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4319,9 +3916,8 @@
     "googlePlaceId": "ChIJnVSAKwCZfDURFv7lBeMn9P8",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4359,9 +3955,8 @@
     "googlePlaceId": "ChIJe35o4oGHezURfiKkyNhIb3g",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4399,9 +3994,8 @@
     "googlePlaceId": "ChIJYddj0SelfDUR8WXTCKiMARc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4439,9 +4033,8 @@
     "googlePlaceId": "ChIJg8FedBujfDUR60Qt-6N_T7Y",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4479,9 +4072,8 @@
     "googlePlaceId": "ChIJPWSy286ifDURodcZS2J09tk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4519,9 +4111,8 @@
     "googlePlaceId": "ChIJCRrErCClfDUR1urQD2jmQKw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4564,49 +4155,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "10500235",
-    "name": "서울풍물시장",
-    "address": "서울 동대문구 천호대로4길 21",
-    "category": "가정,생활 > 시장",
-    "lat": 37.5728186254633,
-    "lng": 127.025392943199,
-    "kakaoUrl": "http://place.map.kakao.com/10500235",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2013,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=701",
-        "originalName": "서울풍물시장",
-        "sourceRecordId": "701"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 4.2,
-        "count": 81,
-        "collectedAt": "2026-11-13T14:46:51+00:00"
-      },
-      "google": {
-        "rating": 3.9,
-        "count": 4896,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJ3W8SI0yjfDUR70wqfxdELx8",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4644,9 +4194,8 @@
     "googlePlaceId": "ChIJMS7bcKuifDURym1rgUnFSLw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4684,9 +4233,8 @@
     "googlePlaceId": "ChIJraly7sKifDURb_LmYSxoz4k",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4729,9 +4277,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4769,9 +4316,8 @@
     "googlePlaceId": "ChIJ8R_CLEWjfDUR3HHfL-sNAiA",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4809,9 +4355,8 @@
     "googlePlaceId": "ChIJxV46qdCjfDURO8r93s3E_7g",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4849,9 +4394,8 @@
     "googlePlaceId": "ChIJBYirXwCjfDUR3QMFPggbsAA",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4889,9 +4433,8 @@
     "googlePlaceId": "ChIJ-VKs286dfDURSsWovqg_Xic",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4929,9 +4472,8 @@
     "googlePlaceId": "ChIJVcWVYQCjfDURackHV-G6EO0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -4969,9 +4511,8 @@
     "googlePlaceId": "ChIJ6fwnPgCjfDURRK3JXHKApos",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5009,44 +4550,8 @@
     "googlePlaceId": "ChIJL2hHUjujfDURbxzijlzZtxs",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "26448873",
-    "name": "숙명여자고등학교 도서관",
-    "address": "서울 강남구 남부순환로 2807",
-    "category": "교육,학문 > 학습시설 > 도서관",
-    "lat": 37.4914744604061,
-    "lng": 127.05261235593,
-    "kakaoUrl": "http://place.map.kakao.com/26448873",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2018,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=3069",
-        "originalName": "숙명여자고등학교 도서관",
-        "sourceRecordId": "3069"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": null,
-        "count": null,
-        "collectedAt": "2026-11-13T14:46:57+00:00"
-      },
-      "google": null
-    },
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5084,9 +4589,8 @@
     "googlePlaceId": "ChIJr-4eGOa9fDURrMio1pKTdCo",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5124,9 +4628,8 @@
     "googlePlaceId": "ChIJCQU272qhfDUR6PCzxxD7AfY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5164,9 +4667,8 @@
     "googlePlaceId": "ChIJ5WOsGoyjfDUR9wNJyWemF5A",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5204,9 +4706,8 @@
     "googlePlaceId": "ChIJB2BRX3OjfDURrLzEVUCryxk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5244,9 +4745,8 @@
     "googlePlaceId": "ChIJIQaZkQqlfDUR5qNX-DM-Blw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5284,9 +4784,8 @@
     "googlePlaceId": "ChIJ0_9cDRlFezUR0ACptb_70Cs",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5324,9 +4823,8 @@
     "googlePlaceId": "ChIJSzZelSm9fDURfO8IciUqOC0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5364,9 +4862,8 @@
     "googlePlaceId": "ChIJ-yZQ4JijfDURDGQwBKgy9nk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5404,9 +4901,8 @@
     "googlePlaceId": "ChIJwxMtAOSifDURT6Ej5JN04-o",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5444,9 +4940,8 @@
     "googlePlaceId": "ChIJBedYETCjfDURWaJ6phZ-yy4",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5484,9 +4979,8 @@
     "googlePlaceId": "ChIJsdM8l_KjfDURobnSNkInVo8",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5524,9 +5018,8 @@
     "googlePlaceId": "ChIJu0PN47-jfDURDd0JJBV9Rj0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5564,9 +5057,8 @@
     "googlePlaceId": "ChIJBYx0XAGjfDUR3NMPYf2_qjY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5604,9 +5096,8 @@
     "googlePlaceId": "ChIJAweR_RyjfDURWomb0mTkRI0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5644,9 +5135,8 @@
     "googlePlaceId": "ChIJ-zTnnoejfDURU00l4M32Uhc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5684,9 +5174,8 @@
     "googlePlaceId": "ChIJN4BClAKjfDUR_ear9V64CTc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5724,9 +5213,8 @@
     "googlePlaceId": "ChIJXdxi_e6YfDURkxsjzDY_pTU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5764,9 +5252,8 @@
     "googlePlaceId": "ChIJzyz8AACZfDURtN7Y2nIktOQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5804,9 +5291,8 @@
     "googlePlaceId": "ChIJzbFCkqShfDURlJnels3lvdQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5844,9 +5330,8 @@
     "googlePlaceId": "ChIJe3UoNQKjfDURa_IWZVyc2w4",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5889,9 +5374,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5929,9 +5413,8 @@
     "googlePlaceId": "ChIJTaVjWi6hfDURVegqLOB9oSs",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -5969,9 +5452,8 @@
     "googlePlaceId": "ChIJIdG_5XalfDURO_iHS8T5Ixc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6009,9 +5491,8 @@
     "googlePlaceId": "ChIJUbDlEV6lfDURWTHYOyweWpQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6049,9 +5530,8 @@
     "googlePlaceId": "ChIJxZim3K-YfDUR3jf_ThTKP18",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6089,9 +5569,8 @@
     "googlePlaceId": "ChIJEcIYG82jfDUR0qgkdV0LfBw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6129,9 +5608,8 @@
     "googlePlaceId": "ChIJCTeTIgCjfDURl5OD7lpTNlc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6169,9 +5647,8 @@
     "googlePlaceId": "ChIJkxAEFN2ifDURb4jQMaVhP8c",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6209,9 +5686,8 @@
     "googlePlaceId": "ChIJqYTmWtGYfDURryq7AaODZoc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6249,9 +5725,8 @@
     "googlePlaceId": "ChIJgUQ7i5braDURpZWSDLutcug",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6289,9 +5764,8 @@
     "googlePlaceId": "ChIJ_QFVYGSjfDURpdna_-3xNGI",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6329,9 +5803,8 @@
     "googlePlaceId": "ChIJb63Nih6jfDURs1emCe-s2EY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6369,9 +5842,8 @@
     "googlePlaceId": "ChIJhX857h6jfDURTXULgLjlZr8",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6409,9 +5881,8 @@
     "googlePlaceId": "ChIJB0aKDcyjfDUR8JYF5UBAUHo",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6449,9 +5920,8 @@
     "googlePlaceId": "ChIJ1YvHj8ClfDURGdKbF4psJ1o",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6489,9 +5959,8 @@
     "googlePlaceId": "ChIJyZixE7-8fDURJGg4PFNXcQk",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6529,9 +5998,8 @@
     "googlePlaceId": "ChIJk5DRDD2jfDURUA4aAk0Frx0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6569,9 +6037,8 @@
     "googlePlaceId": "ChIJpZ-yVWijfDURV5be7_jvKfY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6609,9 +6076,8 @@
     "googlePlaceId": "ChIJ2THadxukfDURCP448nhnWSA",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6649,9 +6115,8 @@
     "googlePlaceId": "ChIJbczJ0-2ifDURyzVx2SvP6Xg",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6689,9 +6154,8 @@
     "googlePlaceId": "ChIJIf38cb6ifDURf7nV1pl5O1U",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6738,10 +6202,11 @@
     },
     "googlePlaceId": "ChIJ95h3lR-jfDURkB9hKZltPXM",
     "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "selected": true,
+      "reasons": [
+        "미쉐린 가이드와 서울미래유산 두 출처 공통 등재"
+      ],
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6779,9 +6244,8 @@
     "googlePlaceId": "ChIJdwaXkL6jfDURhRvzNknpctE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6819,9 +6283,8 @@
     "googlePlaceId": "ChIJB5-kbBaifDURUzcrCAvBNh0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6859,9 +6322,8 @@
     "googlePlaceId": "ChIJJTwRsTCjfDURzrYEZbYVLZs",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6899,9 +6361,8 @@
     "googlePlaceId": "ChIJaeJIP_KifDURoY0DjBxaIj8",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6948,10 +6409,11 @@
     },
     "googlePlaceId": "ChIJR5RpMPOifDURSM0OmHA_h_0",
     "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "selected": true,
+      "reasons": [
+        "미쉐린 가이드와 서울미래유산 두 출처 공통 등재"
+      ],
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -6989,9 +6451,8 @@
     "googlePlaceId": "ChIJq4zOYt2ifDURsGNjd3OqwvU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7029,9 +6490,8 @@
     "googlePlaceId": "ChIJESHUysWjfDURuaDOEmdnsuI",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7074,9 +6534,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7114,9 +6573,8 @@
     "googlePlaceId": "ChIJBfczevOifDURgn_RcORkgi4",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7154,9 +6612,8 @@
     "googlePlaceId": "ChIJPx3xFfWifDURdbWervjwicc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7194,9 +6651,8 @@
     "googlePlaceId": "ChIJA17wJIajfDURORb_dfN8bkU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7234,9 +6690,8 @@
     "googlePlaceId": "ChIJT0oJO4SjfDURBdwv91l1yz4",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7283,90 +6738,11 @@
     },
     "googlePlaceId": "ChIJN0aOM-iifDUR98SZc1MQre0",
     "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "26196931",
-    "name": "이상의집",
-    "address": "서울 종로구 자하문로7길 18",
-    "category": "여행 > 관광,명소 > 문화유적",
-    "lat": 37.5786489976486,
-    "lng": 126.970864669291,
-    "kakaoUrl": "http://place.map.kakao.com/26196931",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2013,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=281",
-        "originalName": "이상의 집",
-        "sourceRecordId": "281"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 4.7,
-        "count": 34,
-        "collectedAt": "2026-11-13T14:47:27+00:00"
-      },
-      "google": {
-        "rating": 4.1,
-        "count": 104,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJtfW6BL6ifDUR459rO4phG_g",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "17565859",
-    "name": "이화여자대학교 진선미관",
-    "address": "서울 서대문구 이화여대길 52",
-    "category": "교육,학문 > 학교부속시설",
-    "lat": 37.5635186743901,
-    "lng": 126.947631303469,
-    "kakaoUrl": "http://place.map.kakao.com/17565859",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2013,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=367",
-        "originalName": "이화여자대학교 진선미관",
-        "sourceRecordId": "367"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": null,
-        "count": null,
-        "collectedAt": "2026-11-13T14:47:27+00:00"
-      },
-      "google": {
-        "rating": 4.5,
-        "count": 57,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJZ3nBJayZfDURxLfPbj7PS2Q",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "selected": true,
+      "reasons": [
+        "미쉐린 가이드와 서울미래유산 두 출처 공통 등재"
+      ],
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7404,9 +6780,8 @@
     "googlePlaceId": "ChIJTfzULhKZfDURPuTC4NJq5pY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7444,9 +6819,8 @@
     "googlePlaceId": "ChIJUdO28-uifDURutXAwIaJQjw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7484,9 +6858,8 @@
     "googlePlaceId": "ChIJ90PW2EuhfDURVGnAxYEqiYc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7524,9 +6897,8 @@
     "googlePlaceId": "ChIJC1L27LGifDURk9mMQgbLfg0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7564,9 +6936,8 @@
     "googlePlaceId": "ChIJoe-qd1GjfDUR9k4tgmUvWSA",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7604,9 +6975,8 @@
     "googlePlaceId": "ChIJFeLbbYuifDURucXOnVpo0wU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7644,9 +7014,8 @@
     "googlePlaceId": "ChIJLwsYxYijfDURiJD-QZw6MYU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7684,9 +7053,8 @@
     "googlePlaceId": "ChIJ3YVgTCWffDURFxXN4L28kyU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7724,9 +7092,8 @@
     "googlePlaceId": "ChIJ3xNCtMWjfDURi88O7OCijdM",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7764,9 +7131,8 @@
     "googlePlaceId": "ChIJg7vT3nShfDURALdNUNzXrgY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7804,9 +7170,8 @@
     "googlePlaceId": "ChIJpX9FYmKifDURDilxmst3mFM",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7844,9 +7209,8 @@
     "googlePlaceId": "ChIJb8Vo4EqjfDURM0hmpQh5Mtg",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7884,9 +7248,8 @@
     "googlePlaceId": "ChIJ-4TSBxKjfDURE3-Uv1TXDvs",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7924,9 +7287,8 @@
     "googlePlaceId": "ChIJAW2M6_SjfDURECrYz11IR8s",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -7964,9 +7326,8 @@
     "googlePlaceId": "ChIJ3xg-uiujfDURBrjFSlS7k-U",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8004,9 +7365,8 @@
     "googlePlaceId": "ChIJKcw_Q4uifDUR8xJygSjZwpc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8044,9 +7404,8 @@
     "googlePlaceId": "ChIJiyOgWw-ifDURElxt_CzxKcg",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8084,9 +7443,8 @@
     "googlePlaceId": "ChIJrVJmB4aXfDURP2DcsvVpc30",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8124,9 +7482,8 @@
     "googlePlaceId": "ChIJyfkL8-uifDURGjR9tuiIbSo",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8164,9 +7521,8 @@
     "googlePlaceId": "ChIJKbTeYYO-fDURkE0jjz2mC4s",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8204,9 +7560,8 @@
     "googlePlaceId": "ChIJCRWHxDmlfDURQ9Ob6eqJZ6c",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8244,9 +7599,8 @@
     "googlePlaceId": "ChIJOYhJNwClfDURpvnZIIPjZes",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8284,9 +7638,8 @@
     "googlePlaceId": "ChIJPbq7MnyjfDUROwBrnGcV-C8",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8324,9 +7677,8 @@
     "googlePlaceId": "ChIJA9AuSt6nfDUREwYp8ug55jQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8364,9 +7716,8 @@
     "googlePlaceId": "ChIJp3KE1MunfDURyxPWYmAwqAY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8404,49 +7755,8 @@
     "googlePlaceId": "ChIJ_8E--UylfDURJRP1Kevybus",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "8112828",
-    "name": "태릉선수촌",
-    "address": "서울 노원구 화랑로 727",
-    "category": "스포츠,레저 > 스포츠시설",
-    "lat": 37.63681518035892,
-    "lng": 127.10298664944588,
-    "kakaoUrl": "http://place.map.kakao.com/8112828",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2013,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=331",
-        "originalName": "태릉선수촌",
-        "sourceRecordId": "331"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 5.0,
-        "count": 5,
-        "collectedAt": "2026-11-13T14:47:42+00:00"
-      },
-      "google": {
-        "rating": 4.5,
-        "count": 18,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJ-wMMwpS5fDURK0Okolidzds",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8484,9 +7794,8 @@
     "googlePlaceId": "ChIJu4j2Ace8fDURb_43bT8q7_k",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8524,9 +7833,8 @@
     "googlePlaceId": "ChIJPe4H9cWifDUR763SM6dZJsw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8564,44 +7872,8 @@
     "googlePlaceId": "ChIJNUC-Pz2lfDURMGV1S250AKg",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "8128836",
-    "name": "통인시장",
-    "address": "서울 종로구 자하문로15길 18",
-    "category": "가정,생활 > 시장",
-    "lat": 37.580769707479256,
-    "lng": 126.96994796046572,
-    "kakaoUrl": "http://place.map.kakao.com/8128836",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": null,
-        "selectedYear": 2015,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=2537",
-        "originalName": "통인시장",
-        "sourceRecordId": "2537"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 3.0,
-        "count": 149,
-        "collectedAt": "2026-11-13T14:47:44+00:00"
-      },
-      "google": null
-    },
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8639,9 +7911,8 @@
     "googlePlaceId": "ChIJWd4hFXikfDURPpkzGW59RdQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8679,9 +7950,8 @@
     "googlePlaceId": "ChIJVZ4zFyOjfDURrY5_G1k5F7A",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8719,9 +7989,8 @@
     "googlePlaceId": "ChIJGc7HIKOlfDUR8CD_FNhLaEQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8759,9 +8028,8 @@
     "googlePlaceId": "ChIJddwdaOSifDURUeKnfI1iPtE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8799,9 +8067,8 @@
     "googlePlaceId": "ChIJy16eNRijfDURG8ccxFM6frs",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8839,9 +8106,8 @@
     "googlePlaceId": "ChIJ3dVqNJOifDURoB_zAowK8I0",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8879,9 +8145,8 @@
     "googlePlaceId": "ChIJm9HFAgClfDURqp0_Hrb6jpQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8919,9 +8184,8 @@
     "googlePlaceId": "ChIJxW-oZ-eifDURrH29Zan3WRg",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8959,9 +8223,8 @@
     "googlePlaceId": "ChIJzctx3J2jfDUR8aZ4DVRySoE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -8999,9 +8262,8 @@
     "googlePlaceId": "ChIJ05Zoz1-jfDURNjPePpknw5k",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9039,9 +8301,8 @@
     "googlePlaceId": "ChIJvZjTMWC9fDURxnT8dx21N3U",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9074,9 +8335,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9114,9 +8374,8 @@
     "googlePlaceId": "ChIJzZCu7SujfDURGD9aedZkmYM",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9154,49 +8413,8 @@
     "googlePlaceId": "ChIJxRiox02ifDURTKtvmicQdHE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "13050574",
-    "name": "한국의집",
-    "address": "서울 중구 퇴계로36길 10",
-    "category": "문화,예술 > 문화시설",
-    "lat": 37.56022350285318,
-    "lng": 126.9944982918746,
-    "kakaoUrl": "http://place.map.kakao.com/13050574",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식점",
-        "openedYear": null,
-        "selectedYear": 2023,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=3667",
-        "originalName": "한국의 집",
-        "sourceRecordId": "3667"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 3.9,
-        "count": 41,
-        "collectedAt": "2026-11-13T14:47:52+00:00"
-      },
-      "google": {
-        "rating": 4.4,
-        "count": 1967,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJ1ytmM5SifDURnsR4OoEvDFQ",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9234,9 +8452,8 @@
     "googlePlaceId": "ChIJHQXogvOjfDURVdjOTKUacgQ",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9274,9 +8491,8 @@
     "googlePlaceId": "ChIJkUSoe4-jfDURujr_bknv6iE",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9314,9 +8530,8 @@
     "googlePlaceId": "ChIJSz0DNZSifDURbyoY-rvEl1o",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9354,9 +8569,8 @@
     "googlePlaceId": "ChIJ_____6ChfDURiaRnah1hzUc",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9389,9 +8603,8 @@
     },
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9429,9 +8642,8 @@
     "googlePlaceId": "ChIJP81GSPehfDURvDoB3v66uNM",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9469,9 +8681,8 @@
     "googlePlaceId": "ChIJQ-Y88belfDURrUsKUS6HMVY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9509,49 +8720,8 @@
     "googlePlaceId": "ChIJhQtB_rSjfDURKQupt63WLDY",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
-    }
-  },
-  {
-    "id": "22425223",
-    "name": "홍익문고",
-    "address": "서울 서대문구 연세로 2",
-    "category": "문화,예술 > 도서 > 서점",
-    "lat": 37.5557973589999,
-    "lng": 126.937030051858,
-    "kakaoUrl": "http://place.map.kakao.com/22425223",
-    "sources": [
-      {
-        "source": "seoul_heritage",
-        "label": "서울미래유산",
-        "group": "음식 관련 후보(확인 필요)",
-        "openedYear": 1960,
-        "selectedYear": 2013,
-        "url": "https://futureheritage.seoul.go.kr/futureHeritageMeet/futureHeritage/view.do?htNo=183",
-        "originalName": "홍익문고",
-        "sourceRecordId": "183"
-      }
-    ],
-    "ratings": {
-      "kakao": {
-        "rating": 4.0,
-        "count": 47,
-        "collectedAt": "2026-11-13T14:47:56+00:00"
-      },
-      "google": {
-        "rating": 4.2,
-        "count": 497,
-        "collectedAt": null
-      }
-    },
-    "googlePlaceId": "ChIJRWJqzJWYfDURGciU25Ey5Tg",
-    "matdoriaPick": {
-      "selected": false,
-      "score": 0,
-      "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9589,9 +8759,8 @@
     "googlePlaceId": "ChIJDZMdLCWffDURLJe61me3ZMU",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9629,9 +8798,8 @@
     "googlePlaceId": "ChIJJ-gxpXeifDUR-UWa6w9-IBw",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9669,9 +8837,8 @@
     "googlePlaceId": "ChIJ13yZpsaifDURUpD__4MZcT4",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   },
   {
@@ -9709,9 +8876,8 @@
     "googlePlaceId": "ChIJqTgxIkGnfDURqFKbw1B1VFA",
     "matdoriaPick": {
       "selected": false,
-      "score": 0,
       "reasons": [],
-      "profileVersion": "draft-1"
+      "profileVersion": "temporary-source-intersection-1"
     }
   }
 ]

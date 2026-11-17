@@ -7,8 +7,9 @@
 - 입력: data/processed/places_matched.csv (confidence high 전체)
 - 키: .env.local 의 GOOGLE_PLACES_API_KEY (출력하지 않음)
 - 출력: data/raw/google/ratings.csv. 기존 source/src_id 결과는 재사용하며, 누락된 high 매칭만 조회한다.
-- Google Place ID는 영구 보관 가능한 식별자지만 rating/count 응답 콘텐츠는 장기 저장하지 말 것.
-  이 CSV는 과거 조사 결과이며 웹앱 JSON에는 평점값을 export하지 않는다. 추가 수집 전에 정책/권한을 확인한다.
+- Google Place ID와 달리 rating/count는 Places 콘텐츠다. 현재 이 collector는 값을 CSV에 저장하고
+  export가 공개 웹 JSON에 포함한다 (사용자 결정). 이는 저장·공개 권한이나 약관 적합성을 확인했다는 뜻이
+  아니며, 위험은 미해결 상태다. 추가 수집 전에도 정책과 권한을 별도로 확인해야 한다.
 """
 
 from __future__ import annotations

@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import type { PointerEvent, WheelEvent } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { KeyboardEvent, PointerEvent, WheelEvent } from "react";
 import dynamic from "next/dynamic";
 import placesData from "../public/data/places.json";
 import type { Place } from "../lib/types";
-import { SOURCE_FILTERS, SOURCE_STATUS, matchesFilter, type SourceFilter } from "../lib/sources";
+import { CURATION_FILTERS, SOURCE_FILTERS, SOURCE_STATUS, matchesFilter, type CurationFilter, type ListFilter, type SourceFilter } from "../lib/sources";
 import PlaceDetail from "../components/PlaceDetail";
 
 // 지도는 브라우저에서만 동작하므로 SSR을 끈다.
@@ -34,17 +34,18 @@ function ListRating({ label, rating, count }: { label: "K Star" | "G Star"; rati
   return (
     <span className="list-rating">
       <span className="list-rating-label">{label}</span>
-      <span className="list-rating-score">{rating === null ? "" : rating.toFixed(1)}</span>
-      <span className="rating-stars list-rating-stars" style={style} aria-label={rating === null ? "평점 없음" : `${fill.toFixed(0)}% 별점`}>★★★★★</span>
+      <span className="list-rating-score">{rating === null ? "—" : rating.toFixed(1)}</span>
+      <span className="rating-stars list-rating-stars" role="img" style={style} aria-label={rating === null ? `${label} 정보 없음` : `${label} ${rating.toFixed(1)}점`}>★★★★★</span>
       <span className="list-rating-count">{rating === null || count === null ? "" : `(${count.toLocaleString("ko-KR")})`}</span>
     </span>
   );
 }
 
 export default function Home() {
-  const [filter, setFilter] = useState<SourceFilter>("all");
+  const [filter, setFilter] = useState<ListFilter>("matdoria_pick");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [activeOptionId, setActiveOptionId] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortKey>("name");
   const [panelMode, setPanelMode] = useState<PanelMode>("split");
   const [isPanelDragging, setIsPanelDragging] = useState(false);
@@ -79,7 +80,16 @@ export default function Home() {
     });
   }, [filter, query, sortBy]);
 
+  useEffect(() => {
+    if (selectedId && !visible.some((place) => place.id === selectedId)) {
+      setSelectedId(null);
+    }
+  }, [selectedId, visible]);
+
   const selected = selectedId ? visible.find((place) => place.id === selectedId) ?? null : null;
+  const focusedOptionId = visible.some((place) => place.id === activeOptionId)
+    ? activeOptionId
+    : selected?.id ?? visible[0]?.id ?? null;
 
   const sourceCounts = useMemo(() => {
     return Object.fromEntries(
@@ -91,6 +101,14 @@ export default function Home() {
       ]),
     ) as Record<SourceFilter, number>;
   }, []);
+
+  const curationCounts = useMemo(() => Object.fromEntries(
+    CURATION_FILTERS.map(({ key }) => [
+      key,
+      places.filter((place) => matchesFilter(place.sources, key, place.matdoriaPick?.selected === true)).length,
+    ]),
+  ) as Record<CurationFilter, number>, []);
+  const activeFilterCount = filter === "matdoria_pick" ? curationCounts[filter] : sourceCounts[filter];
 
   const panelTopForMode = (mode: PanelMode) => {
     const viewportHeight = window.innerHeight;
@@ -149,6 +167,24 @@ export default function Home() {
     setSelectedId(id);
     if (id && panelMode === "peek") setPanelMode("expanded");
   };
+  const onPlaceKeyDown = (event: KeyboardEvent<HTMLLIElement>, id: string) => {
+    const options = Array.from(
+      event.currentTarget.parentElement?.querySelectorAll<HTMLElement>('[role="option"]') ?? [],
+    );
+    const index = options.indexOf(event.currentTarget);
+    let nextIndex: number | null = null;
+    if (event.key === "ArrowDown") nextIndex = Math.min(index + 1, options.length - 1);
+    if (event.key === "ArrowUp") nextIndex = Math.max(index - 1, 0);
+    if (event.key === "Home") nextIndex = 0;
+    if (event.key === "End") nextIndex = options.length - 1;
+    if (nextIndex !== null) {
+      event.preventDefault();
+      options[nextIndex]?.focus();
+    } else if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      selectPlace(id);
+    }
+  };
   const onPanelPointerUp = (event: PointerEvent<HTMLButtonElement>) => finishPanelDrag(event);
   const onPanelToggleClick = () => {
     if (Date.now() < suppressToggleClickUntil.current) return;
@@ -164,8 +200,8 @@ export default function Home() {
     }
     if (target.closest("input, select, button, a")) return;
 
-    const detail = target.closest(".detail-inline") as HTMLElement | null;
-    if (detail) {
+    const detail = target.closest(".detail-scroll") as HTMLElement | null;
+    if (detail?.closest(".detail-inline")) {
       if (panelMode === "split" && event.deltaY < 0 && detail.scrollTop <= 0) setPanelMode("expanded");
       return;
     }
@@ -179,8 +215,7 @@ export default function Home() {
         <button
           type="button"
           className="mobile-panel-toggle"
-          aria-label={panelMode === "expanded" ? "분할 화면으로 접기" : panelMode === "split" ? "리스트 전체 화면으로 펼치기" : "리스트 보기"}
-          aria-expanded={panelMode === "expanded"}
+          aria-label={panelMode === "expanded" ? "현재 리스트 전체 화면. 분할 화면으로 접기" : panelMode === "split" ? "현재 지도와 목록 분할 화면. 리스트 전체 화면으로 펼치기" : "현재 지도 크게 보기. 리스트 보기"}
           onPointerDown={onPanelPointerDown}
           onPointerMove={onPanelPointerMove}
           onPointerUp={onPanelPointerUp}
@@ -189,32 +224,63 @@ export default function Home() {
         >
           <span />
         </button>
-        {panelMode === "peek" && !selected && (
-          <button type="button" className="mobile-map-peek" onClick={() => setPanelMode("split")}>
-            <span>{visible.length}곳 · 목록 보기</span><span aria-hidden="true">↑</span>
+        {panelMode === "peek" && (
+          <button
+            type="button"
+            className="mobile-map-peek"
+            onClick={() => setPanelMode(selected ? "expanded" : "split")}
+            aria-label={selected ? `${selected.name} 상세 열기` : `목록 보기, ${visible.length}곳`}
+          >
+            <span>{selected ? selected.name : `${visible.length}곳 · 목록 보기`}</span><span aria-hidden="true">↑</span>
           </button>
         )}
         <div className="sidebar-head">
           <h1>matdoria · 서울</h1>
+          <div className="curation-section" role="group" aria-label="Matdoria 큐레이션 목록">
+            <div className="section-heading">Matdoria 큐레이션</div>
+            {CURATION_FILTERS.map((curation) => (
+              <button
+                key={curation.key}
+                type="button"
+                className={`curation-card${filter === curation.key ? " is-active" : ""}`}
+                aria-pressed={filter === curation.key}
+                onClick={() => setFilter(curation.key)}
+              >
+                <span className="curation-mark" aria-hidden="true"><span>m</span></span>
+                <span className="curation-card-copy">
+                  <strong>{curation.label}</strong>
+                  <span>{curation.description}</span>
+                </span>
+                <span className="curation-count">{curationCounts[curation.key]}</span>
+              </button>
+            ))}
+          </div>
           <input
             className="search"
+            aria-label="식당 이름 또는 주소 검색"
             placeholder="식당 이름 또는 주소 검색"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <div className="chips" role="tablist" aria-label="맛집 출처별 목록">
-            {SOURCE_FILTERS.map((f) => (
-              <button
-                key={f.key}
-                className="chip"
-                role="tab"
-                aria-selected={filter === f.key}
-                onClick={() => setFilter(f.key)}
-              >
-                {f.label}
-                <span className="chip-count">{sourceCounts[f.key]}</span>
-              </button>
-            ))}
+          <div className="source-section">
+            <div className="source-section-heading">
+              <span>출처별 보기</span>
+              <span className="source-scroll-hint">옆으로 밀어 더 보기 <span aria-hidden="true">→</span></span>
+            </div>
+            <div className="chips" role="group" aria-label="출처별 목록">
+              {SOURCE_FILTERS.map((f) => (
+                <button
+                  key={f.key}
+                  type="button"
+                  className="chip"
+                  aria-pressed={filter === f.key}
+                  onClick={() => setFilter(f.key)}
+                >
+                  {f.label}
+                  <span className="chip-count">{sourceCounts[f.key]}</span>
+                </button>
+              ))}
+            </div>
           </div>
           <div className="list-toolbar">
             <div className="count">{visible.length}곳 표시 · 전체 {places.length}곳</div>
@@ -234,27 +300,32 @@ export default function Home() {
             <div className="empty">
               {query.trim()
                 ? "검색 조건에 맞는 식당이 없습니다."
-                : sourceCounts[filter] === 0
+                : activeFilterCount === 0
                   ? SOURCE_STATUS[filter]
                   : "조건에 맞는 식당이 없습니다."}
             </div>
           ) : (
-            <ul className="list">
+            <ul className="list" role="listbox" aria-label="식당 목록">
               {visible.map((p) => (
                 <li
                   key={p.id}
                   className="list-item"
+                  role="option"
                   aria-selected={p.id === selectedId}
+                  tabIndex={focusedOptionId === p.id ? 0 : -1}
                   onClick={() => selectPlace(p.id)}
+                  onFocus={() => setActiveOptionId(p.id)}
+                  onKeyDown={(event) => onPlaceKeyDown(event, p.id)}
                 >
                   <div className="list-item-name">{p.name}</div>
                   <div className="list-item-sub">
-                    {[
-                      ...p.sources.map((source) => SOURCE_FILTERS.find((f) => f.key === source.source)?.label),
-                      ...(p.matdoriaPick?.selected ? ["Matdoria's Pick"] : []),
-                    ].filter(Boolean).join(" · ")}
-                    {" · "}
-                    {p.address}
+                    <span className="list-item-sources">
+                      {[
+                        ...p.sources.map((source) => SOURCE_FILTERS.find((f) => f.key === source.source)?.label),
+                        ...(p.matdoriaPick?.selected && filter !== "matdoria_pick" ? ["Matdoria's Pick"] : []),
+                      ].filter(Boolean).join(" · ")}
+                    </span>
+                    <span className="list-item-address">{p.address}</span>
                   </div>
                   <div className="list-item-ratings">
                     <ListRating label="K Star" rating={p.ratings?.kakao?.rating ?? null} count={p.ratings?.kakao?.count ?? null} />
@@ -267,7 +338,7 @@ export default function Home() {
         </div>
 
         <div className="notice">
-          장소 정보는 카카오 로컬 기준입니다. 출처별 데이터는 공식 수집 경로와 식당 매칭이 확인된 뒤 차례로 추가합니다. Matdoria's Pick은 별도 큐레이션 기준으로 구성합니다.
+          장소 정보는 카카오 로컬 기준입니다. 각 큐레이션의 선정 방식은 목록 설명에서 확인할 수 있습니다.
         </div>
       </aside>
 
@@ -279,7 +350,7 @@ export default function Home() {
           appKey={KAKAO_MAP_KEY}
         />
         {!KAKAO_MAP_KEY && (
-          <div className="detail" style={{ top: "auto", bottom: 16, left: 16, right: "auto", width: 300 }}>
+          <div className="detail" style={{ top: "auto", bottom: 16, left: 16, right: "auto", width: 300, padding: 20 }}>
             카카오 JavaScript 키가 없습니다. web/.env.local 에 NEXT_PUBLIC_KAKAO_MAP_KEY 를 넣어 주세요.
           </div>
         )}

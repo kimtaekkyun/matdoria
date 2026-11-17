@@ -8,7 +8,7 @@
 [1] 수집 (scripts/fetch_*.py)           → data/raw/<날짜>/ , data/processed/*.csv
 [2] 매칭 (카카오 로컬 API)               → data/processed/places_matched.csv   (기존 2개 출처 완료, 신규 출처 대기)
 [3] 평점 snapshot 수집 (Google/Kakao)     → data/raw/google/ratings.csv + data/processed/kakao_ratings.csv (완료)
-[4] Matdoria's Pick 점수/조건             → data/curation/matdoria_pick.json (초안 설정, 아직 미선정)
+[4] Matdoria's Pick 조건/점수 프로필      → data/curation/matdoria_pick.json (현재 두 출처 교집합 임시 규칙)
 [5] export (Next.js용 JSON)               → web/public/data/places.json (평점 포함, 런타임 API 불필요)
 ```
 
@@ -37,7 +37,8 @@ python scripts/fetch_michelin.py
 
 ## 2단계: 카카오 매칭
 
-- 완료: 미쉐린·서울미래유산 레코드 262건을 카카오 장소 ID에 매칭. 최종 웹 데이터는 high-confidence 매칭만 사용.
+- 미쉐린·서울미래유산 레코드 262건에 Kakao 후보를 연결했습니다. 최종 웹 데이터는 high-confidence 매칭만 사용합니다.
+- 이름만으로 high가 됐던 16건 중 Kakao 카테고리가 음식점 또는 확인된 먹자골목이 아닌 건은 현재 medium으로 내려 웹 데이터에서 제외했습니다. 재매칭/수동 장소 검증 후에만 다시 high로 올립니다 (D-040).
 - 다음 작업: 착한가격업소·모범음식점 등 새 원본을 출처별로 정규화한 뒤 카카오와 이름·주소를 함께 검증해 매칭. 상호명만으로 자동 채택하지 않는다.
 
 산출물: `data/processed/places_matched.csv` (`place_id`, 출처별 원본 ID, Kakao ID, 장소 URL, 매칭 근거 등)
@@ -47,7 +48,9 @@ python scripts/fetch_michelin.py
 - Kakao 평점은 `python scripts/fetch_kakao_ratings.py`로 현재 `places.json`의 모든 Kakao ID에 요청하고 `data/processed/kakao_ratings.csv`에 집계 필드만 저장합니다. 개별 리뷰는 저장하지 않습니다. `--refresh`는 전부 다시 요청합니다.
 - Google snapshot은 `data/raw/google/ratings.csv`의 Place ID/평점 수집 결과를 사용합니다. 신규 source를 검색할 때는 루트 `.env.local`의 `GOOGLE_PLACES_API_KEY`가 필요합니다. 이미 수집한 row를 강제로 갱신하려면 `python scripts/fetch_google_ratings.py --refresh`를 사용합니다 (253건 API 요청/과금 가능).
 - `scripts/export_places.py`는 K/G 별점·리뷰 수 snapshot을 `places.json`에 포함합니다. 웹앱은 export JSON만 읽고 rating API를 호출하지 않습니다. snapshot을 갱신할 때 Google/Kakao batch 수집 → `python scripts/export_places.py` → 배포 순서로 진행합니다.
-- Matdoria's Pick 규칙은 `data/curation/matdoria_pick.json`에서 관리합니다. 현재 점수 가중치/최소 점수 미설정이라 선정 결과는 0곳입니다. ratings는 Pick score에 포함하지 않습니다.
+- 현재 임시 규칙은 설정의 `selectionMode: source_intersection`과 `requiredSources`에 지정한 미쉐린·서울미래유산 양쪽에 모두 등재된 Kakao 장소만 선정합니다. 공통 등재 사실을 이유로 표시하고, 이 규칙은 점수 산정이 아니므로 결과에 score를 넣지 않습니다.
+- 향후 점수 프로필로 바꿀 때는 설정의 `selectionMode`를 `score_profile`로 전환하고 기존 `sourceWeights`, 등급별 점수, 최소 점수를 조정합니다. ratings는 Pick score에 포함하지 않습니다.
+- Kakao/Google 평점 snapshot은 사용자 결정에 따라 정적 JSON에 포함되어 공개 표시됩니다. 이는 약관 적합성이나 재사용 권한을 검증했다는 뜻이 아니며, Kakao 내부 API의 허가/안정성과 Google 콘텐츠 저장·공개 조건 위험은 미해결입니다. 정적 공개 여부와 별개로 최신성이 보장되지 않습니다.
 - 여러 큐레이션 리스트를 지원하며, Top 100 제한과 가중치는 데이터 확인 후 확정합니다.
 
 ## 갱신 절차 (수동, 연 1회 또는 필요 시)

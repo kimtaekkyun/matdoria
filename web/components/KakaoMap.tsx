@@ -5,9 +5,53 @@ import { useEffect, useRef, useState } from "react";
 import type { Place } from "../lib/types";
 import PlaceDetail from "./PlaceDetail";
 
+type KakaoMapInstance = {
+  relayout(): void;
+  setBounds(bounds: KakaoBounds): void;
+  panTo(position: unknown): void;
+};
+
+type KakaoMarker = {
+  setMap(map: KakaoMapInstance | null): void;
+  setImage(image: unknown): void;
+  setZIndex(zIndex: number): void;
+};
+
+type KakaoOverlay = {
+  setMap(map: KakaoMapInstance | null): void;
+};
+
+type KakaoBounds = {
+  extend(position: unknown): void;
+};
+
+type KakaoNamespace = {
+  maps: {
+    load(callback: () => void): void;
+    Map: new (container: HTMLElement, options: { center: unknown; level: number }) => KakaoMapInstance;
+    LatLng: new (lat: number, lng: number) => unknown;
+    LatLngBounds: new () => KakaoBounds;
+    MarkerImage: new (image: string, size: unknown, options: { offset: unknown }) => unknown;
+    Size: new (width: number, height: number) => unknown;
+    Point: new (x: number, y: number) => unknown;
+    Marker: new (options: { position: unknown; title: string; image: unknown; zIndex: number }) => KakaoMarker;
+    CustomOverlay: new (options: {
+      position: unknown;
+      content: HTMLElement;
+      xAnchor: number;
+      yAnchor: number;
+      zIndex: number;
+      clickable: boolean;
+    }) => KakaoOverlay;
+    event: {
+      addListener(target: KakaoMarker, event: string, callback: () => void): void;
+    };
+  };
+};
+
 declare global {
   interface Window {
-    kakao: any; // Kakao Maps SDK does not expose bundled TypeScript definitions.
+    kakao?: KakaoNamespace;
   }
 }
 
@@ -16,12 +60,20 @@ const SDK_ID = "kakao-map-sdk";
 
 function loadKakaoSdk(appKey: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    if (window.kakao?.maps) {
-      window.kakao.maps.load(() => resolve());
+    const loadedKakao = window.kakao;
+    if (loadedKakao?.maps) {
+      loadedKakao.maps.load(() => resolve());
       return;
     }
     const existing = document.getElementById(SDK_ID) as HTMLScriptElement | null;
-    const onLoad = () => window.kakao.maps.load(() => resolve());
+    const onLoad = () => {
+      const kakao = window.kakao;
+      if (!kakao?.maps) {
+        reject(new Error("카카오맵 SDK 초기화 실패 (키 또는 도메인 설정 확인)"));
+        return;
+      }
+      kakao.maps.load(() => resolve());
+    };
     if (existing) {
       existing.addEventListener("load", onLoad);
       return;
@@ -36,7 +88,7 @@ function loadKakaoSdk(appKey: string): Promise<void> {
   });
 }
 
-function markerImage(kakao: any, selected: boolean) {
+function markerImage(kakao: KakaoNamespace, selected: boolean) {
   const width = selected ? 38 : 30;
   const height = selected ? 48 : 40;
   const fill = selected ? "#e24b35" : "#3367d6";
@@ -58,12 +110,12 @@ type Props = {
 
 export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<any>(null);
-  const overlayRef = useRef<any>(null);
+  const mapRef = useRef<KakaoMapInstance | null>(null);
+  const overlayRef = useRef<KakaoOverlay | null>(null);
   const [mapReady, setMapReady] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [overlayHost, setOverlayHost] = useState<HTMLDivElement | null>(null);
-  const markersRef = useRef<Map<string, any>>(new Map());
+  const markersRef = useRef<Map<string, KakaoMarker>>(new Map());
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
   const selectedPlace = selectedId ? places.find((place) => place.id === selectedId) ?? null : null;
@@ -90,7 +142,8 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
     loadKakaoSdk(appKey)
       .then(() => {
         if (cancelled || !containerRef.current) return;
-        const { kakao } = window;
+        const kakao = window.kakao;
+        if (!kakao?.maps) throw new Error("카카오맵 SDK 초기화 실패");
         mapRef.current = new kakao.maps.Map(containerRef.current, {
           center: new kakao.maps.LatLng(SEOUL_CENTER.lat, SEOUL_CENTER.lng),
           level: 7,
@@ -123,8 +176,12 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!mapReady || !map || !window.kakao?.maps) return;
-    const { kakao } = window;
+    const kakao = window.kakao;
+    if (!mapReady || !map || !kakao?.maps) return;
+
+    const hasSamePlaces = markersRef.current.size === places.length
+      && places.every((place) => markersRef.current.has(place.id));
+    if (hasSamePlaces) return;
 
     markersRef.current.forEach((marker) => marker.setMap(null));
     markersRef.current = new Map();
@@ -144,7 +201,7 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
       bounds.extend(position);
     }
     if (places.length > 0) map.setBounds(bounds);
-  }, [places, mapReady]);
+  }, [places, mapReady, selectedId]);
 
   useEffect(() => {
     const map = mapRef.current;

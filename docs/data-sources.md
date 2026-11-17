@@ -81,8 +81,8 @@
 
 ### 8. 플랫폼 평점 (카카오·네이버·Google 등)
 
-- 카카오 로컬 API: 별점·리뷰 수 필드 없음. Kakao Map의 undocumented 내부 리뷰 API를 배치 수집해 243개 장소 중 236개 평점 스냅샷 확보, 7곳은 평점 없음. 원본 결과는 `data/processed/kakao_ratings.csv`, export 결과는 `places.json`에 저장. 내부 API의 공식 허가/안정성은 확인되지 않았으며 (D-032), 조사 절차는 [kakao-rating-api-walkthrough.html](kakao-rating-api-walkthrough.html).
-- Google Places API (New): high 매칭 253개 source row에 Google Place ID가 있고, 251개에 평점 스냅샷이 있음. 238건은 source 좌표 100m 이내, 15건은 `far`. 통합 장소에 모호성 없이 연결된 222개 Google 스냅샷만 `places.json`에 포함하며, 런타임에는 API를 호출하지 않음. `data/raw/google/ratings.csv`는 Git 추적 중이며 Google 콘텐츠의 정적 저장 정책 위험이 남아 있음. 다음 snapshot 수집 시에만 Google API 키가 필요하며 Vercel 런타임 키는 불필요 (D-032).
+- 카카오 로컬 API: 별점·리뷰 수 필드 없음. Kakao Map의 undocumented 내부 리뷰 API를 배치 수집해 243개 장소 중 236개 평점 스냅샷 확보, 7곳은 평점 없음. 원본 결과는 `data/processed/kakao_ratings.csv`, export 결과는 공개 `places.json`에 저장. 사용자 결정에 따라 공개 표시 중이나 내부 API의 공식 허가/안정성은 확인되지 않았고 위험은 미해결 (D-032, D-039). 조사 절차는 [kakao-rating-api-walkthrough.html](kakao-rating-api-walkthrough.html).
+- Google Places API (New): high 매칭 253개 source row에 Google Place ID가 있고, 251개에 평점 스냅샷이 있음. 238건은 source 좌표 100m 이내, 15건은 `far`. 통합 장소에 모호성 없이 연결된 222개 Google 스냅샷만 공개 `places.json`에 포함하며, 런타임에는 API를 호출하지 않음. `data/raw/google/ratings.csv`는 Git 추적 중이다. 사용자 결정에 따른 공개 사용이며 Google 콘텐츠 저장·공개 정책 적합성은 검증되지 않았고 위험은 미해결. 다음 snapshot 수집 시에만 Google API 키가 필요하며 Vercel 런타임 키는 불필요 (D-032, D-039).
 - 네이버·카카오/식신 등 사용자 평점: matdoria에서 사용할 수 있는 허가된 일괄 API·데이터 라이선스를 확인하지 못함. 비공식 페이지 스크래핑은 하지 않음
 
 ## 추가 조사 대상 (현재 자동 수집하지 않음)
