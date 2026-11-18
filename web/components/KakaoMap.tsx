@@ -3,12 +3,19 @@
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import type { Place } from "../lib/types";
+import type { MapInsets } from "../lib/mobileLayout";
 import PlaceDetail from "./PlaceDetail";
+
+type KakaoProjection = {
+  containerPointFromCoords(position: unknown): { x: number; y: number };
+  coordsFromContainerPoint(point: unknown): unknown;
+};
 
 type KakaoMapInstance = {
   relayout(): void;
-  setBounds(bounds: KakaoBounds): void;
+  setBounds(bounds: KakaoBounds, paddingTop?: number, paddingRight?: number, paddingBottom?: number, paddingLeft?: number): void;
   panTo(position: unknown): void;
+  getProjection(): KakaoProjection;
 };
 
 type KakaoMarker = {
@@ -106,9 +113,48 @@ type Props = {
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   appKey: string;
+  // Mobile only: area not covered by header/sheet. null on desktop and when the sheet is expanded.
+  mapInsets: MapInsets | null;
+  // Mobile only: panel mode, changes only on release (not during drag). null on desktop.
+  layoutKey: string | null;
 };
 
-export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props) {
+// Places the coordinate so that it sits at the center of the visible (inset) area.
+function centerPlace(
+  map: KakaoMapInstance,
+  kakao: KakaoNamespace,
+  container: HTMLElement | null,
+  place: Place,
+  insets: MapInsets | null,
+) {
+  const target = new kakao.maps.LatLng(place.lat, place.lng);
+  if (!insets || !container) {
+    map.panTo(target);
+    return;
+  }
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+  const projection = map.getProjection();
+  const current = projection.containerPointFromCoords(target);
+  const desiredX = (insets.left + (width - insets.right)) / 2;
+  const desiredY = (insets.top + (height - insets.bottom)) / 2;
+  const dx = desiredX - current.x;
+  const dy = desiredY - current.y;
+  // The coordinate currently at (center - delta) becomes the new center after the marker shifts by delta.
+  const center = projection.coordsFromContainerPoint(
+    new kakao.maps.Point(width / 2 - dx, height / 2 - dy),
+  );
+  map.panTo(center);
+}
+
+function fitPlaces(map: KakaoMapInstance, kakao: KakaoNamespace, places: Place[], insets: MapInsets | null) {
+  const bounds = new kakao.maps.LatLngBounds();
+  for (const place of places) bounds.extend(new kakao.maps.LatLng(place.lat, place.lng));
+  if (!insets) map.setBounds(bounds);
+  else map.setBounds(bounds, insets.top, insets.right, insets.bottom, insets.left);
+}
+
+export default function KakaoMap({ places, selectedId, onSelect, appKey, mapInsets, layoutKey }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<KakaoMapInstance | null>(null);
   const overlayRef = useRef<KakaoOverlay | null>(null);
@@ -119,6 +165,12 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
   const selectedPlace = selectedId ? places.find((place) => place.id === selectedId) ?? null : null;
+  const insetsRef = useRef<MapInsets | null>(mapInsets);
+  insetsRef.current = mapInsets;
+  const placesRef = useRef(places);
+  placesRef.current = places;
+  const selectedPlaceRef = useRef(selectedPlace);
+  selectedPlaceRef.current = selectedPlace;
 
   useEffect(() => {
     if (!selectedPlace) return;
@@ -186,7 +238,6 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
     markersRef.current.forEach((marker) => marker.setMap(null));
     markersRef.current = new Map();
 
-    const bounds = new kakao.maps.LatLngBounds();
     for (const place of places) {
       const position = new kakao.maps.LatLng(place.lat, place.lng);
       const marker = new kakao.maps.Marker({
@@ -198,9 +249,8 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
       marker.setMap(map);
       kakao.maps.event.addListener(marker, "click", () => onSelectRef.current(place.id));
       markersRef.current.set(place.id, marker);
-      bounds.extend(position);
     }
-    if (places.length > 0) map.setBounds(bounds);
+    if (places.length > 0) fitPlaces(map, kakao, places, insetsRef.current);
   }, [places, mapReady, selectedId]);
 
   useEffect(() => {
@@ -213,9 +263,19 @@ export default function KakaoMap({ places, selectedId, onSelect, appKey }: Props
       marker.setZIndex(selected ? 10 : 1);
     });
     if (selectedPlace) {
-      map.panTo(new kakao.maps.LatLng(selectedPlace.lat, selectedPlace.lng));
+      centerPlace(map, kakao, containerRef.current, selectedPlace, insetsRef.current);
     }
   }, [selectedId, selectedPlace, mapReady]);
+
+  // Panel mode changed (not during drag): refit the visible area, or re-center the selected pin.
+  useEffect(() => {
+    const map = mapRef.current;
+    const kakao = window.kakao;
+    if (!mapReady || !map || !kakao?.maps || layoutKey === null || layoutKey === "expanded") return;
+    const selected = selectedPlaceRef.current;
+    if (selected) centerPlace(map, kakao, containerRef.current, selected, insetsRef.current);
+    else if (placesRef.current.length > 0) fitPlaces(map, kakao, placesRef.current, insetsRef.current);
+  }, [layoutKey, mapReady]);
 
   useEffect(() => {
     const map = mapRef.current;

@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { KeyboardEvent, PointerEvent, WheelEvent } from "react";
+import type { CSSProperties, KeyboardEvent, PointerEvent, WheelEvent } from "react";
 import dynamic from "next/dynamic";
 import placesData from "../public/data/places.json";
 import type { Place } from "../lib/types";
 import { CURATION_FILTERS, SOURCE_FILTERS, SOURCE_STATUS, matchesFilter, type CurationFilter, type ListFilter, type SourceFilter } from "../lib/sources";
 import PlaceDetail from "../components/PlaceDetail";
+import { nearestPanelMode, sheetTop, useMobileLayout, visibleInsets, type PanelMode } from "../lib/mobileLayout";
 
 // 지도는 브라우저에서만 동작하므로 SSR을 끈다.
 const KakaoMap = dynamic(() => import("../components/KakaoMap"), {
@@ -25,7 +26,6 @@ const SORT_OPTIONS = [
   { key: "google_count", label: "G 평가 많은 순" },
 ] as const;
 type SortKey = (typeof SORT_OPTIONS)[number]["key"];
-type PanelMode = "peek" | "split" | "expanded";
 type PanelDrag = { startY: number; startTop: number; lastTop: number; moved: boolean };
 
 function ListRating({ label, rating, count }: { label: "K Star" | "G Star"; rating: number | null; count: number | null }) {
@@ -49,9 +49,14 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<SortKey>("name");
   const [panelMode, setPanelMode] = useState<PanelMode>("split");
   const [isPanelDragging, setIsPanelDragging] = useState(false);
+  const [sourceMenuOpen, setSourceMenuOpen] = useState(false);
   const appRef = useRef<HTMLDivElement>(null);
+  const headRef = useRef<HTMLDivElement>(null);
+  const sourceRef = useRef<HTMLDivElement>(null);
+  const sourceTriggerRef = useRef<HTMLButtonElement>(null);
   const panelDrag = useRef<PanelDrag | null>(null);
   const suppressToggleClickUntil = useRef(0);
+  const layout = useMobileLayout(appRef, headRef);
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -110,25 +115,15 @@ export default function Home() {
   ) as Record<CurationFilter, number>, []);
   const activeFilterCount = filter === "matdoria_pick" ? curationCounts[filter] : sourceCounts[filter];
 
-  const panelTopForMode = (mode: PanelMode) => {
-    const viewportHeight = window.innerHeight;
-    if (mode === "expanded") return 0;
-    if (mode === "peek") return Math.max(0, viewportHeight - 74);
-    return Math.max(260, viewportHeight * 0.48);
-  };
-  const nearestPanelMode = (top: number): PanelMode => {
-    const stops: Array<{ mode: PanelMode; top: number }> = [
-      { mode: "expanded", top: panelTopForMode("expanded") },
-      { mode: "split", top: panelTopForMode("split") },
-      { mode: "peek", top: panelTopForMode("peek") },
-    ];
-    return stops.reduce((best, candidate) =>
-      Math.abs(candidate.top - top) < Math.abs(best.top - top) ? candidate : best,
-    ).mode;
+  const clampPanelTop = (top: number) => {
+    if (!layout) return top;
+    return Math.max(sheetTop("expanded", layout), Math.min(sheetTop("peek", layout), top));
   };
   const onPanelPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
     const sidebar = appRef.current?.querySelector(".sidebar");
-    if (!sidebar || !window.matchMedia("(max-width: 800px)").matches) return;
+    if (!sidebar || !layout) return;
+    // A drag moves the sheet under the popover, so close the menu rather than leave it stale.
+    setSourceMenuOpen(false);
     const startTop = sidebar.getBoundingClientRect().top;
     panelDrag.current = { startY: event.clientY, startTop, lastTop: startTop, moved: false };
     appRef.current?.style.setProperty("--panel-top", `${startTop}px`);
@@ -138,7 +133,7 @@ export default function Home() {
   const onPanelPointerMove = (event: PointerEvent<HTMLButtonElement>) => {
     const drag = panelDrag.current;
     if (!drag || !appRef.current) return;
-    const nextTop = Math.max(0, Math.min(window.innerHeight - 74, drag.startTop + event.clientY - drag.startY));
+    const nextTop = clampPanelTop(drag.startTop + event.clientY - drag.startY);
     drag.lastTop = nextTop;
     drag.moved ||= Math.abs(event.clientY - drag.startY) > 8;
     appRef.current.style.setProperty("--panel-top", `${nextTop}px`);
@@ -146,12 +141,10 @@ export default function Home() {
   const finishPanelDrag = (event?: PointerEvent<HTMLButtonElement>) => {
     const drag = panelDrag.current;
     if (!drag) return;
-    const top = event
-      ? Math.max(0, Math.min(window.innerHeight - 74, drag.startTop + event.clientY - drag.startY))
-      : drag.lastTop;
+    const top = event ? clampPanelTop(drag.startTop + event.clientY - drag.startY) : drag.lastTop;
     const moved = drag.moved || (event ? Math.abs(event.clientY - drag.startY) > 8 : false);
     if (moved) {
-      setPanelMode(nearestPanelMode(top));
+      if (layout) setPanelMode(nearestPanelMode(top, layout));
       suppressToggleClickUntil.current = Date.now() + 500;
     }
     panelDrag.current = null;
@@ -165,7 +158,8 @@ export default function Home() {
   };
   const selectPlace = (id: string | null) => {
     setSelectedId(id);
-    if (id && panelMode === "peek") setPanelMode("expanded");
+    // Picking a pin or row from the peek bar opens the lower detail sheet, keeping the map visible.
+    if (id && panelMode === "peek") setPanelMode("split");
   };
   const onPlaceKeyDown = (event: KeyboardEvent<HTMLLIElement>, id: string) => {
     const options = Array.from(
@@ -191,7 +185,7 @@ export default function Home() {
     setPanelMode((mode) => mode === "peek" ? "split" : mode === "split" ? "expanded" : "split");
   };
   const onPanelWheel = (event: WheelEvent<HTMLElement>) => {
-    if (!window.matchMedia("(max-width: 800px)").matches || Math.abs(event.deltaY) < 12) return;
+    if (!layout || Math.abs(event.deltaY) < 12) return;
     const target = event.target as HTMLElement;
     const onHandle = target.closest(".mobile-panel-toggle");
     if (onHandle) {
@@ -209,8 +203,46 @@ export default function Home() {
     if (list && panelMode === "split" && event.deltaY < 0 && list.scrollTop <= 0) setPanelMode("expanded");
   };
 
+  useEffect(() => {
+    if (!sourceMenuOpen) return;
+    const onPointerDown = (event: globalThis.PointerEvent) => {
+      if (!sourceRef.current?.contains(event.target as Node)) setSourceMenuOpen(false);
+    };
+    // Capture phase + stopImmediatePropagation so Escape closes only the menu, not the open detail.
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.stopImmediatePropagation();
+      setSourceMenuOpen(false);
+      sourceTriggerRef.current?.focus();
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown, true);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown, true);
+    };
+  }, [sourceMenuOpen]);
+
+  // Any change of panel mode (handle, wheel, drag, peek) closes the source menu so it never covers a moved sheet.
+  useEffect(() => {
+    setSourceMenuOpen(false);
+  }, [panelMode]);
+
+  const sourceTriggerLabel = filter === "matdoria_pick"
+    ? "출처"
+    : `출처 · ${SOURCE_FILTERS.find((f) => f.key === filter)?.label ?? ""}`;
+  const appStyle = layout
+    ? ({
+        "--split-top": `${sheetTop("split", layout)}px`,
+        "--peek-top": `${sheetTop("peek", layout)}px`,
+        "--expanded-top": `${sheetTop("expanded", layout)}px`,
+        "--header-bottom": `${layout.headerBottom}px`,
+      } as CSSProperties)
+    : undefined;
+  const mapInsets = layout ? visibleInsets(panelMode, layout) : null;
+
   return (
-    <div ref={appRef} className={`app panel-${panelMode}${isPanelDragging ? " panel-dragging" : ""}`}>
+    <div ref={appRef} className={`app panel-${panelMode}${isPanelDragging ? " panel-dragging" : ""}`} style={appStyle}>
       <aside className={`sidebar${selected ? " has-selection" : ""}${panelMode === "peek" ? " panel-peek" : ""}`} onWheel={onPanelWheel}>
         <button
           type="button"
@@ -228,13 +260,13 @@ export default function Home() {
           <button
             type="button"
             className="mobile-map-peek"
-            onClick={() => setPanelMode(selected ? "expanded" : "split")}
+            onClick={() => setPanelMode("split")}
             aria-label={selected ? `${selected.name} 상세 열기` : `목록 보기, ${visible.length}곳`}
           >
             <span>{selected ? selected.name : `${visible.length}곳 · 목록 보기`}</span><span aria-hidden="true">↑</span>
           </button>
         )}
-        <div className="sidebar-head">
+        <div className="sidebar-head" ref={headRef}>
           <h1>matdoria · 서울</h1>
           <div className="curation-section" role="group" aria-label="Matdoria 큐레이션 목록">
             <div className="section-heading">Matdoria 큐레이션</div>
@@ -262,19 +294,33 @@ export default function Home() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <div className="source-section">
+          <div className={`source-section${sourceMenuOpen ? " is-open" : ""}`} ref={sourceRef}>
             <div className="source-section-heading">
               <span>출처별 보기</span>
               <span className="source-scroll-hint">옆으로 밀어 더 보기 <span aria-hidden="true">→</span></span>
             </div>
-            <div className="chips" role="group" aria-label="출처별 목록">
+            <button
+              ref={sourceTriggerRef}
+              type="button"
+              className="source-trigger"
+              aria-expanded={sourceMenuOpen}
+              aria-controls="source-menu"
+              onClick={() => setSourceMenuOpen((open) => !open)}
+            >
+              <span>{sourceTriggerLabel}</span>
+              <span aria-hidden="true">▾</span>
+            </button>
+            <div className="chips" id="source-menu" role="group" aria-label="출처별 목록">
               {SOURCE_FILTERS.map((f) => (
                 <button
                   key={f.key}
                   type="button"
                   className="chip"
                   aria-pressed={filter === f.key}
-                  onClick={() => setFilter(f.key)}
+                  onClick={() => {
+                    setFilter(f.key);
+                    setSourceMenuOpen(false);
+                  }}
                 >
                   {f.label}
                   <span className="chip-count">{sourceCounts[f.key]}</span>
@@ -282,18 +328,19 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="list-toolbar">
-            <div className="count">{visible.length}곳 표시 · 전체 {places.length}곳</div>
-            <select className="sort-select" value={sortBy} onChange={(e) => setSortBy(e.target.value as SortKey)} aria-label="정렬 기준">
-              {SORT_OPTIONS.map((option) => <option key={option.key} value={option.key}>{option.label}</option>)}
-            </select>
-          </div>
+        </div>
+
+        <div className="list-toolbar">
+          <div className="count">{visible.length}곳 표시 · 전체 {places.length}곳</div>
+          <select className="sort-select" value={sortBy} onChange={(e) => setSortBy(e.target.value as SortKey)} aria-label="정렬 기준">
+            {SORT_OPTIONS.map((option) => <option key={option.key} value={option.key}>{option.label}</option>)}
+          </select>
         </div>
 
         <div className={`sidebar-content${selected ? " has-selection" : ""}`}>
           {selected && (
             <div className="mobile-detail-pane">
-              <PlaceDetail place={selected} onClose={() => selectPlace(null)} presentation="inline" />
+              <PlaceDetail key={selected.id} place={selected} onClose={() => selectPlace(null)} presentation="inline" />
             </div>
           )}
           {visible.length === 0 ? (
@@ -348,6 +395,8 @@ export default function Home() {
           selectedId={selectedId}
           onSelect={selectPlace}
           appKey={KAKAO_MAP_KEY}
+          mapInsets={mapInsets}
+          layoutKey={layout ? panelMode : null}
         />
         {!KAKAO_MAP_KEY && (
           <div className="detail" style={{ top: "auto", bottom: 16, left: 16, right: "auto", width: 300, padding: 20 }}>

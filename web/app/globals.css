@@ -60,8 +60,7 @@ select {
 
 .sidebar-head {
   flex: 0 0 auto;
-  padding: 20px 18px 14px;
-  border-bottom: 1px solid var(--line);
+  padding: 20px 18px 0;
   background: linear-gradient(180deg, #fff 0%, #fcfcfd 100%);
 }
 
@@ -143,6 +142,7 @@ select {
 }
 
 .chip:focus-visible,
+.source-trigger:focus-visible,
 .curation-card:focus-visible,
 .mobile-panel-toggle:focus-visible,
 .mobile-map-peek:focus-visible,
@@ -270,6 +270,11 @@ select {
   min-width: 0;
 }
 
+/* Desktop shows the chip row directly; the trigger/popover is a mobile-only control. */
+.source-trigger {
+  display: none;
+}
+
 .source-section-heading {
   margin: 11px 0 0;
   letter-spacing: 0;
@@ -295,6 +300,8 @@ select {
   justify-content: space-between;
   gap: 8px;
   margin-top: 5px;
+  padding: 0 18px 14px;
+  border-bottom: 1px solid var(--line);
 }
 
 .count {
@@ -904,6 +911,11 @@ select {
     padding-right: 14px;
     padding-left: 14px;
   }
+
+  .list-toolbar {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
 }
 
 /* Mobile: fixed map canvas above a separately scrollable restaurant list. */
@@ -913,33 +925,52 @@ select {
     overscroll-behavior: none;
   }
 
+  /* Full-bleed map: its size never changes with the panel state. */
   .app {
     position: relative;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: minmax(260px, 48dvh) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
     height: 100vh;
     height: 100dvh;
     min-height: 100svh;
   }
 
-  .app.panel-expanded .sidebar {
+  .map-wrap {
+    position: absolute;
+    z-index: 0;
     top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Lower sheet. Its `top` comes from the layout module through CSS custom properties. */
+  .sidebar {
+    position: absolute;
+    z-index: 30;
+    top: var(--split-top, max(260px, 48dvh));
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid var(--line);
+    border-right: none;
+    transition: top 240ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 180ms ease;
+    will-change: top;
+  }
+
+  .app.panel-expanded .sidebar {
+    top: var(--expanded-top, 0px);
     border-top-color: transparent;
     box-shadow: 0 0 30px rgba(24, 32, 45, 0.12);
   }
 
   .sidebar.panel-peek {
-    top: calc(100% - 74px);
+    top: var(--peek-top, calc(100% - 74px));
     border-top-color: transparent;
     box-shadow: 0 -5px 18px rgba(24, 32, 45, 0.08);
-  }
-
-  .app.panel-peek .map-wrap {
-    height: calc(100% - 74px);
-  }
-
-  .app.panel-expanded .map-wrap {
-    height: 100%;
   }
 
   .app.panel-dragging .sidebar {
@@ -947,22 +978,9 @@ select {
     transition: none;
   }
 
-  .app.panel-dragging .map-wrap {
-    height: var(--panel-top);
-    transition: none;
-  }
-
-  .sidebar.panel-peek .sidebar-head,
-  .sidebar.panel-peek .sidebar-content {
+  .sidebar.panel-peek .sidebar-content,
+  .sidebar.panel-peek .list-toolbar {
     display: none;
-  }
-
-  .mobile-map-peek {
-    display: none;
-  }
-
-  .sidebar.panel-peek .mobile-map-peek {
-    display: flex;
   }
 
   .mobile-panel-toggle {
@@ -988,13 +1006,18 @@ select {
     background: #cbd0d7;
   }
 
+  .app.panel-expanded .mobile-panel-toggle span {
+    background: var(--accent);
+  }
+
   .mobile-map-peek {
     display: none;
-    flex: 0 0 44px;
+    flex: 0 0 calc(44px + env(safe-area-inset-bottom, 0px));
     align-items: center;
     justify-content: space-between;
+    box-sizing: border-box;
     min-height: 44px;
-    padding: 0 18px;
+    padding: 0 18px env(safe-area-inset-bottom, 0px);
     border: 0;
     background: var(--surface);
     color: var(--fg);
@@ -1003,81 +1026,181 @@ select {
     cursor: pointer;
   }
 
+  .sidebar.panel-peek .mobile-map-peek {
+    display: flex;
+  }
+
+  .mobile-map-peek span:first-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .mobile-map-peek span:last-child {
+    flex: 0 0 auto;
     color: var(--accent);
     font-size: 17px;
   }
 
-  .app.panel-expanded .mobile-panel-toggle span {
-    background: var(--accent);
-  }
-
-  .sidebar {
-    position: absolute;
-    z-index: 30;
-    top: max(260px, 48dvh);
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid var(--line);
-    border-right: none;
-    transition: top 240ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 180ms ease;
-    will-change: top;
-  }
-
-  .sidebar.has-selection .sidebar-head {
-    display: none;
-  }
-
+  /* Floating header: search, Pick, and source menu over the map. Fixed so it stays
+     put while the sheet moves. Translucent so the map stays visible behind it. */
   .sidebar-head {
-    padding: 11px 13px 8px;
-  }
-
-  .curation-section {
-    margin-bottom: 10px;
-  }
-
-  .curation-card {
-    min-height: 52px;
-    gap: 9px;
-    padding: 7px 9px;
-  }
-
-  .curation-mark {
-    flex-basis: 29px;
-    width: 29px;
-    height: 29px;
-  }
-
-  .curation-card-copy > span {
-    font-size: 10px;
-  }
-
-  .source-scroll-hint {
-    display: inline-flex;
+    position: fixed;
+    z-index: 40;
+    top: calc(env(safe-area-inset-top, 0px) + 8px);
+    right: calc(10px + env(safe-area-inset-right, 0px));
+    left: calc(10px + env(safe-area-inset-left, 0px));
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 3px;
+    gap: 8px;
+    padding: 8px;
+    border: 1px solid rgba(224, 227, 232, 0.9);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.84);
+    box-shadow: 0 8px 24px rgba(24, 32, 45, 0.14);
+  }
+
+  /* Blur lives on a pseudo-element: backdrop-filter on the header itself would make it the
+     containing block of the fixed source popover. */
+  .sidebar-head::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    content: "";
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    backdrop-filter: blur(14px) saturate(1.2);
   }
 
   .sidebar-head h1 {
-    margin-bottom: 10px;
-    font-size: 17px;
+    display: none;
+  }
+
+  .curation-section {
+    flex: 0 0 100%;
+    margin: 0;
+  }
+
+  .section-heading {
+    display: none;
+  }
+
+  .curation-card {
+    min-height: 44px;
+    gap: 9px;
+    padding: 6px 10px;
+    border-radius: 12px;
+  }
+
+  .curation-mark {
+    flex-basis: 26px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .curation-card-copy strong {
+    font-size: 13px;
+  }
+
+  .curation-card-copy > span {
+    display: none;
+  }
+
+  .curation-count {
+    min-width: 26px;
+    height: 26px;
   }
 
   .search {
+    flex: 1 1 0;
+    min-width: 0;
     min-height: 42px;
+    width: auto;
   }
 
+  .source-section {
+    position: relative;
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+
+  .source-section-heading {
+    display: none;
+  }
+
+  .source-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 42px;
+    padding: 0 12px;
+    border: 1px solid #dfe3e8;
+    border-radius: 11px;
+    background: #fff;
+    color: var(--fg);
+    font-size: 13px;
+    font-weight: 650;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .source-section.is-open .source-trigger {
+    border-color: var(--accent);
+    color: var(--accent-strong);
+  }
+
+  /* Source filter as a popover anchored to the trigger; same buttons and state as desktop chips. */
+  /* Popover is fixed to the viewport so it can sit below the header, clear of the sheet handle. */
   .chips {
-    margin-top: 9px;
-    padding-bottom: 5px;
+    display: none;
+    position: fixed;
+    top: calc(var(--header-bottom, 120px) + 8px);
+    right: calc(18px + env(safe-area-inset-right, 0px));
+    z-index: 50;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: min(300px, calc(100vw - 36px));
+    /* Split: fit between the header and the split sheet top, minus a gap. */
+    max-height: max(96px, calc(var(--split-top, 50dvh) - var(--header-bottom, 120px) - 20px));
+    margin: 0;
+    padding: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: var(--shadow-card);
+  }
+
+  .source-section.is-open .chips {
+    display: flex;
+  }
+
+  /* Expanded: the sheet handle sits right under the header, so the popover drops below the handle
+     and uses the remaining height. The handle's center and top edge stay unobstructed. */
+  .app.panel-expanded .chips {
+    top: calc(var(--expanded-top, 128px) + 36px);
+    max-height: max(96px, calc(100dvh - var(--expanded-top, 128px) - 48px));
   }
 
   .chip {
     min-height: 34px;
     padding: 6px 10px;
     font-size: 12px;
+  }
+
+  /* Sheet toolbar: count and sort, directly above the list. */
+  .list-toolbar {
+    margin: 0;
+    padding: 6px 13px 8px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sidebar.has-selection .list-toolbar {
+    display: none;
   }
 
   .sort-select {
@@ -1141,9 +1264,15 @@ select {
     font-size: 10px;
   }
 
+  /* While a detail is open the list is collapsed but kept mounted, so its scroll offset survives. */
   .sidebar-content.has-selection .list,
   .sidebar-content.has-selection .empty {
-    display: none;
+    flex: 0 0 0;
+    height: 0;
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+    visibility: hidden;
   }
 
   .sidebar-content.has-selection .mobile-detail-pane {
@@ -1177,17 +1306,6 @@ select {
 
   .mobile-detail-pane .detail-inline h2 {
     padding-right: 42px;
-  }
-
-  .map-wrap {
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: max(260px, 48dvh);
-    transition: height 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   .mobile-detail-pane .actions {
