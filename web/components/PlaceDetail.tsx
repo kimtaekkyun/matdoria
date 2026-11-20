@@ -6,15 +6,20 @@ type RatingLineProps = { prefix: "K Star" | "G Star"; result: RatingSnapshot | n
 
 function RatingLine({ prefix, result }: RatingLineProps) {
   const rating = result?.rating ?? null;
-  const fill = rating === null ? 0 : Math.max(0, Math.min(100, (rating / 5) * 100));
-  const starsStyle = { backgroundImage: `linear-gradient(90deg, #e5a100 ${fill}%, #d5d7dc ${fill}%)` };
 
   return (
-    <div className="rating-row">
-      <strong className="rating-prefix">{prefix}</strong>
-      <span className="rating-number">{rating === null ? "—" : rating.toFixed(1)}</span>
-      <span className="rating-stars" role="img" style={starsStyle} aria-label={rating === null ? `${prefix} 정보 없음` : `${prefix} ${rating.toFixed(1)}점`}>★★★★★</span>
-      <span className="rating-count">{result?.count == null ? "" : `(${result.count.toLocaleString("ko-KR")})`}</span>
+    <div className="detail-rating">
+      <span className="detail-rating-label">{prefix}</span>
+      <span className="detail-rating-value">
+        {rating === null ? (
+          <span aria-label="평점 정보 없음">—</span>
+        ) : (
+          <strong><span className="detail-rating-star" aria-hidden="true">★</span> {rating.toFixed(1)}</strong>
+        )}
+        {result?.count != null && (
+          <span className="detail-rating-count"> ({result.count.toLocaleString("ko-KR")})</span>
+        )}
+      </span>
     </div>
   );
 }
@@ -116,13 +121,16 @@ export default function PlaceDetail({
         ×
       </button>
       <div className="detail-scroll">
-        <h2>{place.name}</h2>
-        <div className="detail-meta">{place.category}</div>
-        <div className="detail-meta">{place.address}</div>
-
-        <div className="rating-panel" aria-label="플랫폼 평점">
-          <RatingLine prefix="K Star" result={place.ratings?.kakao ?? null} />
-          <RatingLine prefix="G Star" result={place.ratings?.google ?? null} />
+        <div className="detail-header">
+          <div className="detail-identity">
+            <h2>{place.name}</h2>
+            <div className="detail-meta">{place.category}</div>
+            <div className="detail-meta">{place.address}</div>
+          </div>
+          <div className="detail-ratings" role="group" aria-label="플랫폼 평점">
+            <RatingLine prefix="K Star" result={place.ratings?.kakao ?? null} />
+            <RatingLine prefix="G Star" result={place.ratings?.google ?? null} />
+          </div>
         </div>
 
         <div className="badges">
@@ -133,17 +141,6 @@ export default function PlaceDetail({
           ))}
           {isPickEligible && <span className="badge matdoria-pick">Matdoria&apos;s Pick</span>}
         </div>
-
-        {isPickEligible && (
-          <section className="pick-rationale" aria-label="Matdoria's Pick 리뷰 수 근거">
-            <strong>Matdoria&apos;s Pick · Review count 기준 충족</strong>
-            <ul>
-              <li>K Review count: {place.ratings?.kakao?.count?.toLocaleString("ko-KR")} (기준 ≥ {place.matdoriaPick?.thresholds.kakaoReviewCount})</li>
-              <li>G Review count: {place.ratings?.google?.count?.toLocaleString("ko-KR")} (기준 ≥ {place.matdoriaPick?.thresholds.googleUserRatingCount})</li>
-            </ul>
-            <p>두 플랫폼의 Review 수가 모두 기준 이상일 때 포함됩니다. Review 수가 없는 것은 낮은 품질을 뜻하지 않습니다.</p>
-          </section>
-        )}
 
         <div className="detail-sources">
           {place.sources.map((source, index) => (
