@@ -1,14 +1,11 @@
+import { meetsPickReviewThresholds } from "../lib/types";
 import type { Place, PlaceSource, RatingSnapshot } from "../lib/types";
 import { SOURCE_FILTERS, awardText } from "../lib/sources";
 
-type RatingLineProps = { prefix: "K Star" | "G Star"; result: RatingSnapshot | null; showCollectedDate?: boolean };
+type RatingLineProps = { prefix: "K Star" | "G Star"; result: RatingSnapshot | null };
 
-function RatingLine({ prefix, result, showCollectedDate = false }: RatingLineProps) {
+function RatingLine({ prefix, result }: RatingLineProps) {
   const rating = result?.rating ?? null;
-  const collectedAt = showCollectedDate && result?.collectedAt ? new Date(result.collectedAt) : null;
-  const collectedDate = collectedAt && !Number.isNaN(collectedAt.getTime())
-    ? new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium", timeZone: "Asia/Seoul" }).format(collectedAt)
-    : null;
   const fill = rating === null ? 0 : Math.max(0, Math.min(100, (rating / 5) * 100));
   const starsStyle = { backgroundImage: `linear-gradient(90deg, #e5a100 ${fill}%, #d5d7dc ${fill}%)` };
 
@@ -17,8 +14,7 @@ function RatingLine({ prefix, result, showCollectedDate = false }: RatingLinePro
       <strong className="rating-prefix">{prefix}</strong>
       <span className="rating-number">{rating === null ? "—" : rating.toFixed(1)}</span>
       <span className="rating-stars" role="img" style={starsStyle} aria-label={rating === null ? `${prefix} 정보 없음` : `${prefix} ${rating.toFixed(1)}점`}>★★★★★</span>
-      <span className="rating-count">{rating === null || result?.count == null ? "" : `(${result.count.toLocaleString("ko-KR")})`}</span>
-      {collectedDate && <time className="rating-collected-at" dateTime={result?.collectedAt ?? undefined}>수집 {collectedDate}</time>}
+      <span className="rating-count">{result?.count == null ? "" : `(${result.count.toLocaleString("ko-KR")})`}</span>
     </div>
   );
 }
@@ -62,15 +58,20 @@ function SourceBlock({ source }: { source: PlaceSource }) {
   }
 
   if (source.source === "good_price") {
+    const menus = source.menuItems?.length
+      ? source.menuItems
+      : source.menuName
+        ? [{ name: source.menuName, price: source.menuPrice ?? null }]
+        : [];
     return (
       <div className="source-block">
-        <div className="source-heading"><strong>착한가격업소</strong> · {source.category}</div>
-        {source.menuName && (
-          <div className="detail-meta">
-            착한가격 메뉴: {source.menuName}
-            {source.menuPrice !== null && ` · ${source.menuPrice.toLocaleString("ko-KR")}원`}
+        <div className="source-heading"><strong>착한가격업소</strong> · {[source.categoryGroup, source.category].filter(Boolean).join(" · ")}</div>
+        {menus.map((menu, index) => (
+          <div className="detail-meta" key={`${menu.name}-${index}`}>
+            착한가격 메뉴: {menu.name}
+            {menu.price !== null && ` · ${menu.price.toLocaleString("ko-KR")}원`}
           </div>
-        )}
+        ))}
         <div className="source-info">
           <span className="detail-meta">원래 이름: {source.originalName}</span>
           {source.url && <a href={source.url} target="_blank" rel="noopener noreferrer">공공데이터 ↗</a>}
@@ -84,6 +85,7 @@ function SourceBlock({ source }: { source: PlaceSource }) {
       <div className="source-heading">
         <strong>{sourceLabel(source)}</strong>
         {source.category && <span> · {source.category}</span>}
+        {source.foodType && <span> · 대표 음식: {source.foodType}</span>}
         {source.year && <span> · {source.year}년</span>}
       </div>
       <div className="source-info">
@@ -103,6 +105,7 @@ export default function PlaceDetail({
   onClose: () => void;
   presentation?: "bubble" | "inline";
 }) {
+  const isPickEligible = meetsPickReviewThresholds(place);
   const googleMapUrl = place.googlePlaceId
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} ${place.address}`)}&query_place_id=${encodeURIComponent(place.googlePlaceId)}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} ${place.address}`)}`;
@@ -119,7 +122,7 @@ export default function PlaceDetail({
 
         <div className="rating-panel" aria-label="플랫폼 평점">
           <RatingLine prefix="K Star" result={place.ratings?.kakao ?? null} />
-          <RatingLine prefix="G Star" result={place.ratings?.google ?? null} showCollectedDate />
+          <RatingLine prefix="G Star" result={place.ratings?.google ?? null} />
         </div>
 
         <div className="badges">
@@ -128,8 +131,19 @@ export default function PlaceDetail({
               {source.source === "michelin" ? awardText(source.award) : sourceLabel(source)}
             </span>
           ))}
-          {place.matdoriaPick?.selected && <span className="badge matdoria-pick">Matdoria&apos;s Pick</span>}
+          {isPickEligible && <span className="badge matdoria-pick">Matdoria&apos;s Pick</span>}
         </div>
+
+        {isPickEligible && (
+          <section className="pick-rationale" aria-label="Matdoria's Pick 리뷰 수 근거">
+            <strong>Matdoria&apos;s Pick · Review count 기준 충족</strong>
+            <ul>
+              <li>K Review count: {place.ratings?.kakao?.count?.toLocaleString("ko-KR")} (기준 ≥ {place.matdoriaPick?.thresholds.kakaoReviewCount})</li>
+              <li>G Review count: {place.ratings?.google?.count?.toLocaleString("ko-KR")} (기준 ≥ {place.matdoriaPick?.thresholds.googleUserRatingCount})</li>
+            </ul>
+            <p>두 플랫폼의 Review 수가 모두 기준 이상일 때 포함됩니다. Review 수가 없는 것은 낮은 품질을 뜻하지 않습니다.</p>
+          </section>
+        )}
 
         <div className="detail-sources">
           {place.sources.map((source, index) => (

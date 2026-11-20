@@ -4,7 +4,7 @@ export const CURATION_FILTERS = [
   {
     key: "matdoria_pick",
     label: "Matdoria's Pick",
-    description: "임시 기준 · 미쉐린과 서울미래유산 공통 등재",
+    description: "K/G Review 기준을 모두 충족한 인기 장소",
   },
 ] as const;
 
@@ -26,11 +26,11 @@ export const SOURCE_STATUS: Record<ListFilter, string> = {
   all: "",
   michelin: "미쉐린 데이터가 포함된 장소를 표시합니다.",
   seoul_heritage: "서울미래유산 데이터가 포함된 장소를 표시합니다.",
-  good_price: "원본 CSV는 확보했습니다. 카카오 장소 매칭 후 표시됩니다.",
-  model_restaurant: "공식 데이터 파일의 실제 다운로드와 장소 매칭을 확인 중입니다.",
+  good_price: "서울 외식업 1,503건을 정규화했습니다. 카카오 장소와 주소 검증된 항목만 표시합니다.",
+  model_restaurant: "공식 CSV 확보 후 정규화·카카오 주소 검증을 거쳐 표시합니다.",
   seoul_gourmet_100: "공식 목록과 재사용 조건을 확인한 뒤 표시합니다.",
-  hundred_store: "공식 목록과 데이터 제공 경로를 확인한 뒤 표시합니다.",
-  matdoria_pick: "미쉐린과 서울미래유산 양쪽에 모두 등재된 장소를 보여주는 임시 Pick입니다.",
+  hundred_store: "전국 백년가게 지정 목록 1,511건을 확보했습니다. Kakao 장소 매칭·검수 후 표시합니다.",
+  matdoria_pick: "K Review 50+ 및 G Review 250+ 기준을 모두 충족한 장소입니다. 데이터가 없는 것은 낮은 평가를 뜻하지 않습니다.",
 };
 
 export function matchesFilter(

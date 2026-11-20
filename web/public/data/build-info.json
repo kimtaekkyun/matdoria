@@ -1,0 +1,8 @@
+{
+  "buildTimestamp": "2026-11-20T13:03:29.946050Z",
+  "selectedPlaceCount": 91,
+  "reviewCountThresholds": {
+    "kakaoReviewCount": 50,
+    "googleUserRatingCount": 250
+  }
+}

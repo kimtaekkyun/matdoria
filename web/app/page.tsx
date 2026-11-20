@@ -4,9 +4,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, KeyboardEvent, PointerEvent, WheelEvent } from "react";
 import dynamic from "next/dynamic";
 import placesData from "../public/data/places.json";
+import buildInfo from "../public/data/build-info.json";
+import { meetsPickReviewThresholds } from "../lib/types";
 import type { Place } from "../lib/types";
 import { CURATION_FILTERS, SOURCE_FILTERS, SOURCE_STATUS, matchesFilter, type CurationFilter, type ListFilter, type SourceFilter } from "../lib/sources";
 import PlaceDetail from "../components/PlaceDetail";
+import TrustPanel from "../components/TrustPanel";
 import { nearestPanelMode, sheetTop, useMobileLayout, visibleInsets, type PanelMode } from "../lib/mobileLayout";
 
 // 지도는 브라우저에서만 동작하므로 SSR을 끈다.
@@ -21,9 +24,9 @@ const KAKAO_MAP_KEY = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY ?? "";
 const SORT_OPTIONS = [
   { key: "name", label: "이름순" },
   { key: "kakao_rating", label: "K Star 높은 순" },
-  { key: "kakao_count", label: "K 리뷰 많은 순" },
+  { key: "kakao_count", label: "K Review 수 많은 순" },
   { key: "google_rating", label: "G Star 높은 순" },
-  { key: "google_count", label: "G 평가 많은 순" },
+  { key: "google_count", label: "G Review 수 많은 순" },
 ] as const;
 type SortKey = (typeof SORT_OPTIONS)[number]["key"];
 type PanelDrag = { startY: number; startTop: number; lastTop: number; moved: boolean };
@@ -36,7 +39,7 @@ function ListRating({ label, rating, count }: { label: "K Star" | "G Star"; rati
       <span className="list-rating-label">{label}</span>
       <span className="list-rating-score">{rating === null ? "—" : rating.toFixed(1)}</span>
       <span className="rating-stars list-rating-stars" role="img" style={style} aria-label={rating === null ? `${label} 정보 없음` : `${label} ${rating.toFixed(1)}점`}>★★★★★</span>
-      <span className="list-rating-count">{rating === null || count === null ? "" : `(${count.toLocaleString("ko-KR")})`}</span>
+      <span className="list-rating-count">{count === null ? "" : `(${count.toLocaleString("ko-KR")})`}</span>
     </span>
   );
 }
@@ -46,7 +49,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [activeOptionId, setActiveOptionId] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<SortKey>("name");
+  const [sortBy, setSortBy] = useState<SortKey>("google_count");
   const [panelMode, setPanelMode] = useState<PanelMode>("split");
   const [isPanelDragging, setIsPanelDragging] = useState(false);
   const [sourceMenuOpen, setSourceMenuOpen] = useState(false);
@@ -62,7 +65,7 @@ export default function Home() {
     const q = query.trim().toLowerCase();
     const filtered = places.filter(
       (p) =>
-        matchesFilter(p.sources, filter, p.matdoriaPick?.selected === true) &&
+        matchesFilter(p.sources, filter, meetsPickReviewThresholds(p)) &&
         (q === "" || p.name.toLowerCase().includes(q) || p.address.includes(q)),
     );
     const metric = (place: Place): number | null => {
@@ -102,7 +105,7 @@ export default function Home() {
         key,
         key === "all"
           ? places.length
-          : places.filter((place) => matchesFilter(place.sources, key, place.matdoriaPick?.selected === true)).length,
+          : places.filter((place) => matchesFilter(place.sources, key, meetsPickReviewThresholds(place))).length,
       ]),
     ) as Record<SourceFilter, number>;
   }, []);
@@ -110,7 +113,7 @@ export default function Home() {
   const curationCounts = useMemo(() => Object.fromEntries(
     CURATION_FILTERS.map(({ key }) => [
       key,
-      places.filter((place) => matchesFilter(place.sources, key, place.matdoriaPick?.selected === true)).length,
+      places.filter((place) => matchesFilter(place.sources, key, meetsPickReviewThresholds(place))).length,
     ]),
   ) as Record<CurationFilter, number>, []);
   const activeFilterCount = filter === "matdoria_pick" ? curationCounts[filter] : sourceCounts[filter];
@@ -276,17 +279,21 @@ export default function Home() {
                 type="button"
                 className={`curation-card${filter === curation.key ? " is-active" : ""}`}
                 aria-pressed={filter === curation.key}
-                onClick={() => setFilter(curation.key)}
+                onClick={() => {
+                  setFilter(curation.key);
+                  setSortBy("google_count");
+                }}
               >
                 <span className="curation-mark" aria-hidden="true"><span>m</span></span>
                 <span className="curation-card-copy">
                   <strong>{curation.label}</strong>
-                  <span>{curation.description}</span>
+                  <span>{curation.key === "matdoria_pick" ? `K Review ≥ ${buildInfo.reviewCountThresholds.kakaoReviewCount} AND G Review ≥ ${buildInfo.reviewCountThresholds.googleUserRatingCount}` : curation.description}</span>
                 </span>
                 <span className="curation-count">{curationCounts[curation.key]}</span>
               </button>
             ))}
           </div>
+          <TrustPanel />
           <input
             className="search"
             aria-label="식당 이름 또는 주소 검색"
@@ -348,7 +355,9 @@ export default function Home() {
               {query.trim()
                 ? "검색 조건에 맞는 식당이 없습니다."
                 : activeFilterCount === 0
-                  ? SOURCE_STATUS[filter]
+                  ? filter === "matdoria_pick"
+                    ? `K Review ${buildInfo.reviewCountThresholds.kakaoReviewCount}개 이상 AND G Review ${buildInfo.reviewCountThresholds.googleUserRatingCount}개 이상을 모두 충족한 장소가 없습니다.`
+                    : SOURCE_STATUS[filter]
                   : "조건에 맞는 식당이 없습니다."}
             </div>
           ) : (
@@ -369,7 +378,7 @@ export default function Home() {
                     <span className="list-item-sources">
                       {[
                         ...p.sources.map((source) => SOURCE_FILTERS.find((f) => f.key === source.source)?.label),
-                        ...(p.matdoriaPick?.selected && filter !== "matdoria_pick" ? ["Matdoria's Pick"] : []),
+                        ...(meetsPickReviewThresholds(p) ? ["Matdoria's Pick"] : []),
                       ].filter(Boolean).join(" · ")}
                     </span>
                     <span className="list-item-address">{p.address}</span>

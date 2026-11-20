@@ -22,8 +22,11 @@ export type GoodPriceSource = {
   source: "good_price";
   label: string;
   category: string;
-  menuName: string;
-  menuPrice: number | null;
+  categoryGroup?: string;
+  menuItems?: { name: string; price: number | null }[];
+  /** Legacy fields retained for older exported snapshots. */
+  menuName?: string;
+  menuPrice?: number | null;
   url: string;
   originalName: string;
 };
@@ -32,6 +35,7 @@ export type PublicSelectionSource = {
   source: "model_restaurant" | "seoul_gourmet_100" | "hundred_store";
   label: string;
   category?: string;
+  foodType?: string;
   year?: number | null;
   url?: string;
   originalName: string;
@@ -42,7 +46,6 @@ export type PlaceSource = MichelinSource | HeritageSource | GoodPriceSource | Pu
 export type RatingSnapshot = {
   rating: number | null;
   count: number | null;
-  collectedAt: string | null;
 };
 
 export type PlaceRatings = {
@@ -52,9 +55,9 @@ export type PlaceRatings = {
 
 export type MatdoriaPick = {
   selected: boolean;
-  score?: number;
-  reasons: string[];
-  profileVersion?: string;
+  profileVersion: string;
+  reviewCounts: { kakaoReviewCount: number | null; googleUserRatingCount: number | null };
+  thresholds: { kakaoReviewCount: number; googleUserRatingCount: number };
 };
 
 export type Place = {
@@ -70,3 +73,7 @@ export type Place = {
   sources: PlaceSource[];
   matdoriaPick?: MatdoriaPick;
 };
+
+export function meetsPickReviewThresholds(place: Pick<Place, "matdoriaPick">): boolean {
+  return place.matdoriaPick?.selected === true;
+}

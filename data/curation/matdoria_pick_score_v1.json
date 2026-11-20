@@ -1,0 +1,65 @@
+{
+  "profileId": "matdoria_pick",
+  "profileVersion": "2.0.0",
+  "status": "draft",
+  "description": "Popularity-only Pick qualification from platform review counts. Star averages do not enter the score. Existing expert, public-designation, and value signals are diagnostic only. Platform data licensing concerns remain unresolved.",
+  "selection": {
+    "dimensions": ["popularity"],
+    "minimumScore": 1,
+    "minimumScoreMeaning": "Binary qualification: both configured review-count thresholds must be met. A complete but below-threshold pair has score 0; an incomplete pair is unknown, not zero."
+  },
+  "dimensions": {
+    "popularity": {
+      "label": "대중 관심도 (리뷰 수)",
+      "type": "review_count_thresholds",
+      "source": "platform_review_counts",
+      "thresholds": {
+        "kakao_review_count": 50,
+        "google_user_rating_count": 250
+      },
+      "requireAll": true,
+      "meaning": "Binary Pick qualification requires Kakao review_count >= 50 AND Google user_rating_count >= 250. Average star ratings are excluded."
+    },
+    "expert_recognition": {
+      "label": "전문가 선정 (진단 전용)",
+      "source": "michelin",
+      "scoreField": "src_group",
+      "weights": {
+        "3 Stars": 10.0,
+        "2 Stars": 8.0,
+        "1 Star": 5.0,
+        "Bib Gourmand": 3.0,
+        "Selected Restaurants": 1.0
+      },
+      "maxPerSource": true,
+      "selectionRole": "diagnostic_only",
+      "meaning": "Retained as an independent diagnostic dimension; never affects Pick selection or popularity score."
+    },
+    "public_designation": {
+      "label": "공공·지역 지정 (진단 전용)",
+      "source": "seoul_heritage",
+      "scoreField": "src_group",
+      "weights": {
+        "음식점": 2.0
+      },
+      "maxPerSource": true,
+      "selectionRole": "diagnostic_only",
+      "meaning": "Direct restaurant designation only; retained for diagnostics and never affects Pick selection. Heritage streets/areas do not transfer designation to restaurants."
+    },
+    "value": {
+      "label": "가성비 관련 지정 (진단 전용)",
+      "source": "good_price",
+      "scoreField": "designation",
+      "designationValue": "good_price",
+      "weight": 1.0,
+      "maxPerSource": true,
+      "selectionRole": "diagnostic_only",
+      "meaning": "Good Price Store designation is retained for diagnostics only; not a price comparison, taste score, or Pick input."
+    }
+  },
+  "excludedSignals": {
+    "platform_rating_averages": "Kakao/Google star averages are never read by the score engine and do not enter Pick selection.",
+    "missing_review_counts": "Unknown if either required count is unavailable or ambiguous. Missing data never becomes zero or a negative contribution.",
+    "licensing": "Existing Kakao/Google snapshot reuse concerns remain unresolved; this profile does not authorize refresh or expanded use."
+  }
+}

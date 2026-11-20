@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matdoria 모바일 UI 리디자인 · Before / After</title>
+  <style>
+    :root { color-scheme: light; --ink:#20242c; --muted:#697382; --line:#e4e8ed; --surface:#fff; --canvas:#f4f6f8; --accent:#d94d3c; --ok:#177245; --warn:#885900; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--canvas); color:var(--ink); font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif; }
+    main { width:min(1100px,calc(100% - 32px)); margin:32px auto 72px; }
+    header { padding:30px; border:1px solid var(--line); border-radius:20px; background:var(--surface); box-shadow:0 10px 32px #18202d12; }
+    h1 { margin:0 0 8px; font-size:clamp(25px,4vw,38px); line-height:1.2; letter-spacing:-.04em; }
+    h2 { margin:34px 0 12px; font-size:23px; letter-spacing:-.025em; }
+    h3 { margin:0 0 8px; font-size:17px; }
+    p { margin:8px 0; }
+    .muted { color:var(--muted); }
+    .lead { max-width:780px; font-size:17px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+    .pill { padding:5px 10px; border:1px solid var(--line); border-radius:999px; background:#fff; color:#495362; font-size:12px; font-weight:650; }
+    .pill.ok { border-color:#b7dfc8; background:#f1fbf5; color:var(--ok); }
+    .pill.warn { border-color:#efd79b; background:#fff9e8; color:var(--warn); }
+    .callout { margin:18px 0; padding:14px 16px; border-left:4px solid var(--accent); border-radius:8px; background:#fff; }
+    .warning { border-left-color:#c48a13; background:#fffaf0; }
+    .pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    figure { min-width:0; margin:0; padding:12px; border:1px solid var(--line); border-radius:14px; background:#fff; }
+    figure img { display:block; width:100%; height:auto; border:1px solid #e8ebef; border-radius:9px; background:#e9eef1; }
+    figcaption { margin-top:9px; color:var(--muted); font-size:12px; }
+    .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .card { padding:16px; border:1px solid var(--line); border-radius:14px; background:#fff; }
+    .card strong { display:block; margin-bottom:4px; }
+    table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+    th,td { padding:11px 13px; border-bottom:1px solid var(--line); text-align:left; }
+    th { background:#f8f9fb; font-size:13px; }
+    td { font-variant-numeric:tabular-nums; }
+    tr:last-child td { border-bottom:0; }
+    code { padding:2px 5px; border-radius:5px; background:#f0f2f5; font-size:.92em; }
+    ul { padding-left:22px; }
+    li { margin:5px 0; }
+    .small { font-size:13px; }
+    @media (max-width:700px) { main { width:calc(100% - 20px); margin-top:10px; } header { padding:20px; } .pair,.grid3 { grid-template-columns:1fr; } table { font-size:13px; } th,td { padding:8px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="muted">MATDORIA · MOBILE PRODUCT REVIEW</p>
+    <h1>모바일 UI 리디자인</h1>
+    <p class="lead">검색과 주요 메뉴를 지도 위쪽의 floating overlay로 옮기고, 지도는 화면 전체에 이어지게 했습니다. 리스트와 선택 상세는 아래쪽 sheet가 겹쳐 표시합니다.</p>
+    <p class="muted">이 패턴은 보통 <strong>full-bleed map with floating overlay controls</strong> 또는 <strong>floating search bar over a full-screen map</strong>이라고 부릅니다.</p>
+    <div class="chips">
+      <span class="pill ok">기본 split · Pick 우선</span>
+      <span class="pill ok">지도 캔버스 전체 높이 유지</span>
+      <span class="pill ok">출처 메뉴 · 목록/상세 하단 sheet</span>
+      <span class="pill ok">localhost:3000에서 실제 지도 타일 확인</span>
+    </div>
+  </header>
+
+  <h2>Before / After · 375×667 · 기본 split</h2>
+  <div class="pair">
+    <figure>
+      <img src="mobile-ui-report-assets/375x667-before-split.png" alt="변경 전 375x667 화면: 지도 위쪽, 검색과 필터가 아래 사이드 패널에 위치">
+      <figcaption><strong>Before.</strong> 지도 높이가 상단 영역에 제한되고, 검색·큐레이션·출처·정렬이 패널 헤더에 쌓여 기본 리스트 공간이 작았습니다.</figcaption>
+    </figure>
+    <figure>
+      <img src="mobile-ui-report-assets/375x667-after-split.png" alt="변경 후 375x667 화면: 지도 위에 floating 검색과 메뉴, 하단에 목록 sheet">
+      <figcaption><strong>After.</strong> 화면 전체가 지도 캔버스이고, Matdoria’s Pick·검색·출처 메뉴는 지도 위에 떠 있습니다. 아래 sheet에는 정렬과 장소 목록이 표시됩니다.</figcaption>
+    </figure>
+  </div>
+
+  <div class="callout">
+    <strong>지도와 스크린샷</strong>
+    <p>격리 검증 서버 <code>localhost:3100</code>에서는 Kakao 키 도메인 제한으로 타일이 로드되지 않았지만, 이후 프로젝트 개발 서버를 재시작하고 허용 도메인인 <code>localhost:3000</code>에서 After 스크린샷을 다시 캡처했습니다. 최종 After 이미지에는 실제 지도 타일과 마커가 표시됩니다. E2E도 허용 도메인인 localhost:3000에서 재실행해 full-viewport 지도 캔버스와 패널/검색/터치 동작을 검증했습니다. 실 마커 터치와 split/peek 중 선택 핀의 가시 위치도 `npm run test:map`으로 자동 확인했습니다. 스크린샷 왼쪽 아래의 검은 N은 Next.js 개발 표시이며 프로덕션 UI에는 없습니다.</p>
+  </div>
+
+  <h2>Before / After · 장소 상세</h2>
+  <div class="pair">
+    <figure>
+      <img src="mobile-ui-report-assets/375x667-before-detail.png" alt="변경 전 장소 상세 화면">
+      <figcaption><strong>Before.</strong> 장소 상세가 아래 패널의 콘텐츠 영역을 대체합니다.</figcaption>
+    </figure>
+    <figure>
+      <img src="mobile-ui-report-assets/375x667-after-detail.png" alt="변경 후 장소 상세 화면: 상단 검색 메뉴 유지, 상세는 하단 sheet">
+      <figcaption><strong>After.</strong> 상단 검색/큐레이션 컨트롤은 계속 접근 가능하고, 선택한 장소의 상세는 하단 sheet에 나타납니다. 닫으면 목록 스크롤 위치를 복원합니다.</figcaption>
+    </figure>
+  </div>
+
+  <h2>짧은 화면과 큰 화면</h2>
+  <div class="grid3">
+    <figure><img src="mobile-ui-report-assets/320x568-after-split.png" alt="320x568 기본 split"><figcaption>320×568 · 좁고 짧은 화면</figcaption></figure>
+    <figure><img src="mobile-ui-report-assets/390x844-after-split.png" alt="390x844 기본 split"><figcaption>390×844 · 일반 스마트폰</figcaption></figure>
+    <figure><img src="mobile-ui-report-assets/430x932-after-split.png" alt="430x932 기본 split"><figcaption>430×932 · 큰 스마트폰</figcaption></figure>
+  </div>
+
+  <h2>레이아웃 측정</h2>
+  <p class="muted small">Chrome DevTools Protocol 모바일 viewport에서 측정했습니다. 높이는 CSS pixel 기준이며 실기기 safe-area/브라우저 툴바는 emulation하지 않았습니다.</p>
+  <table>
+    <thead><tr><th>Viewport</th><th>Before: sheet / list</th><th>After: sheet / list</th><th>Header</th><th>Map canvas</th></tr></thead>
+    <tbody>
+      <tr><td>320×568</td><td>273 / 15px</td><td>284 / 202px</td><td>y=8–120</td><td>320×568</td></tr>
+      <tr><td>375×667</td><td>320 / 18px</td><td>334 / 252px</td><td>y=8–120</td><td>375×667</td></tr>
+      <tr><td>390×844</td><td>405 / 110px</td><td>422 / 340px</td><td>y=8–120</td><td>390×844</td></tr>
+      <tr><td>430×932</td><td>447 / 156px</td><td>466 / 384px</td><td>y=8–120</td><td>430×932</td></tr>
+    </tbody>
+  </table>
+  <p class="small">320×568 split에서 출처 메뉴는 sheet handle과 최소 12px 간격을 두도록 제한되며, 메뉴 내부에서 스크롤됩니다.</p>
+
+  <h2>구현한 동작</h2>
+  <div class="grid3">
+    <div class="card"><strong>Full-bleed map</strong><span class="muted">패널 상태가 바뀌어도 지도 element 크기는 viewport 전체를 유지합니다. 상단 컨트롤과 하단 sheet만 지도 위에 겹칩니다.</span></div>
+    <div class="card"><strong>Floating controls</strong><span class="muted">Pick과 검색을 상단 glass surface에 두고, 출처 선택은 popover 메뉴로 분리했습니다. 320px split/expanded 모두 메뉴가 sheet handle을 가리지 않고, 패널을 움직이면 메뉴가 닫힙니다.</span></div>
+    <div class="card"><strong>Bottom sheet</strong><span class="muted">Split·peek·expanded를 유지하고, peek에서 선택한 장소는 split 상세로 열립니다. 상세를 닫아도 목록 스크롤 위치가 유지됩니다.</span></div>
+  </div>
+
+  <h2>테스트 결과</h2>
+  <ul>
+    <li><code>npm run lint</code>: 통과</li>
+    <li><code>npm run test:unit</code>: 6개 통과</li>
+    <li><code>npx tsc --noEmit -p .</code>: 통과</li>
+    <li><code>npm run test:e2e</code>: 76개 desktop/mobile geometry·interaction assertion 통과</li>
+    <li><code>npm run test:map</code>: 11개 통과. localhost:3000에서 실제 Kakao 마커 터치, 상세 이름 동기화, split/peek 구간 내 선택 핀 가시성을 확인했습니다.</li>
+    <li>Touch emulation suite: 49개 통과. Split↔peek↔expanded, source popover와 handle의 hit-test/drag, 320px split/expanded에서 메뉴가 handle을 가리지 않는지와 메뉴 내부 스크롤을 포함합니다. 320px expanded에서 발견한 popover/handle 겹침도 수정 후 재검증했습니다.</li>
+    <li>Desktop regression: 900×800, 1024×768, 1280×800, 1440×900 세 상태의 pixel diff max channel 3/255.</li>
+  </ul>
+
+  <h2>검증 한계와 PM 판단</h2>
+  <ul>
+    <li><strong>의도 부합:</strong> 상단 floating search/메뉴, 연속되는 full-screen 지도, 아래 목록/상세 sheet 구조가 구현됐고 4개 모바일 viewport에서 geometry와 조작을 검증했습니다. 기본 split에서 리스트 높이는 기존 15–156px에서 202–384px로 늘었습니다.</li>
+    <li><strong>실제 지도:</strong> stale <code>.next</code> 청크 404를 내던 port 3000 개발 서버를 재시작한 뒤, 허용 도메인인 <code>localhost:3000</code>에서 지도 타일과 마커가 After 캡처에 렌더링되는 것을 확인했습니다. projection과 <code>setBounds</code> 서명도 공식 Kakao 문서와 대조했습니다. 실제 마커 탭과 선택 핀 가시성은 `test:map`으로 localhost:3000에서 자동 확인했습니다.</li>
+    <li><strong>실기기:</strong> iOS safe-area, 모바일 브라우저 주소창 변화, 저사양 Android에서의 backdrop blur 비용은 실제 기기에서 확인해야 합니다.</li>
+  </ul>
+  <p class="muted small">관련 소스: <code>web/app/page.tsx</code>, <code>web/app/globals.css</code>, <code>web/lib/mobileLayout.ts</code>, <code>web/components/KakaoMap.tsx</code>, <code>web/scripts/mobile-e2e.mjs</code>.</p>
+</main>
+</body>
+</html>
