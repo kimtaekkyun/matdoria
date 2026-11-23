@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from export_places import pick_entry
+from export_places import pick_entry, source_entry
 
 
 PROFILE = {
@@ -44,6 +44,24 @@ class ExportPickTests(unittest.TestCase):
         self.assertFalse(result["selected"])
         self.assertIsNone(result["reviewCounts"]["kakaoReviewCount"])
         self.assertIsNone(result["reviewCounts"]["googleUserRatingCount"])
+
+    def test_exports_administrative_license_status_without_collection_timestamps(self):
+        result = source_entry({
+            "source": "restaurant_license",
+            "resolved_current_status": "영업/정상",
+            "업태구분명": "한식",
+            "license_record_count": "2",
+            "source_url": "https://www.data.go.kr/data/15071760/fileData.do",
+            "사업장명": "우래옥 본점",
+            "collected_at": "internal-only",
+            "source_snapshot": "internal-only",
+        })
+        self.assertEqual(result["source"], "restaurant_license")
+        self.assertEqual(result["status"], "영업/정상")
+        self.assertEqual(result["businessType"], "한식")
+        self.assertEqual(result["licenseRecordCount"], 2)
+        self.assertNotIn("collectedAt", result)
+        self.assertNotIn("sourceSnapshot", result)
 
 
 if __name__ == "__main__":

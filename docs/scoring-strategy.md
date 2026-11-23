@@ -94,15 +94,16 @@ profile_score(place) = Σ weight(signal) × transform(signal_value)
 | 후보 | 확인 결과 | 점수 입력 적합성 | 다음 조치 |
 |---|---|---|---|
 | Michelin | 기존 사용 중. matdoria는 MIT 라이선스의 커뮤니티 생성 CSV를 가져온다. 공식 미쉐린 API가 아님. | 조건부 가능: 등급 신호로 사용하되 데이터셋 기준일·공식 가이드 교차 확인 필요 | 기존 수집 유지, 업스트림 버전과 데이터 기준일을 기록 |
-| Kakao Local API / Kakao Map 내부 리뷰 API | Local API에는 별점/리뷰 수가 없음. Map 웹앱의 비공개 내부 리뷰 API에서 집계값을 일괄 수집함. | Kakao 243개 중 236개 rating snapshot을 `places.json`에 공개 표시, 나머지는 null. 사용 허가/안정성은 미확인 | 사용자 결정으로 현재 snapshot을 공개 사용 중. 허용성은 미검증이며 위험 미해결 (D-032, D-039). Matdoria's Pick score에는 미사용 |
-| Google Places API (New) | 공식 필드 `rating`, `userRatingCount`를 조회했고 high source row 253건에 Place ID/평점 결과가 있음. | Google Place ID가 모호성 없이 연결된 222개 장소의 snapshot을 `places.json`에 공개 표시. 나머지 21곳은 far/ID 충돌로 제외. Google snapshot 저장·공개 조건은 검증되지 않았고 위험 미해결 | 사용자 결정으로 정적 snapshot을 공개 사용 중. 수집은 로컬 batch이며 웹앱 runtime 호출 없음. Google API 키는 snapshot 재수집 때만 필요 (D-032, D-039). Matdoria's Pick score에는 미사용 |
+| Kakao Local API / Kakao Map 내부 리뷰 API | Local API에는 별점/리뷰 수가 없음. 기존 Kakao review snapshot은 243행이며 222개 canonical 장소에서 count가 연결됨. snapshot 수집 경로는 비공식 내부 API임. | Draft Pick은 Kakao Review count ≥50만 사용하며 별점 평균은 반영하지 않음. | 재수집은 하지 않았다. 내부 API의 수집·재사용 권한은 미해결이며 public 운영 전 확인 필요 (D-032, D-042) |
+| Google Places API (New) | 기존 수집 파일에는 253 source row가 있고 211개 canonical 장소에 unambiguous count snapshot이 연결됨. | Draft Pick은 Google userRatingCount ≥250을 Kakao 기준과 AND 조건으로 사용함. 별점 평균은 반영하지 않음. | 새 Google API 호출/수집은 하지 않았다. Google 콘텐츠 저장·파생·Kakao 지도와의 결합 조건은 미해결이며 public 배포 전 확인 필요 (D-032, D-042) |
 | 서울미래유산 | 기존 수집 스크립트와 CSV가 있음. 식음 관련 지정/후보를 포함하나 항목 유형을 구분해야 함. | 가능: 지역·역사성 신호. 맛 평가로 해석하지 않음 | 개별 식당/골목/후보 분류와 개업연도 근거 검수 |
 | 모범음식점 (공공데이터 ID 15076765) | 공공데이터포털 상세 페이지 확인. CSV, 전국 자치단체 자료, 업소명·주소·업태·주된 음식 등 기본정보, 무료·이용허락범위 제한 없음, 2025-11-27 수정 스냅샷과 “2일 전 기준” 갱신 안내를 확인. 제공 파일 URL은 LocalData이며 현재 조사 환경에서 다운로드는 HTTP 403으로 실패. | 조건부 가능: 공공 지정/위생 성격 보조 신호이지 맛 평점이 아님 | 브라우저 또는 공식 배포 경로에서 실제 파일 다운로드, 서울 행 수·컬럼·식당 조인률 검증 |
-| 착한가격업소 (공공데이터 ID 15172358) | 공식 CSV를 실제 다운로드·파싱함. 2026-09-30 스냅샷, 12,935행·17컬럼. 서울 2,155행 중 외식업 1,503행. `prepare_public_sources.py`로 정규화하고 Kakao 주소 검증을 통과한 1,002건을 Matdoria에 연결함. 미확정 501건은 `match_public_review.csv`에 분리. | 가능: 가성비 리스트/필터. 맛 평가가 아님 | 추가 매칭은 검수 CSV에서 수동 확인 후 반영. 출처 지정은 Matdoria's Pick 맛 점수에 자동 반영하지 않음 |
+| 착한가격업소 (공공데이터 ID 15172358) | 공식 CSV를 실제 다운로드·파싱함. 2026-09-30 스냅샷, 12,935행·17컬럼. 서울 2,155행 중 외식업 1,503행. `prepare_public_sources.py`로 정규화하고 Kakao 주소 검증을 통과한 1,002건을 Matdoria에 연결함. 미확정 501건은 `match_public_review.csv`에 분리. | 가능: 가성비 리스트/필터. 맛 평가가 아님 | 추가 매칭은 검수 CSV에서 수동 확인 후 반영. 출처 지정은 Matdoria's Pick taste criteria에 반영하지 않음 |
+| 서울 일반음식점 인허가 (Data.go.kr 15071760 / Seoul OA-16094) | 서울 540,008행 2026-11-22 snapshot; KOGL Type 1. `match_seoul_restaurant_licenses.py`가 업소명과 도로명주소 exact join으로 681개 장소에 행정상 status를 연결함 (663 active, 18 closed). | 운영상태/허가기간 분석용; 맛 점수나 Pick 입력이 아님 | 이 자료는 2–3일 지연될 수 있고 인허가일은 영업 연속기간을 증명하지 않는다. 16,722 후보는 review CSV에 보존 |
 | 블루리본 서베이 | 공식 도메인은 자동 조사 요청에서 HTTP 403을 반환. 이 조사만으로 공개 목록 전체 또는 공식 API 부재를 확정할 수는 없음. 공개적으로 재사용 가능한 대량 데이터/라이선스는 확인되지 않음. 과거 요구사항은 수집 제외였음. | 현재 사용 불가 판정(권리·수집 경로 미확인). 개인 열람·수동 참고와 대량 수집/재배포는 구분 | 재검토 후보. 공식 문의/이용약관에서 데이터 라이선스나 제휴/API 확인 전 자동 수집 금지 |
-| 서울미식 100선 | 이번 조사에서 안정적인 공식 데이터/API 또는 명확한 대량 재사용 조건을 확인하지 못함. 목록이 공개된 웹페이지가 있더라도 재배포 권리를 의미하지 않음. | 미확인; 지금은 자동 수집/점수 입력 불가 | 서울시·서울관광재단 공식 페이지와 저작권/다운로드 조건을 수동 확인 |
+| 서울미식 100선 | 공식 2026 목록 페이지 및 PDF catalogue link를 확인했으나 현재 에디션의 open reuse permission은 없음. Taste of Seoul 약관은 사전 승인 없이 비상업적 복사·재배포도 금지함. | 수집/점수 입력 보류 | Seoul Tourism Organization의 서면 허가 또는 재사용을 허용하는 dataset 필요 (`docs/seoul_gourmet_100_audit.md`) |
 | 네이버·카카오·식신·다이닝코드 등 사용자 평점 | 이번 프로젝트에서 사용할 수 있는 허가된 일괄 API/데이터 라이선스를 확인하지 못함. Kakao Local API는 평점을 제공하지 않음. | 현재 점수 입력 불가. 웹페이지 스크래핑 금지 | 공식 API/제휴와 재사용 허가가 확인될 때만 재평가 |
-| 백년가게·서울 오래가게 | 이번 조사에서 공식 공개 데이터의 구체적 다운로드/API와 현재 필드를 확인하지 못함. | 업력·상징성 신호로는 유용할 수 있으나, 수집 가능성 미확인 | 공공데이터포털/운영기관 공식 목록을 다음 조사 대상으로 확인 |
+| 백년가게 | SBDC Data.go.kr 15132695, CSV 1,511행, 이용허락범위 제한 없음; 업체명·주소는 있지만 음식 업종/영업기간 필드는 없음. | 전국 raw signal을 확보했지만 미매칭이며 Pick 미사용 | 음식 업종 분류와 주소 검수를 거쳐 별도 리스트로 연결 검토 |
 
 ### 확인한 공식 링크
 
@@ -113,6 +114,8 @@ profile_score(place) = Σ weight(signal) × transform(signal_value)
 - [행정안전부 착한가격업소 등록현황 (15172358)](https://www.data.go.kr/data/15172358/fileData.do)
 - [블루리본 서베이](https://www.bluer.co.kr/) — 자동 조사 요청은 403; 접근 불가만으로 서비스/자료 부재를 뜻하지 않음
 - [Michelin community dataset](https://github.com/ngshiheng/michelin-my-maps)
+- [서울 일반음식점 인허가 Data.go.kr 15071760](https://www.data.go.kr/data/15071760/fileData.do)
+- [서울미식 100선 source/reuse audit](seoul_gourmet_100_audit.md)
 
 ## 6. 첫 구현 범위 및 현재 상태
 

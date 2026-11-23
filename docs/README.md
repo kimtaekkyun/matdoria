@@ -14,7 +14,7 @@
 | [rating-api-experiment.md](rating-api-experiment.md) | Kakao 내부 평점 API 및 Google Places 실험 결과 |
 | [kakao-rating-api-walkthrough.html](kakao-rating-api-walkthrough.html) | Kakao 내부 평점 API 조사·재현 명령을 따라하는 HTML 가이드 |
 
-## 현재 상태 (2026-11-20)
+## 현재 상태 (2026-11-24)
 
 - 웹앱: 장소 1,229곳 (미쉐린 168, 서울미래유산 63, 착한가격업소 1,002). 모범음식점은 원본 미확보로 0건. 로컬(localhost:3000)에서 동작 확인.
 - 미쉐린 매칭: high 174/180. 나머지 6곳은 보류 (D-026). 음식점이 아닌 Kakao 카테고리로 이름 매칭된 서울미래유산 16건은 수동 확인 전까지 medium으로 내려 웹 데이터에서 제외했습니다 (D-040).
