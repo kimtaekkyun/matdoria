@@ -10,6 +10,7 @@
 | [pipeline.md](pipeline.md) | 수집, 매칭, 점수화, export 절차, 배포 |
 | [scoring-strategy.md](scoring-strategy.md) | DB 구조, 점수 전략, 외부 데이터 소스 실현 가능성 조사 |
 | [score_review.ipynb](../notebooks/score_review.ipynb) | 로컬 score snapshot 커버리지·임계값 민감도·선정 근거 분석 |
+| [seoul_gourmet_100_audit.md](seoul_gourmet_100_audit.md) | 서울미식 100선 공식 출처와 재사용 조건 조사 결과 |
 | [rating-api-experiment.md](rating-api-experiment.md) | Kakao 내부 평점 API 및 Google Places 실험 결과 |
 | [kakao-rating-api-walkthrough.html](kakao-rating-api-walkthrough.html) | Kakao 내부 평점 API 조사·재현 명령을 따라하는 HTML 가이드 |
 
