@@ -67,14 +67,15 @@
 - 용도: 맛 점수가 아닌 공공 지정/위생 성격의 보조 신호
 - 서울 자치구별 CSV, 허가번호 등 실제 컬럼, 전국 파일 서울 필터는 원본 확보 후 검증 필요
 
+### 6. 서울 일반음식점 인허가 (서울 열린데이터광장 OA-16094)
+
+- 공식 카탈로그: 공공데이터포털 [15071760](https://www.data.go.kr/data/15071760/fileData.do)에서 서울 열린데이터광장 [OA-16094](https://data.seoul.go.kr/dataList/OA-16094/S/1/datasetView.do)로 연결
+- 라이선스: 공공저작물 제1유형(출처표시); 서울 페이지는 이용허락범위 제한 없음. 최신 값은 약 2~3일 지연됨
+- 2026-11-22 snapshot: 540,008행, 영업/정상 120,077 · 폐업 419,931. 원본 46열·CP949는 `data/raw/seoul_restaurant_licenses/`에 git 제외로 보관하고, 분석 필드는 24열 gzip `data/processed/seoul_restaurant_licenses.csv.gz`로 보존
+- 상호와 정규화 도로명주소가 정확히 일치한 681개 canonical 장소에만 상태 정보를 연결: 663 영업/정상, 18 폐업. 상호나 주소만으로 찾은 16,722 후보는 검수 파일에 분리. 인허가일은 현재 인허가 기록의 날짜이지 연속 운영기간의 증명이 아님
+- 수집/정규화: `python scripts/fetch_seoul_restaurant_licenses.py`; 오프라인 매칭: `python scripts/match_seoul_restaurant_licenses.py`. 상태는 표시 정보일 뿐 Matdoria's Pick 기준에는 반영하지 않음. 자세한 내용은 [seoul_restaurant_licenses_audit.md](seoul_restaurant_licenses_audit.md)
+
 ## 보류
-
-### 6. 일반음식점 인허가 (지방행정 인허가 개방데이터)
-
-- 용도: 개업 연차의 하한 추정, 폐업 필터
-- 한계: 영업자 변경이나 재인허가 시 인허가일이 바뀜. 오래된 인허가일은 신뢰도가 높음
-- 필요 작업: 서울 파일 구조, 관리번호 필드, 개업연도 신뢰도 검증
-- 상태: 서울미래유산 개업연도 확보 후 보조 지표로 검토
 
 ### 7. 소상공인 상가(상권)정보
 
@@ -87,6 +88,15 @@
 - 카카오 로컬 API: 별점·리뷰 수 필드 없음. Kakao Map의 undocumented 내부 리뷰 API를 배치 수집해 243개 장소 중 236개 평점 스냅샷 확보, 7곳은 평점 없음. 원본 결과는 `data/processed/kakao_ratings.csv`, export 결과는 공개 `places.json`에 저장. 사용자 결정에 따라 공개 표시 중이나 내부 API의 공식 허가/안정성은 확인되지 않았고 위험은 미해결 (D-032, D-039). 조사 절차는 [kakao-rating-api-walkthrough.html](kakao-rating-api-walkthrough.html).
 - Google Places API (New): high 매칭 253개 source row에 Google Place ID가 있고, 251개에 평점 스냅샷이 있음. 238건은 source 좌표 100m 이내, 15건은 `far`. 통합 장소에 모호성 없이 연결된 222개 Google 스냅샷만 공개 `places.json`에 포함하며, 런타임에는 API를 호출하지 않음. `data/raw/google/ratings.csv`는 Git 추적 중이다. 사용자 결정에 따른 공개 사용이며 Google 콘텐츠 저장·공개 정책 적합성은 검증되지 않았고 위험은 미해결. 다음 snapshot 수집 시에만 Google API 키가 필요하며 Vercel 런타임 키는 불필요 (D-032, D-039).
 - 네이버·카카오/식신 등 사용자 평점: matdoria에서 사용할 수 있는 허가된 일괄 API·데이터 라이선스를 확인하지 못함. 비공식 페이지 스크래핑은 하지 않음
+
+## 수집했지만 앱에 연결하지 않은 데이터
+
+### 서울 광진구 음식점 위생등급
+
+- 공식 Data.go.kr [15112215](https://www.data.go.kr/data/15112215/fileData.do), 이용허락범위 제한 없음. 2025-12-31 snapshot / 2026-01-20 portal update.
+- 원본 1,008,200개 record slot 중 1,008,009개는 전체 빈 row placeholder였고, 유효한 업소 레코드는 191개였습니다. 정규화 파일은 `data/processed/gwangjin_hygiene.csv`; 다운로드 스냅샷은 `data/raw/gwangjin_hygiene/` 아래에 있습니다.
+- 등급 표기(매우우수/우수/좋음)는 2026-03-16 단일 `적합` 기준 변경 전 데이터입니다. 현재 장소와 exact name/address로 검증된 매치는 없으며, 한 주소 일치 후보도 업소명이 달라 거부했습니다. 웹앱·Pick에 연결하지 않습니다.
+- 전국 MFDS 위생등급 API [15060883](https://www.data.go.kr/data/15060883/openapi.do)는 별도 Data.go.kr service key와 활용신청이 필요해 이번에는 호출하지 않았습니다. 상세는 [seoul_restaurant_licenses_audit.md](seoul_restaurant_licenses_audit.md) 참조.
 
 ## 추가 조사 대상 (현재 자동 수집하지 않음)
 
@@ -138,3 +148,11 @@ python scripts/export_places.py
 - 원본: `data/raw/hundred_store/2026-11-20/hundred_stores_20260820.csv` (raw는 git 제외); 정규화: `data/processed/hundred_stores.csv` (1,511행, 원본 필드 보존 + source URL/snapshot/수집 시각).
 - 재실행: `python scripts/fetch_hundred_stores.py`; 테스트: `python -m unittest discover -s tests -p 'test_hundred_stores.py' -v`.
 - 이 목록은 전국 업소이며 음식점/영업기간 필드가 없습니다. 현재 Kakao 장소 매칭과 Pick 점수에는 아직 넣지 않았고, 추후 분류·매칭 검수 후 별도 지표로 검토합니다. 상세 기록은 [public-data-audit.md](public-data-audit.md) 참조.
+
+## 새로 수집한 공개 데이터: 서울 일반음식점 인허가 정보 (2026-11-23)
+
+- 공식 출처: Data.go.kr [15071760](https://www.data.go.kr/data/15071760/fileData.do) → 서울 열린데이터광장 [OA-16094](https://data.seoul.go.kr/dataList/OA-16094/S/1/datasetView.do). 공공저작물 제1유형(출처표시), CSV export, 일일 갱신, 약 2~3일 지연.
+- raw snapshot: `data/raw/seoul_restaurant_licenses/2026-11-23/` (git 제외), source 기준일 2026-11-22. 정규화: `data/processed/seoul_restaurant_licenses.csv.gz` 540,008행 × 24 분석 열. 전체 raw는 46열로 로컬 보존.
+- 상태 분포: 폐업 419,931, 영업/정상 120,077. 인허가일은 현재 인허가 기록의 시작이지 같은 업소가 같은 장소에서 연속 운영된 기간을 증명하지 않습니다.
+- canonical 목록과 업소명+도로명주소가 정확히 일치한 681곳(702 인허가 기록)을 앱 상세의 영업 상태 정보로 연결했습니다: 영업/정상 663, 폐업 18. 16,722 후보는 별도 검수 파일에 보존하고, 522,584 무후보 원본 행은 gzip 원본/정규화 입력에 유지합니다. 이 상태 신호는 Pick 자격·점수에 영향 주지 않습니다.
+- 재수집/정규화: `python scripts/fetch_seoul_restaurant_licenses.py`; 매칭: `python scripts/match_seoul_restaurant_licenses.py`. 상세 분석은 [seoul_restaurant_licenses_audit.md](seoul_restaurant_licenses_audit.md)를 참조합니다.

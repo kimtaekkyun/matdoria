@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import hashlib
 import json
 import os
@@ -36,6 +37,7 @@ PICK_CONFIG = ROOT / "data" / "curation" / "matdoria_pick_score_v1.json"
 GOOGLE_RATINGS = ROOT / "data" / "raw" / "google" / "ratings.csv"
 KAKAO_RATINGS = ROOT / "data" / "processed" / "kakao_ratings.csv"
 PUBLIC_MATCHES = ROOT / "data" / "processed" / "public_sources_matched.csv"
+LICENSE_MATCHES = ROOT / "data" / "processed" / "seoul_restaurant_licenses_matched.csv"
 SCORE_OUTPUT_DIR = ROOT / "data" / "processed" / "matdoria_pick_scores"
 BUILD_INFO = ROOT / "web" / "public" / "data" / "build-info.json"
 BUILD_HISTORY = ROOT / "data" / "processed" / "build_history.jsonl"
@@ -81,6 +83,17 @@ def source_entry(row: dict) -> dict:
             "menuItems": menu_items,
             "url": row.get("source_url", ""),
             "originalName": row["name"],
+        }
+
+    if source == "restaurant_license":
+        return {
+            "source": source,
+            "label": "서울 일반음식점 인허가",
+            "status": row.get("resolved_current_status", ""),
+            "businessType": row.get("업태구분명", ""),
+            "licenseRecordCount": int(row["license_record_count"]) if row.get("license_record_count", "").isdigit() else 1,
+            "url": row.get("source_url", "https://www.data.go.kr/data/15071760/fileData.do"),
+            "originalName": row.get("사업장명", row.get("canonical_place_name", "")),
         }
 
     if source == "model_restaurant":
@@ -155,19 +168,40 @@ def load_source_metadata() -> dict[str, dict]:
         "seoul_heritage": ROOT / "data" / "processed" / "seoul_heritage_food.csv",
         "good_price": ROOT / "data" / "processed" / "good_price_seoul.csv",
         "hundred_store": ROOT / "data" / "processed" / "hundred_stores.csv",
+        "seoul_restaurant_licenses": ROOT / "data" / "processed" / "seoul_restaurant_licenses.csv.gz",
+        "seoul_restaurant_license_matches": LICENSE_MATCHES,
     }
     result: dict[str, dict] = {}
     for source, path in source_files.items():
         if not path.is_file():
             continue
-        with path.open(encoding="utf-8-sig", newline="") as f:
-            source_rows = list(csv.DictReader(f))
-        snapshot_field = "source_snapshot"
-        collected_field = "fetched_at" if source == "seoul_heritage" else "collected_at"
+        opener = gzip.open if path.suffix == ".gz" else open
+        row_count = 0
+        snapshots: set[str] = set()
+        collected: set[str] = set()
+        source_modified: set[str] = set()
+        data_go_modified: set[str] = set()
+        with opener(path, "rt", encoding="utf-8-sig", newline="") as f:
+            for row in csv.DictReader(f):
+                row_count += 1
+                snapshot = row.get("source_snapshot") or ""
+                collected_at = row.get("fetched_at") or row.get("collected_at") or ""
+                modified_at = row.get("source_modified_at") or ""
+                data_go_modified_at = row.get("data_go_modified_at") or ""
+                if snapshot:
+                    snapshots.add(snapshot)
+                if collected_at:
+                    collected.add(collected_at)
+                if modified_at:
+                    source_modified.add(modified_at)
+                if data_go_modified_at:
+                    data_go_modified.add(data_go_modified_at)
         result[source] = {
-            "rowCount": len(source_rows),
-            "sourceSnapshots": sorted({r.get(snapshot_field, "") for r in source_rows if r.get(snapshot_field)}),
-            "collectedAt": sorted({r.get(collected_field, "") for r in source_rows if r.get(collected_field)}),
+            "rowCount": row_count,
+            "sourceSnapshots": sorted(snapshots),
+            "collectedAt": sorted(collected),
+            "sourceModifiedAt": sorted(source_modified),
+            "dataGoModifiedAt": sorted(data_go_modified),
             "inputSha256": sha256_file(path),
         }
     return result
@@ -197,6 +231,10 @@ def main(build_timestamp: str | None = None) -> None:
     if PUBLIC_MATCHES.exists():
         with PUBLIC_MATCHES.open(encoding="utf-8-sig", newline="") as f:
             public_rows = list(csv.DictReader(f))
+    license_rows: list[dict[str, str]] = []
+    if LICENSE_MATCHES.exists():
+        with LICENSE_MATCHES.open(encoding="utf-8-sig", newline="") as f:
+            license_rows = list(csv.DictReader(f))
     rows = [r for r in matched_rows if r.get("match_confidence") == "high"]
     rows.extend(r for r in public_rows if r.get("match_confidence") == "high")
 
@@ -283,6 +321,21 @@ def main(build_timestamp: str | None = None) -> None:
         if google_row:
             google_ids_by_place.setdefault(kid, set()).add(google_row["google_place_id"])
             google_rows_by_place.setdefault(kid, []).append(google_row)
+
+    license_rows_by_place: dict[str, list[dict[str, str]]] = {}
+    for row in license_rows:
+        if row.get("match_status") != "accepted":
+            continue
+        place_id = row.get("canonical_place_id", "")
+        if place_id in places:
+            license_rows_by_place.setdefault(place_id, []).append(row)
+
+    for place_id, records in license_rows_by_place.items():
+        row = dict(records[0])
+        row["source"] = "restaurant_license"
+        row["source_url"] = row.get("source_url") or "https://www.data.go.kr/data/15071760/fileData.do"
+        row["license_record_count"] = str(len(records))
+        places[place_id]["sources"].append(source_entry(row))
 
     for place_id, place in places.items():
         kakao_row = kakao_ratings.get(place_id, {})
