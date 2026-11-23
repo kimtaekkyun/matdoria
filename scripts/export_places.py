@@ -168,6 +168,7 @@ def load_source_metadata() -> dict[str, dict]:
         "seoul_heritage": ROOT / "data" / "processed" / "seoul_heritage_food.csv",
         "good_price": ROOT / "data" / "processed" / "good_price_seoul.csv",
         "hundred_store": ROOT / "data" / "processed" / "hundred_stores.csv",
+        "gwangjin_hygiene": ROOT / "data" / "processed" / "gwangjin_hygiene.csv",
         "seoul_restaurant_licenses": ROOT / "data" / "processed" / "seoul_restaurant_licenses.csv.gz",
         "seoul_restaurant_license_matches": LICENSE_MATCHES,
     }
