@@ -338,11 +338,7 @@ export default function Home() {
         </div>
 
         <div className="list-toolbar">
-          <div className="count">
-            {filter === "restaurant_license"
-              ? `${visible.length}곳 매칭 · 전체 후보 ${places.length}곳`
-              : `${visible.length}곳 표시 · 전체 ${places.length}곳`}
-          </div>
+          <div className="count">{visible.length}곳 표시 · 전체 {places.length}곳</div>
           <select className="sort-select" value={sortBy} onChange={(e) => setSortBy(e.target.value as SortKey)} aria-label="정렬 기준">
             {SORT_OPTIONS.map((option) => <option key={option.key} value={option.key}>{option.label}</option>)}
           </select>

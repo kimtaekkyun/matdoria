@@ -41,17 +41,7 @@ export type PublicSelectionSource = {
   originalName: string;
 };
 
-export type RestaurantLicenseSource = {
-  source: "restaurant_license";
-  label: string;
-  status: string;
-  businessType: string;
-  licenseRecordCount: number;
-  url: string;
-  originalName: string;
-};
-
-export type PlaceSource = MichelinSource | HeritageSource | GoodPriceSource | PublicSelectionSource | RestaurantLicenseSource;
+export type PlaceSource = MichelinSource | HeritageSource | GoodPriceSource | PublicSelectionSource;
 
 export type RatingSnapshot = {
   rating: number | null;

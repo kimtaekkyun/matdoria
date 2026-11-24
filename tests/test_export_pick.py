@@ -45,23 +45,9 @@ class ExportPickTests(unittest.TestCase):
         self.assertIsNone(result["reviewCounts"]["kakaoReviewCount"])
         self.assertIsNone(result["reviewCounts"]["googleUserRatingCount"])
 
-    def test_exports_administrative_license_status_without_collection_timestamps(self):
-        result = source_entry({
-            "source": "restaurant_license",
-            "resolved_current_status": "영업/정상",
-            "업태구분명": "한식",
-            "license_record_count": "2",
-            "source_url": "https://www.data.go.kr/data/15071760/fileData.do",
-            "사업장명": "우래옥 본점",
-            "collected_at": "internal-only",
-            "source_snapshot": "internal-only",
-        })
-        self.assertEqual(result["source"], "restaurant_license")
-        self.assertEqual(result["status"], "영업/정상")
-        self.assertEqual(result["businessType"], "한식")
-        self.assertEqual(result["licenseRecordCount"], 2)
-        self.assertNotIn("collectedAt", result)
-        self.assertNotIn("sourceSnapshot", result)
+    def test_administrative_license_status_is_not_public_place_source(self):
+        with self.assertRaises(KeyError):
+            source_entry({"source": "restaurant_license"})
 
 
 if __name__ == "__main__":

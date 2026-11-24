@@ -62,23 +62,6 @@ function SourceBlock({ source }: { source: PlaceSource }) {
     );
   }
 
-  if (source.source === "restaurant_license") {
-    return (
-      <div className="source-block">
-        <div className="source-heading">
-          <strong>영업 상태: {source.status}</strong>
-          {source.businessType && <span> · {source.businessType}</span>}
-          {source.licenseRecordCount > 1 && <span> · 인허가 이력 {source.licenseRecordCount}건</span>}
-        </div>
-        <div className="detail-meta">행정 인허가 자료이며 실시간 영업 여부와 다를 수 있습니다.</div>
-        <div className="source-info">
-          <span className="detail-meta">원래 업소명: {source.originalName}</span>
-          <a href={source.url} target="_blank" rel="noopener noreferrer">공공데이터 ↗</a>
-        </div>
-      </div>
-    );
-  }
-
   if (source.source === "good_price") {
     const menus = source.menuItems?.length
       ? source.menuItems

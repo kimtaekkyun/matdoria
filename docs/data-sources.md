@@ -154,5 +154,6 @@ python scripts/export_places.py
 - 공식 출처: Data.go.kr [15071760](https://www.data.go.kr/data/15071760/fileData.do) → 서울 열린데이터광장 [OA-16094](https://data.seoul.go.kr/dataList/OA-16094/S/1/datasetView.do). 공공저작물 제1유형(출처표시), CSV export, 일일 갱신, 약 2~3일 지연.
 - raw snapshot: `data/raw/seoul_restaurant_licenses/2026-11-23/` (git 제외), source 기준일 2026-11-22. 정규화: `data/processed/seoul_restaurant_licenses.csv.gz` 540,008행 × 24 분석 열. 전체 raw는 46열로 로컬 보존.
 - 상태 분포: 폐업 419,931, 영업/정상 120,077. 인허가일은 현재 인허가 기록의 시작이지 같은 업소가 같은 장소에서 연속 운영된 기간을 증명하지 않습니다.
-- canonical 목록과 업소명+도로명주소가 정확히 일치한 681곳(702 인허가 기록)을 앱 상세의 영업 상태 정보로 연결했습니다: 영업/정상 663, 폐업 18. 16,722 후보는 별도 검수 파일에 보존하고, 522,584 무후보 원본 행은 gzip 원본/정규화 입력에 유지합니다. 이 상태 신호는 Pick 자격·점수에 영향 주지 않습니다.
+- canonical 목록과 업소명+도로명주소가 정확히 일치한 681곳(702 인허가 기록)을 내부 분석용 `data/processed/seoul_restaurant_licenses_matched.csv`에 연결했습니다: 영업/정상 663, 폐업 18. 16,722 후보는 별도 검수 파일에 보존하고, 522,584 무후보 원본 행은 gzip 원본/정규화 입력에 유지합니다.
+- 사용자 의견에 따라 이 행정 상태는 Kakao 지도에 등록되어 있는지를 대체하지 못하므로 web app에서 제거했습니다. Pick 자격·점수에도 쓰지 않고 repository 내부 분석 데이터로만 유지합니다.
 - 재수집/정규화: `python scripts/fetch_seoul_restaurant_licenses.py`; 매칭: `python scripts/match_seoul_restaurant_licenses.py`. 상세 분석은 [seoul_restaurant_licenses_audit.md](seoul_restaurant_licenses_audit.md)를 참조합니다.

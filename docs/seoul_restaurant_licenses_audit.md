@@ -26,7 +26,8 @@ The collector acquired the official CSV snapshot; no API was called for this acq
 | Normalized projection | `data/processed/seoul_restaurant_licenses.csv.gz`, 540,008 rows × 24 selected columns, 36,188,339 bytes; status/date/address/business-type and source provenance retained |
 | Exact local matches | `data/processed/seoul_restaurant_licenses_matched.csv`: 702 source records across 681 unique canonical places (exact normalized business name + road address) |
 | Review queue | `data/processed/seoul_restaurant_licenses_match_review.csv`: 16,722 name/address candidate rows; 522,584 records had no candidate and remain in the raw/normalized source |
-| App integration | The app displays administrative status for 681 exact matches; 663 resolve to `영업/정상`, 18 to `폐업`. Status does **not** affect Matdoria's Pick selection. |
+| Internal exact matches | 681 canonical places from 702 license records; 663 resolve to `영업/정상`, 18 to `폐업`. These matches are kept for repository-only analysis. |
+| App/Pick use | Removed from the app because Kakao presence is the more relevant user-facing availability check. Administrative status does **not** affect Pick selection. |
 
 The tracked normalized projection is distinct from the private raw snapshot: it is a selected-field, compressed representation, not a copy of the full 215 MB source CSV.
 

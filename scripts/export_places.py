@@ -85,17 +85,6 @@ def source_entry(row: dict) -> dict:
             "originalName": row["name"],
         }
 
-    if source == "restaurant_license":
-        return {
-            "source": source,
-            "label": "서울 일반음식점 인허가",
-            "status": row.get("resolved_current_status", ""),
-            "businessType": row.get("업태구분명", ""),
-            "licenseRecordCount": int(row["license_record_count"]) if row.get("license_record_count", "").isdigit() else 1,
-            "url": row.get("source_url", "https://www.data.go.kr/data/15071760/fileData.do"),
-            "originalName": row.get("사업장명", row.get("canonical_place_name", "")),
-        }
-
     if source == "model_restaurant":
         return {
             "source": source,
@@ -232,10 +221,6 @@ def main(build_timestamp: str | None = None) -> None:
     if PUBLIC_MATCHES.exists():
         with PUBLIC_MATCHES.open(encoding="utf-8-sig", newline="") as f:
             public_rows = list(csv.DictReader(f))
-    license_rows: list[dict[str, str]] = []
-    if LICENSE_MATCHES.exists():
-        with LICENSE_MATCHES.open(encoding="utf-8-sig", newline="") as f:
-            license_rows = list(csv.DictReader(f))
     rows = [r for r in matched_rows if r.get("match_confidence") == "high"]
     rows.extend(r for r in public_rows if r.get("match_confidence") == "high")
 
@@ -322,21 +307,6 @@ def main(build_timestamp: str | None = None) -> None:
         if google_row:
             google_ids_by_place.setdefault(kid, set()).add(google_row["google_place_id"])
             google_rows_by_place.setdefault(kid, []).append(google_row)
-
-    license_rows_by_place: dict[str, list[dict[str, str]]] = {}
-    for row in license_rows:
-        if row.get("match_status") != "accepted":
-            continue
-        place_id = row.get("canonical_place_id", "")
-        if place_id in places:
-            license_rows_by_place.setdefault(place_id, []).append(row)
-
-    for place_id, records in license_rows_by_place.items():
-        row = dict(records[0])
-        row["source"] = "restaurant_license"
-        row["source_url"] = row.get("source_url") or "https://www.data.go.kr/data/15071760/fileData.do"
-        row["license_record_count"] = str(len(records))
-        places[place_id]["sources"].append(source_entry(row))
 
     for place_id, place in places.items():
         kakao_row = kakao_ratings.get(place_id, {})
