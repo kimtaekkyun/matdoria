@@ -284,10 +284,8 @@ export default function Home() {
                   setSortBy("google_count");
                 }}
               >
-                <span className="curation-mark" aria-hidden="true"><span>m</span></span>
                 <span className="curation-card-copy">
                   <strong>{curation.label}</strong>
-                  <span>{curation.key === "matdoria_pick" ? `K Review ≥ ${buildInfo.reviewCountThresholds.kakaoReviewCount} AND G Review ≥ ${buildInfo.reviewCountThresholds.googleUserRatingCount}` : curation.description}</span>
                 </span>
                 <span className="curation-count">{curationCounts[curation.key]}</span>
               </button>
@@ -356,7 +354,7 @@ export default function Home() {
                 ? "검색 조건에 맞는 식당이 없습니다."
                 : activeFilterCount === 0
                   ? filter === "matdoria_pick"
-                    ? `K Review ${buildInfo.reviewCountThresholds.kakaoReviewCount}개 이상 AND G Review ${buildInfo.reviewCountThresholds.googleUserRatingCount}개 이상을 모두 충족한 장소가 없습니다.`
+                    ? `K Review ${buildInfo.reviewCountThresholds.kakaoReviewCount}개 · K Star ${buildInfo.ratingThresholds.kakaoRating.toFixed(1)}점 · G Review ${buildInfo.reviewCountThresholds.googleUserRatingCount}개 · G Star ${buildInfo.ratingThresholds.googleRating.toFixed(1)}점 기준을 모두 충족한 장소가 없습니다.`
                     : SOURCE_STATUS[filter]
                   : "조건에 맞는 식당이 없습니다."}
             </div>
@@ -394,7 +392,7 @@ export default function Home() {
         </div>
 
         <div className="notice">
-          장소 정보는 카카오 로컬 기준입니다. 각 큐레이션의 선정 방식은 목록 설명에서 확인할 수 있습니다.
+          장소 정보는 카카오 로컬 기준입니다. Matdoria&apos;s Pick 선정 기준은 상단 안내에서 확인할 수 있습니다.
         </div>
       </aside>
 

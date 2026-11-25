@@ -181,13 +181,13 @@ select {
 .curation-card {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 8px;
   width: 100%;
-  min-height: 58px;
-  padding: 8px 11px;
+  min-height: 40px;
+  padding: 6px 9px;
   border: 1px solid #e5b9ae;
-  border-radius: 13px;
-  background: linear-gradient(105deg, #fff7f3 0%, #fff 72%);
+  border-radius: 10px;
+  background: #fff9f7;
   color: var(--fg);
   text-align: left;
   cursor: pointer;
@@ -207,9 +207,9 @@ select {
 
 .curation-mark {
   display: grid;
-  flex: 0 0 32px;
-  width: 32px;
-  height: 32px;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
   place-items: center;
   border-radius: 50% 50% 50% 9px;
   background: var(--accent);
@@ -237,7 +237,7 @@ select {
 }
 
 .curation-card-copy strong {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -245,7 +245,7 @@ select {
 .curation-card-copy > span {
   overflow: hidden;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1.35;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -254,8 +254,8 @@ select {
 .curation-count {
   display: grid;
   flex: 0 0 auto;
-  min-width: 28px;
-  height: 28px;
+  min-width: 24px;
+  height: 24px;
   place-items: center;
   padding: 0 7px;
   border-radius: 999px;
@@ -1062,10 +1062,10 @@ select {
   }
 
   .curation-card {
-    min-height: 44px;
-    gap: 9px;
-    padding: 6px 10px;
-    border-radius: 12px;
+    min-height: 38px;
+    gap: 8px;
+    padding: 5px 9px;
+    border-radius: 10px;
   }
 
   .curation-mark {
@@ -1497,6 +1497,67 @@ select {
     font-size: 11px;
   }
 
+}
+
+.pick-about {
+  display: grid;
+  gap: 5px;
+  margin: -5px 0 10px;
+  color: #626b78;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.pick-about p {
+  margin: 0;
+}
+
+.pick-about-intro {
+  color: #525b68;
+}
+
+.pick-about-criteria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+}
+
+.pick-about-criteria span {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #f5f6f8;
+  color: #555e6b;
+  font-size: 9px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.pick-about-note {
+  color: #858c97;
+  font-size: 9px;
+}
+
+@media (max-width: 800px) {
+  .pick-about {
+    flex: 0 0 100%;
+    gap: 3px;
+    margin: -3px 0 0;
+    padding: 1px 2px;
+    font-size: 9px;
+  }
+
+  .pick-about-criteria {
+    gap: 3px 4px;
+  }
+
+  .pick-about-criteria span {
+    padding: 2px 5px;
+    font-size: 8px;
+  }
+
+  .pick-about-note {
+    font-size: 8px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

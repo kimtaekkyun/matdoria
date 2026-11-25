@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Build an explainable offline Matdoria's Pick score snapshot.
 
-Pick qualification uses review-count thresholds only. Platform star averages
-are never read. Michelin, Seoul Heritage, and Good Price are retained as
-independent diagnostic dimensions and cannot affect selection.
+Pick qualification requires both platform review-count and star-rating thresholds.
+Michelin, Seoul Heritage, and Good Price are retained as independent diagnostic
+dimensions and cannot affect selection.
 """
 from __future__ import annotations
 
@@ -72,6 +72,14 @@ def _distance(value: Any) -> float | None:
     return result if math.isfinite(result) and result >= 0 else None
 
 
+def _rating(value: Any) -> float | None:
+    try:
+        result = float(value)
+    except (TypeError, ValueError):
+        return None
+    return result if math.isfinite(result) and 0 < result <= 5 else None
+
+
 def _matched_place_links(
     matched_rows: list[dict[str, str]],
     public_rows: list[dict[str, str]],
@@ -98,26 +106,19 @@ def assemble_canonical_review_counts(
     matched_rows: list[dict[str, str]],
     public_rows: list[dict[str, str]] | None = None,
 ) -> dict[str, dict[str, Any]]:
-    """Assemble canonical review-count evidence keyed by Kakao place ID.
+    """Assemble canonical review-count and rating evidence by Kakao place ID.
 
-    Kakao counts join directly by ``kakao_place_id`` and require ``status=ok``.
-    Google counts join ``(source, src_id)`` to high-confidence rows from the
-    matched/public inputs, require ``status=ok`` and distance <= 100m, and are
-    accepted only when all eligible joins for a canonical place agree on one
-    Google Place ID. For that ID, the nearest eligible row supplies its count.
-
-    The result value is ``{"placeId": str, "kakao": {...}, "google": {...}}``;
-    each platform object has ``count`` (int or None), ``status`` (``known`` or
-    ``unknown``), ``reason`` when unknown, and source ``evidence`` records.
-    No average-rating column is read or returned.
+    Counts and ratings are taken from the same accepted platform snapshot. The
+    Google row must pass the same high-confidence, status, distance, and unique
+    Place ID checks as the review-count evidence. Missing ratings remain unknown.
     """
     public_rows = public_rows or []
     place_ids, source_links = _matched_place_links(matched_rows, public_rows)
     assembled: dict[str, dict[str, Any]] = {
         place_id: {
             "placeId": place_id,
-            "kakao": {"count": None, "status": "unknown", "reason": "no_valid_kakao_count", "evidence": []},
-            "google": {"count": None, "status": "unknown", "reason": "no_eligible_google_count", "evidence": []},
+            "kakao": {"count": None, "rating": None, "status": "unknown", "reason": "no_valid_kakao_count", "evidence": []},
+            "google": {"count": None, "rating": None, "status": "unknown", "reason": "no_eligible_google_count", "evidence": []},
         }
         for place_id in sorted(place_ids)
     }
@@ -134,12 +135,13 @@ def assemble_canonical_review_counts(
             "kakaoPlaceId": place_id,
             "status": row.get("status") or "unknown",
             "reviewCount": count,
+            "rating": _rating(row.get("rating")),
             "collectedAt": row.get("collected_at") or None,
             "accepted": accepted,
         }
         if not accepted:
             evidence["exclusionReason"] = "status_not_ok" if row.get("status") != "ok" else "invalid_or_missing_review_count"
-        kakao_by_id.setdefault(place_id, []).append({"row": row, "count": count, "evidence": evidence, "accepted": accepted})
+        kakao_by_id.setdefault(place_id, []).append({"row": row, "count": count, "rating": _rating(row.get("rating")), "evidence": evidence, "accepted": accepted})
 
     for place_id, records in kakao_by_id.items():
         valid = [item for item in records if item["accepted"]]
@@ -163,6 +165,7 @@ def assemble_canonical_review_counts(
             item["evidence"].setdefault("selected", False)
         assembled[place_id]["kakao"].update({
             "count": chosen["count"],
+            "rating": chosen["rating"],
             "status": "known",
             "reason": None,
             "evidence": [item["evidence"] for item in records],
@@ -196,6 +199,7 @@ def assemble_canonical_review_counts(
             "distanceMeters": distance,
             "status": row.get("status") or "unknown",
             "userRatingCount": count,
+            "rating": _rating(row.get("rating")),
             "countValid": count is not None,
             "collectedAt": row.get("collected_at") or None,
             "eligible": eligible,
@@ -205,7 +209,7 @@ def assemble_canonical_review_counts(
         for place_id in linked_ids:
             if place_id in google_by_place:
                 google_by_place[place_id].append({
-                    "row": row, "count": count, "distance": distance,
+                    "row": row, "count": count, "rating": _rating(row.get("rating")), "distance": distance,
                     "googlePlaceId": google_id, "eligible": eligible,
                     "evidence": dict(evidence),
                 })
@@ -242,6 +246,7 @@ def assemble_canonical_review_counts(
             continue
         assembled[place_id]["google"].update({
             "count": chosen["count"],
+            "rating": chosen["rating"],
             "status": "known",
             "reason": None,
             "googlePlaceId": chosen["googlePlaceId"],
@@ -322,8 +327,12 @@ def _popularity_result(
     thresholds = dimension["thresholds"]
     kakao_threshold = int(thresholds["kakao_review_count"])
     google_threshold = int(thresholds["google_user_rating_count"])
+    kakao_rating_threshold = float(thresholds["kakao_rating"])
+    google_rating_threshold = float(thresholds["google_rating"])
     kakao_count = _nonnegative_int(kakao.get("count")) if kakao.get("status") == "known" else None
     google_count = _nonnegative_int(google.get("count")) if google.get("status") == "known" else None
+    kakao_rating = _rating(kakao.get("rating")) if kakao.get("status") == "known" else None
+    google_rating = _rating(google.get("rating")) if google.get("status") == "known" else None
     evidence: list[dict[str, Any]] = []
     for platform, item, count, threshold, count_field in (
         ("kakao", kakao, kakao_count, kakao_threshold, "reviewCount"),
@@ -340,8 +349,21 @@ def _popularity_result(
             "sourceEvidence": item.get("evidence", []),
             **({"googlePlaceId": item.get("googlePlaceId"), "distanceMeters": item.get("distanceMeters")} if platform == "google" else {}),
         })
-    complete = kakao_count is not None and google_count is not None
-    selected = bool(complete and kakao_count >= kakao_threshold and google_count >= google_threshold)
+    rating_evidence = []
+    for platform, rating, threshold in (
+        ("kakao", kakao_rating, kakao_rating_threshold),
+        ("google", google_rating, google_rating_threshold),
+    ):
+        rating_evidence.append({
+            "source": platform,
+            "rating": rating,
+            "status": "known" if rating is not None else "unknown",
+            "threshold": threshold,
+            "thresholdMet": rating >= threshold if rating is not None else None,
+        })
+    complete = all(value is not None for value in (kakao_count, google_count, kakao_rating, google_rating))
+    selected = bool(complete and kakao_count >= kakao_threshold and google_count >= google_threshold
+                    and kakao_rating >= kakao_rating_threshold and google_rating >= google_rating_threshold)
     score = (1.0 if selected else 0.0) if complete else None
     status = "qualified" if selected else ("not_qualified" if complete else "unknown")
     return {
@@ -351,8 +373,14 @@ def _popularity_result(
         "source": dimension["source"],
         "evidenceCount": sum(len(item.get("sourceEvidence", [])) for item in evidence),
         "counts": {"kakaoReviewCount": kakao_count, "googleUserRatingCount": google_count},
-        "thresholds": {"kakaoReviewCount": kakao_threshold, "googleUserRatingCount": google_threshold},
-        "contributions": evidence,
+        "ratings": {"kakaoRating": kakao_rating, "googleRating": google_rating},
+        "thresholds": {
+            "kakaoReviewCount": kakao_threshold,
+            "googleUserRatingCount": google_threshold,
+            "kakaoRating": kakao_rating_threshold,
+            "googleRating": google_rating_threshold,
+        },
+        "contributions": [*evidence, *rating_evidence],
     }
 
 
@@ -525,11 +553,19 @@ def score_rows(
             "inputRows": input_counts,
             "candidatePlaceCount": denominator,
             "selectedPlaceCount": sum(1 for item in results if item["selected"]),
-            "reviewCountThresholds": popularity_profile.get("thresholds", {}),
+            "reviewCountThresholds": {
+                "kakao_review_count": popularity_profile.get("thresholds", {}).get("kakao_review_count"),
+                "google_user_rating_count": popularity_profile.get("thresholds", {}).get("google_user_rating_count"),
+            },
+            "ratingThresholds": {
+                "kakao_rating": popularity_profile.get("thresholds", {}).get("kakao_rating"),
+                "google_rating": popularity_profile.get("thresholds", {}).get("google_rating"),
+            },
             "platformReviewCountsUsed": bool(popularity_profile),
-            "platformRatingAveragesUsed": False,
-            "platformRatingsUsed": False,
+            "platformRatingAveragesUsed": True,
+            "platformRatingsUsed": True,
             "missingDataPolicy": "unknown_not_penalized",
+            "platformRatingsUsedForSelection": True,
         },
         "coverage": coverage,
         "reviewCountCoverage": review_coverage,

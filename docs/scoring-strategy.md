@@ -45,7 +45,7 @@ matdoria는 리뷰를 직접 받거나 자체 별점을 매기는 서비스가 �
 
 ### `score_profiles` — 점수 설정
 
-선정 규칙과 결측 처리는 JSON 프로필로 버전 관리한다. 현재 `data/curation/matdoria_pick_score_v1.json` v2는 Kakao Review count ≥50 AND Google userRatingCount ≥250인 장소만 Pick으로 선택한다. 미등재·미수집은 0점이나 낮은 품질로 해석하지 않고, 하나라도 count를 확인할 수 없으면 eligible로 보지 않는다. Michelin·서울미래유산·착한가격업소·백년가게 신호는 원본 분석용으로 보존하되 현재 Pick 선택에는 반영하지 않는다.
+선정 규칙과 결측 처리는 JSON 프로필로 버전 관리한다. 현재 `data/curation/matdoria_pick_score_v1.json` v2.1은 Kakao Review count ≥50, Kakao rating ≥3.5, Google userRatingCount ≥250, Google rating ≥4.0을 모두 요구한다. 미등재·미수집은 0점이나 낮은 품질로 해석하지 않고, 네 기준 중 하나라도 확인할 수 없으면 eligible로 보지 않는다. Michelin·서울미래유산·착한가격업소·백년가게 신호는 원본 분석용으로 보존하되 현재 Pick 선택에는 반영하지 않는다.
 
 ### `score_results` — 재현 가능한 결과
 
@@ -71,7 +71,7 @@ profile_score(place) = Σ weight(signal) × transform(signal_value)
 - **운영 기간:** 확인된 개업연도만 사용한다. 인허가일 등 간접 추정치는 `estimated`와 신뢰도를 표시하고, 확인값과 같은 점수를 주지 않는다.
 - **착한가격업소:** 맛 점수가 아니라 가성비 프로필의 선정 신호 또는 필터로 사용한다. 공공 지정의 정확한 의미를 UI에도 표시한다.
 - **모범음식점·위생등급:** 맛 평가가 아니라 위생/공공 지정 신호다. 종합 맛 점수에서 높은 가중치로 취급하지 말고 별도 필터 또는 약한 보조 신호로 둔다.
-- **플랫폼 별점:** 플랫폼의 평균 점수와 평가 수는 서로 다른 필드다. 현재 사용자의 결정에 따라 Kakao/Google snapshot을 정적 JSON에서 공개 표시하지만, 이는 저장·표시 권한이나 약관 적합성을 확인했다는 뜻이 아니다. Kakao 내부 API 사용과 Google 콘텐츠 저장·공개 조건은 미해결 위험이며, 평점은 Matdoria's Pick 점수에 넣지 않는다.
+- **플랫폼 별점:** 플랫폼의 평균 점수와 평가 수는 서로 다른 필드다. v2.1 Pick은 Kakao/Google snapshot을 정적 JSON에서 공개 표시하는 동시에 K Star ≥3.5와 G Star ≥4.0을 선택 기준으로 사용한다. 이는 저장·표시 권한이나 약관 적합성을 확인했다는 뜻이 아니다. Kakao 내부 API 사용과 Google 콘텐츠 저장·공개 조건은 미해결 위험으로 남는다.
 
 ### 4.3 결측값과 데이터 커버리지
 
@@ -94,8 +94,8 @@ profile_score(place) = Σ weight(signal) × transform(signal_value)
 | 후보 | 확인 결과 | 점수 입력 적합성 | 다음 조치 |
 |---|---|---|---|
 | Michelin | 기존 사용 중. matdoria는 MIT 라이선스의 커뮤니티 생성 CSV를 가져온다. 공식 미쉐린 API가 아님. | 조건부 가능: 등급 신호로 사용하되 데이터셋 기준일·공식 가이드 교차 확인 필요 | 기존 수집 유지, 업스트림 버전과 데이터 기준일을 기록 |
-| Kakao Local API / Kakao Map 내부 리뷰 API | Local API에는 별점/리뷰 수가 없음. 기존 Kakao review snapshot은 243행이며 222개 canonical 장소에서 count가 연결됨. snapshot 수집 경로는 비공식 내부 API임. | Draft Pick은 Kakao Review count ≥50만 사용하며 별점 평균은 반영하지 않음. | 재수집은 하지 않았다. 내부 API의 수집·재사용 권한은 미해결이며 public 운영 전 확인 필요 (D-032, D-042) |
-| Google Places API (New) | 기존 수집 파일에는 253 source row가 있고 211개 canonical 장소에 unambiguous count snapshot이 연결됨. | Draft Pick은 Google userRatingCount ≥250을 Kakao 기준과 AND 조건으로 사용함. 별점 평균은 반영하지 않음. | 새 Google API 호출/수집은 하지 않았다. Google 콘텐츠 저장·파생·Kakao 지도와의 결합 조건은 미해결이며 public 배포 전 확인 필요 (D-032, D-042) |
+| Kakao Local API / Kakao Map 내부 리뷰 API | Local API에는 별점/리뷰 수가 없음. 기존 Kakao review snapshot은 243행이며 222개 canonical 장소에서 count가 연결됨. snapshot 수집 경로는 비공식 내부 API임. | v2.1 Draft Pick은 Kakao Review count ≥50 및 Kakao rating ≥3.5를 요구함. | 재수집은 하지 않았다. 내부 API의 수집·재사용 권한은 미해결이며 public 운영 전 확인 필요 (D-032, D-042, D-043) |
+| Google Places API (New) | 기존 수집 파일에는 253 source row가 있고 211개 canonical 장소에 unambiguous count snapshot이 연결됨. | v2.1 Draft Pick은 Google userRatingCount ≥250 및 Google rating ≥4.0을 Kakao 기준과 AND 조건으로 요구함. | 새 Google API 호출/수집은 하지 않았다. Google 콘텐츠 저장·파생·Kakao 지도와의 결합 조건은 미해결이며 public 배포 전 확인 필요 (D-032, D-042, D-043) |
 | 서울미래유산 | 기존 수집 스크립트와 CSV가 있음. 식음 관련 지정/후보를 포함하나 항목 유형을 구분해야 함. | 가능: 지역·역사성 신호. 맛 평가로 해석하지 않음 | 개별 식당/골목/후보 분류와 개업연도 근거 검수 |
 | 모범음식점 (공공데이터 ID 15076765) | 공공데이터포털 상세 페이지 확인. CSV, 전국 자치단체 자료, 업소명·주소·업태·주된 음식 등 기본정보, 무료·이용허락범위 제한 없음, 2025-11-27 수정 스냅샷과 “2일 전 기준” 갱신 안내를 확인. 제공 파일 URL은 LocalData이며 현재 조사 환경에서 다운로드는 HTTP 403으로 실패. | 조건부 가능: 공공 지정/위생 성격 보조 신호이지 맛 평점이 아님 | 브라우저 또는 공식 배포 경로에서 실제 파일 다운로드, 서울 행 수·컬럼·식당 조인률 검증 |
 | 착한가격업소 (공공데이터 ID 15172358) | 공식 CSV를 실제 다운로드·파싱함. 2026-09-30 스냅샷, 12,935행·17컬럼. 서울 2,155행 중 외식업 1,503행. `prepare_public_sources.py`로 정규화하고 Kakao 주소 검증을 통과한 1,002건을 Matdoria에 연결함. 미확정 501건은 `match_public_review.csv`에 분리. | 가능: 가성비 리스트/필터. 맛 평가가 아님 | 추가 매칭은 검수 CSV에서 수동 확인 후 반영. 출처 지정은 Matdoria's Pick taste criteria에 반영하지 않음 |

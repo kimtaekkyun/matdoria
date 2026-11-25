@@ -141,6 +141,12 @@ python scripts/export_places.py
 - `data/processed/build_history.jsonl`과 `data/processed/matdoria_pick_scores/`에 profile/input/code hashes, build timestamp, source snapshot·K/G 수집 시각, 커버리지, 장소별 evidence를 내부 보존한다. 공개 `web/public/data/build-info.json`에는 Pick 업데이트 시각과 개수만 둔다.
 - Kakao 내부 평점 API의 재사용 조건과 Google Places snapshot 저장·공개 조건은 검증되지 않았다. 사용 중인 snapshot이 남아 있더라도 신규 수집이나 사용 확대의 승인을 뜻하지 않는다. 이번 Pick 변경은 기존 snapshot만 이용했으며 재수집은 하지 않았다. 공개 배포 전 재사용 권한을 확인한다.
 
+### Pick 프로필 업데이트 (2026-11-25)
+
+- 프로필 v2.1은 기존 review count 기준에 별점 최소값을 추가했습니다: Kakao Review ≥50 AND Kakao Star ≥3.5 AND Google Review ≥250 AND Google Star ≥4.0.
+- 기존 snapshot만 사용해 재수집 없이 export했습니다. 전체 1,229곳 중 58곳이 현재 조건을 모두 충족합니다. 네 조건 중 어느 하나라도 데이터가 없거나 모호하면 판정에서 제외하되 낮은 평가로 해석하지 않습니다.
+- 상세 판단 및 당시 v2 기록은 [decisions.md](decisions.md)의 D-042 및 D-043을 참조합니다.
+
 ## 새로 수집한 공개 데이터: 백년가게 지정목록 (2026-11-20)
 
 - 공식 출처: 소상공인시장진흥공단, 공공데이터포털 [15132695](https://www.data.go.kr/data/15132695/fileData.do).

@@ -9,11 +9,14 @@ from export_places import pick_entry, source_entry
 
 
 PROFILE = {
-    "profileVersion": "2.0.0",
+    "profileVersion": "2.1.0",
     "dimensions": {
         "popularity": {
             "type": "review_count_thresholds",
-            "thresholds": {"kakao_review_count": 50, "google_user_rating_count": 250},
+            "thresholds": {
+                "kakao_review_count": 50, "google_user_rating_count": 250,
+                "kakao_rating": 3.5, "google_rating": 4.0,
+            },
         }
     },
 }
@@ -27,16 +30,22 @@ class ExportPickTests(unittest.TestCase):
                 "dimensions": {
                     "popularity": {
                         "counts": {"kakaoReviewCount": 259, "googleUserRatingCount": 495},
-                        "thresholds": {"kakaoReviewCount": 50, "googleUserRatingCount": 250},
+                        "thresholds": {
+                            "kakaoReviewCount": 50, "googleUserRatingCount": 250,
+                            "kakaoRating": 3.5, "googleRating": 4.0,
+                        },
                     }
                 },
             }
         }
         result = pick_entry("42", scores, PROFILE)
         self.assertTrue(result["selected"])
-        self.assertEqual(result["profileVersion"], "2.0.0")
+        self.assertEqual(result["profileVersion"], "2.1.0")
         self.assertEqual(result["reviewCounts"], {"kakaoReviewCount": 259, "googleUserRatingCount": 495})
-        self.assertEqual(result["thresholds"], {"kakaoReviewCount": 50, "googleUserRatingCount": 250})
+        self.assertEqual(result["thresholds"], {
+            "kakaoReviewCount": 50, "googleUserRatingCount": 250,
+            "kakaoRating": 3.5, "googleRating": 4.0,
+        })
         self.assertNotIn("score", result)
 
     def test_unknown_place_does_not_qualify_or_invent_review_counts(self):

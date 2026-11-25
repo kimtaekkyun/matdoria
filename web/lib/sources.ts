@@ -4,7 +4,7 @@ export const CURATION_FILTERS = [
   {
     key: "matdoria_pick",
     label: "Matdoria's Pick",
-    description: "K/G Review 기준을 모두 충족한 인기 장소",
+    description: "리뷰와 별점 기준을 통과한 장소",
   },
 ] as const;
 
@@ -30,7 +30,7 @@ export const SOURCE_STATUS: Record<ListFilter, string> = {
   model_restaurant: "공식 CSV 확보 후 정규화·카카오 주소 검증을 거쳐 표시합니다.",
   seoul_gourmet_100: "공식 목록과 재사용 조건을 확인한 뒤 표시합니다.",
   hundred_store: "전국 백년가게 지정 목록 1,511건을 확보했습니다. Kakao 장소 매칭·검수 후 표시합니다.",
-  matdoria_pick: "K Review 50+ 및 G Review 250+ 기준을 모두 충족한 장소입니다. 데이터가 없는 것은 낮은 평가를 뜻하지 않습니다.",
+  matdoria_pick: "K Review·K Star·G Review·G Star 기준을 모두 충족한 장소입니다. 데이터가 없는 것은 낮은 평가를 뜻하지 않습니다.",
 };
 
 export function matchesFilter(

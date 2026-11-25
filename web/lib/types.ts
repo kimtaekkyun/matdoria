@@ -57,7 +57,12 @@ export type MatdoriaPick = {
   selected: boolean;
   profileVersion: string;
   reviewCounts: { kakaoReviewCount: number | null; googleUserRatingCount: number | null };
-  thresholds: { kakaoReviewCount: number; googleUserRatingCount: number };
+  thresholds: {
+    kakaoReviewCount: number;
+    googleUserRatingCount: number;
+    kakaoRating: number;
+    googleRating: number;
+  };
 };
 
 export type Place = {

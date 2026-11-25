@@ -259,3 +259,10 @@
 - 기준 초안: Kakao Review 50개 이상 AND Google Review 250개 이상. 기존 snapshot에서 각각의 count 중앙값은 약 53.5와 287이며, 두 count가 있는 장소 207곳 중 91곳(전체 1,229곳 중 91곳)이 통과한다.
 - 별점 평균, 미쉐린, 서울미래유산, 가성비 신호는 Pick 자격에 반영하지 않는다. count 누락·모호함은 자격 확인 불가이지 낮은 평가나 0건을 뜻하지 않는다.
 - 현재 Kakao 내부 count 수집 경로와 Google 콘텐츠의 저장·파생/공개 조건은 미해결이다. 이 profile은 기존 로컬 snapshot을 사용하며 재수집·정책 승인·public deployment 허가를 의미하지 않는다.
+
+## D-043 · 2026-11-25 · 초안 (Matdoria's Pick 별점 하한 추가 및 안내 UI 간소화)
+**D-042의 Review count 기준에 Kakao·Google 별점 하한을 추가한다.**
+- v2.1 조건은 Kakao Review ≥50 AND Kakao Star ≥3.5 AND Google Review ≥250 AND Google Star ≥4.0이다. 네 조건을 모두 충족해야 선정하며, 값이 누락되거나 모호하면 미선정이지만 낮은 평가로 간주하지 않는다.
+- 기존 로컬 snapshot을 재수집 없이 사용해 재계산했다. 2026-11-25 기준 1,229곳 중 58곳이 조건을 충족한다. 증거와 입력 hash는 `data/processed/matdoria_pick_scores/`에 남긴다.
+- 웹 UI는 별도 “Pick 선정 기준” 팝오버를 없애고, Matdoria 소개와 4개 기준을 짧은 상시 안내로 표시한다. Pick 필터 버튼은 아이콘·장문 설명을 덜어 한 줄 컨트롤로 축소했다.
+- D-042의 count-only 조건을 대체한다. Kakao/Google snapshot의 저장·재사용 권한은 별도 미해결 위험으로 유지하며, 이번 변경은 재수집이나 권한 확인을 뜻하지 않는다.

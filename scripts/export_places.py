@@ -380,6 +380,10 @@ def main(build_timestamp: str | None = None) -> None:
             "kakaoReviewCount": int(profile_thresholds["kakao_review_count"]),
             "googleUserRatingCount": int(profile_thresholds["google_user_rating_count"]),
         },
+        "ratingThresholds": {
+            "kakaoRating": float(profile_thresholds["kakao_rating"]),
+            "googleRating": float(profile_thresholds["google_rating"]),
+        },
     }
     write_json_atomic(OUT, result)
     write_json_atomic(BUILD_INFO, build_info)

@@ -35,13 +35,13 @@ def matched(source, source_id, place_id, **kwargs):
 
 
 def kakao(place_id, count, **kwargs):
-    return {"kakao_place_id": place_id, "review_count": str(count) if count is not None else "", "status": "ok", "collected_at": "2026-11-13T00:00:00Z", **kwargs}
+    return {"kakao_place_id": place_id, "review_count": str(count) if count is not None else "", "rating": "4.0", "status": "ok", "collected_at": "2026-11-13T00:00:00Z", **kwargs}
 
 
 def google(source, source_id, place_id, google_id, count, distance=30, **kwargs):
     return {
         "source": source, "src_id": source_id, "google_place_id": google_id,
-        "user_rating_count": str(count) if count is not None else "", "distance_m": str(distance),
+        "user_rating_count": str(count) if count is not None else "", "rating": "4.5", "distance_m": str(distance),
         "status": "ok", "collected_at": "2026-11-13T00:00:00Z", **kwargs,
     }
 
@@ -59,9 +59,9 @@ class ReviewCountAssemblyTests(unittest.TestCase):
             matched("michelin", "b", "2", src_group="3 Stars"),
             matched("michelin", "c", "3", src_group="3 Stars"),
         ]
-        kakao_rows = [kakao("1", 50, rating="1.0"), kakao("2", 49), kakao("3", 50)]
+        kakao_rows = [kakao("1", 50, rating="3.5"), kakao("2", 49), kakao("3", 50)]
         google_rows = [
-            google("michelin", "a", "1", "g1", 250, rating="1.0"),
+            google("michelin", "a", "1", "g1", 250, rating="4.0"),
             google("michelin", "b", "2", "g2", 250, rating="5.0"),
             google("michelin", "c", "3", "g3", 249),
         ]
@@ -76,16 +76,25 @@ class ReviewCountAssemblyTests(unittest.TestCase):
         self.assertEqual(places["3"]["pickScore"], 0.0)
         self.assertEqual(payload["metadata"]["selectedPlaceCount"], 1)
         serialized = json.dumps(payload, ensure_ascii=False)
-        self.assertNotIn('"rating"', serialized)
-        def contains_average_field(value):
-            if isinstance(value, dict):
-                return any(key in {"rating", "averageRating", "ratingAverage"} or contains_average_field(item) for key, item in value.items())
-            if isinstance(value, list):
-                return any(contains_average_field(item) for item in value)
-            return False
-        self.assertFalse(contains_average_field(payload))
-        self.assertFalse(payload["metadata"]["platformRatingAveragesUsed"])
+        self.assertIn('"ratings": {"kakaoRating": 3.5, "googleRating": 4.0}', serialized)
+        self.assertTrue(payload["metadata"]["platformRatingAveragesUsed"])
+        self.assertTrue(payload["metadata"]["platformRatingsUsedForSelection"])
         self.assertTrue(payload["metadata"]["platformReviewCountsUsed"])
+
+    def test_star_thresholds_are_inclusive_and_missing_rating_is_unknown(self):
+        rows = [matched("michelin", "m1", "1"), matched("michelin", "m2", "2")]
+        counts = score_matdoria_pick.assemble_canonical_review_counts(
+            [kakao("1", 50, rating="3.4"), kakao("2", 50, rating="")],
+            [google("michelin", "m1", "1", "g1", 250, rating="4.5"),
+             google("michelin", "m2", "2", "g2", 250, rating="4.5")],
+            rows,
+        )
+        payload = score(rows, review_counts=counts)
+        places = {item["placeId"]: item for item in payload["places"]}
+        self.assertFalse(places["1"]["selected"])
+        self.assertEqual(places["1"]["dimensions"]["popularity"]["ratings"]["kakaoRating"], 3.4)
+        self.assertEqual(places["2"]["dimensions"]["popularity"]["status"], "unknown")
+        self.assertFalse(places["2"]["selected"])
 
     def test_missing_either_count_is_unknown_not_zero_and_does_not_qualify(self):
         matches = [matched("michelin", "a", "1"), matched("michelin", "b", "2")]
@@ -131,7 +140,7 @@ class ReviewCountAssemblyTests(unittest.TestCase):
         self.assertEqual(counts["2"]["google"]["reason"], "ambiguous_google_place_id")
         self.assertNotIn("3", counts)  # medium match is not a canonical join
         self.assertEqual(len([e for e in counts["1"]["google"]["evidence"] if e.get("exclusionReason") == "distance_missing_or_over_100m"]), 1)
-        self.assertNotIn("rating", json.dumps(counts))
+        self.assertEqual(counts["1"]["google"]["rating"], 4.5)
 
     def test_kakao_requires_status_ok_and_valid_nonnegative_count(self):
         matches = [matched("michelin", "m1", "1")]
@@ -168,6 +177,7 @@ class ReviewCountAssemblyTests(unittest.TestCase):
         self.assertEqual(metadata["inputSha256"]["kakaoRatings"], "kakao-hash")
         self.assertEqual(metadata["inputSha256"]["googleRatings"], "google-hash")
         self.assertEqual(metadata["reviewCountThresholds"], {"kakao_review_count": 50, "google_user_rating_count": 250})
+        self.assertEqual(metadata["ratingThresholds"], {"kakao_rating": 3.5, "google_rating": 4.0})
         self.assertEqual(payload["reviewCountCoverage"]["qualifyingPlaces"], 1)
 
     def test_no_mapping_means_unknown_not_zero(self):
